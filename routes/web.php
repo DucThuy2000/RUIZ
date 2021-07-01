@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+require("admin.php");
+
+Route::namespace("EndUser")->group(function(){
+    Route::get('/', 'PageController@index')->name('page.index');
+
+    $prefix = "cua-hang";
+    $controller = "shop";
+    Route::prefix($prefix)->name($controller . ".")->group(function () use ($controller){
+        $controllerName = ucfirst($controller) . "Controller@";
+        Route::get("/", $controllerName . "index")->name("index");
+        Route::get("danh-muc={slug}", $controllerName . "showProductByCategory")->name("showProductByCategory");
+    });
+
 });
+

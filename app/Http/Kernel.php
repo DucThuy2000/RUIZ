@@ -26,6 +26,9 @@ class Kernel extends HttpKernel
     /**
      * The application's route middleware groups.
      *
+     * Gán một số middleware vào 1 biến để gọi dễ dàng hơn
+     * web -> có thể sử dụng tất cả middleware nó định nghĩa
+     *
      * @var array
      */
     protected $middlewareGroups = [
@@ -34,7 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class, //Share $errors variable to all of application when validate failed
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
