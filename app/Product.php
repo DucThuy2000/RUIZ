@@ -15,4 +15,8 @@ class Product extends Model
     public function tags(){
         return $this -> belongsToMany('App\Product_tags', 'rl_prod_tag', 'prod_id', 'tag_id');
     }
+
+    public function reviews(){
+        return $this -> hasMany("App\Review", "product_id");
+    }
 }

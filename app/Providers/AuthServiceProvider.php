@@ -35,6 +35,7 @@ class AuthServiceProvider extends ServiceProvider
                 $permission = json_decode($role -> permissions,true);
                 foreach ($permission as $request => $on){
                     //Define method determine if a user is authorized to perform a given action
+                    //Gate define just return true or false
                     Gate::define($request, function () use ($on){
                         return $on;
                     });

@@ -16,7 +16,7 @@ class ProductController extends AdminController
 
     protected $resize = [
         'thumbnail' => ['width' => 100],
-        'standard' => ['width' => 100],
+        'standard' => ['width' => 150],
     ];
 
     protected $fieldForm = [

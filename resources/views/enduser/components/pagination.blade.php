@@ -7,7 +7,9 @@
                         <a class="page-link" href="{{ $pagination -> previousPageUrl() }}">Prev</a>
                     </li>
                     @for($i = 1; $i <= $pagination -> lastPage(); ++$i)
-                        <li class="@if($i == $pagination -> currentPage()) active @endif"><a href="{{ $pagination -> url($i) }}">{{ $i }}</a></li>
+                        <li class="@if($i == $pagination -> currentPage()) active @endif">
+                            <a href="{{ $pagination -> url($i) }}">{{ $i }}</a>
+                        </li>
                     @endfor
                     <li class="page-item @if( $pagination -> currentPage() == $pagination -> lastPage()) disabled @endif">
                         <a class="page-link" href="{{ $pagination -> nextPageUrl() }}">Next</a>

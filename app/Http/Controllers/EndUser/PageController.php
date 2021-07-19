@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\EndUser;
 
 use App\Banner;
+use App\Blog;
 use App\Http\Controllers\Controller;
 use App\Partner;
 use App\Product;
@@ -15,6 +16,9 @@ class PageController extends Controller
 
     public function index()
     {
+        $carts = session() -> get("cart");
+        $wishlist = session() -> get("wishList");
+        $blogs = Blog::where("status","active")->latest()->limit(3)->get();
         $slidebars = Banner::where([
             ['status', 'active'],
             ['type' , '1'],
@@ -47,6 +51,6 @@ class PageController extends Controller
 
         return view($this -> pathView . "index"
         ,compact("slidebars", "banner_below_slidebar",
-                "partners", "best_seller", "banners", "product_sale"));
+                "partners", "best_seller", "banners", "product_sale", "carts", "wishlist", "blogs"));
     }
 }

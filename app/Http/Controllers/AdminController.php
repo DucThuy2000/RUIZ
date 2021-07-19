@@ -18,6 +18,7 @@ class AdminController extends BaseController
     protected $pathView;
     protected $folderUpload;
     protected $resize;
+
     public function index(){
         $data = $this -> model -> paginate(10);
         return view($this -> pathView . "index",compact("data"));

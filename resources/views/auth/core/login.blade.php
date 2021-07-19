@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center form_container">
-            <form method="POST" id="login-form" data-url="{{ route("auth.authenticate") }}">
+            <form method="POST" id="login-form" data-url="{{ route("authAdmin.authenticate") }}">
                 @csrf
                 <div class="input-group mb-3">
                     <div class="input-group-append">

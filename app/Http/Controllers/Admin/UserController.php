@@ -79,8 +79,9 @@ class UserController extends AdminController
 
         $this -> model -> save();
 
+
         // Xử lý với roles
-        if(isset($request -> id_role) && count($request -> id_role) > 0 ){
+        if(!empty($request -> id_role) && count($request -> id_role) > 0 ){
             $roles = $request -> id_role;
             $role = [];
             foreach ($roles as $r){
@@ -90,7 +91,13 @@ class UserController extends AdminController
             }
             $this -> model -> roles() -> attach($role);
         }
+        else{
+            $guest = Role::where("name", "Guest")->first();
 
+            $role[] = $guest -> id;
+
+            $this -> model -> roles() -> attach($role);
+        }
 
         Session::flash("action_success","Tạo mới tài khoản thành công");
         return redirect() -> route("admin." . $this -> controllerName . ".index");

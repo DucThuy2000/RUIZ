@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/';
+
 
     /**
      * Define your route model bindings, pattern filters, etc.

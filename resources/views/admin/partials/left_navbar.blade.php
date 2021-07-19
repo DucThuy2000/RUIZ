@@ -26,7 +26,7 @@
                 <div class="collapse" id="blog" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{ route("admin.blog.index") }}">Danh Sách</a>
-{{--                        <a class="nav-link" href="{{ route("admin.blog_category.index") }}">Danh Mục</a>--}}
+                        <a class="nav-link" href="{{ route("admin.blog_category.index") }}">Danh Mục</a>
 {{--                        <a class="nav-link" href="{{ route("admin.blog_tags.index") }}">Tags</a>--}}
                     </nav>
                 </div>
@@ -35,6 +35,12 @@
                 <a class="nav-link collapsed" href="{{ route('admin.setting.index') }}"  aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-cog"></i></div>
                     Setting
+                </a>
+
+                <!---- Coupon Navigate ---->
+                <a class="nav-link collapsed" href="{{ route('admin.coupon.index') }}"  aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-percentage"></i></div>
+                    Coupon
                 </a>
 
                 <!---- Menu Navigate ---->
@@ -64,6 +70,7 @@
                 </a>
                 <div class="collapse" id="widget" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{ route("admin.widget.index") }}">List Widget</a>
                         <a class="nav-link" href="{{ route("admin.partner.index") }}">Partners</a>
                         <a class="nav-link" href="{{ route("admin.banner.index") }}">Banners</a>
                     </nav>

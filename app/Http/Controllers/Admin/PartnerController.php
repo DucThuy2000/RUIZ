@@ -25,6 +25,12 @@ class PartnerController extends AdminController
                 ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox']
             ]
         ],
+        'seo_tab' => [
+            'tab_label' => 'Meta',
+            'items' => [
+                ['label' => 'Slug', 'name' => 'slug', 'type' => 'slug'],
+            ]
+        ],
     ];
 
     protected $fieldList = [

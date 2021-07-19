@@ -31,7 +31,7 @@
     16. About US css
     17. Contact Us Css
     18. Cart Page Css
-    19. Checkout Page Css
+    19. CheckoutController Page Css
     20. Error 404 Page Css
     21. Compare Page Css
     22. My Account Page Css
@@ -188,7 +188,7 @@ a:focus {
 .header-sticky.is-sticky {
   position: fixed;
   width: 100%;
-  z-index: 999999999;
+  z-index: 10000;
   top: 0;
 }
 .header-sticky.bg-white.is-sticky {
@@ -1851,8 +1851,14 @@ img.mfp-img {
   width: 60%;
 }
 .shopping-cart-wrap ul.mini-cart .cart-item .cart-title h4 {
-  font-size: 14px;
-  font-weight: 400;
+    margin: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    width: 150px;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 400;
 }
 .shopping-cart-wrap ul.mini-cart .cart-item .cart-title .quanti-price-wrap {
   display: flex;
@@ -2090,13 +2096,13 @@ img.mfp-img {
   height: 46px;
   border: none;
   background-color: #fff;
-  border-radius: 0 5px 5px 0;
+  border-radius: 5px;
   padding: 0 55px 0 30px;
 }
 
 .search-field-wrap {
   position: relative;
-  width: 415px;
+  width: 480px;
 }
 .search-field-wrap .search-btn button {
   width: 50px;
@@ -2718,6 +2724,7 @@ img.mfp-img {
 ------------------------------*/
 .single-product-area {
   position: relative;
+  box-shadow: 0 0 2px rgb(0 0 0 / 30%);
   margin-bottom: 2px;
   border-radius: 5px;
 }
@@ -3258,12 +3265,20 @@ img.mfp-img {
   min-width: 62px;
 }
 
+.review_thumb img{
+    display: block;
+    width: 100px;
+    border-radius: 50%;
+    vertical-align: center;
+}
+
 .review_details {
   border: 1px solid #ddd;
   margin-left: 26px;
   padding: 10px 20px;
   position: relative;
   border-radius: 3px;
+    width: 100%;
 }
 @media only screen and (max-width: 479px) {
   .review_details {
@@ -3288,20 +3303,21 @@ img.mfp-img {
   font-weight: 300;
 }
 
-.product-rating li {
-  margin-right: 3px;
-  font-size: 16px;
-  color: #ffcc00;
+.rating-info > ul > li.star{
+    color: #cccccc;
 }
+
+.rating-info > ul > li.selected{
+    color:#FF912C;
+}
+
 
 .comments-reply-area .comment-input input, .comments-reply-area .comment-input textarea, .comments-reply-area .comment-form-comment input, .comments-reply-area .comment-form-comment textarea {
   width: 100%;
   border: 1px solid #ddd;
   padding: 10px;
 }
-.comments-reply-area .comment-input textarea, .comments-reply-area .comment-form-comment textarea {
-  height: 140px;
-}
+
 .comments-reply-area label {
   display: block;
   margin-bottom: 3px;
@@ -3520,15 +3536,23 @@ img.mfp-img {
   color: #c89979;
 }
 
-.singel-latest-blog .articles-name {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 24px;
-  margin-bottom: 15px;
-  margin-top: 0;
-  position: relative;
-  text-transform: uppercase;
+.articles-name {
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    max-width: 100%;
+    height: 50px; /* Fallback for non-webkit */
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 25px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+    margin-bottom: 15px;
+    margin-top: 0;
+    position: relative;
+    text-transform: uppercase;
 }
 
 .singel-latest-blog .articles-image {
@@ -3863,6 +3887,10 @@ img.mfp-img {
   border-radius: 3px;
 }
 
+.social-icons li a i{
+    line-height: 30px;
+}
+
 .newletter-wrap .newsletter-title h3 {
   margin-bottom: 0;
 }
@@ -4127,7 +4155,7 @@ img.mfp-img {
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   -webkit-flex-direction: row;
-  flex-direction: row;
+  flex-direction: column;
   font-size: 13px;
   margin-bottom: 10px;
 }
@@ -4152,8 +4180,8 @@ img.mfp-img {
 .filter-price-cont .input-type input {
   border: medium none;
   padding: 0 8px 0 0;
-  text-align: center;
-  width: 40px;
+  text-align: left;
+  width: 65px;
   background: transparent;
   font-weight: 500;
 }
@@ -4188,9 +4216,8 @@ img.mfp-img {
 
 .shop-top-bar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 10px 15px;
-  border: 1px solid #ddd;
   margin-bottom: 10px;
   align-items: center;
   border-radius: 3px;
@@ -4286,12 +4313,11 @@ img.mfp-img {
 }
 .single-widget-post .post-thumb {
   float: left;
-  max-width: 30%;
 }
 .single-widget-post .post-info {
   float: left;
-  padding-left: 20px;
-  max-width: 70%;
+  margin-top: 15px;
+  max-width: 100%;
 }
 .single-widget-post .post-info .post-date {
   font-size: 13px;
@@ -4713,7 +4739,7 @@ img.mfp-img {
 }
 
 /*--
-   19. Checkout Page Css
+   19. CheckoutController Page Css
 ------------------------------*/
 .coupon-accordion h3 {
   background: #f6f6f6;
@@ -5367,5 +5393,330 @@ img.mfp-img {
 
 .label-best_seller{
     background: #8FB1EA;
+}
+
+.overlay-snipper{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.1);
+    z-index: 99999;
+    top: 0;
+    display: none;
+    transition: all 0.3s linear;
+}
+
+.overlay-snipper.open{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.snipper-image{
+    width: 250px;
+    display: block;
+}
+
+.sweet-alert{
+    position: fixed;
+    top: 17%;
+    right: 0;
+    z-index: 9999;
+    transition: all .3s ease-in-out;
+    display: none;
+}
+
+.pro-large-img{
+    display: flex !important;
+    justify-content: center;
+}
+
+.pro-large-img img{
+    width: 240px;
+}
+
+.product-thumb .product-wrapper{
+    display: flex !important;
+    justify-content: center;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.product-thumb img{
+    width: 150px;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #C89979;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+.single-form-row{
+    position: relative;
+}
+
+.single-form-row .form-checkout{
+    padding-right: 45px;
+}
+
+.has-error .form-checkout{
+    border-color: #9c3328;
+}
+
+.has-error span.validate-error{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    color: #9c3328;
+    font-style: italic;
+    pointer-events: none;
+}
+
+.has-feedback .form-control-feedback{
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 42%;
+    right: 1px;
+    pointer-events: none;
+}
+
+.comment-title{
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.login-to-comment{
+    width: 100%;
+    padding: 20px;
+}
+
+.border-box{
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.login-to-comment:hover{
+    color: inherit;
+}
+
+.login-to-comment .comment-wrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .5;
+}
+
+.user-image-comment{
+    display: block;
+    margin-right: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.reply-text{
+    font-size: 14px;
+    color: #c8cbcf;
+    font-weight: 400;
+
+}
+
+.reply-text:hover{
+    color: #c8cbcf;
+}
+
+.form-control-feedback i.fa-check{
+    color: #0f74a8;
+}
+
+.btn-coupon{
+    background: #000000;
+    padding: 8px 15px;
+    color: #ffffff;
+    transition: all .3s ease;
+}
+
+.btn-coupon:hover{
+    background: #c89979;
+    color: #ffffff;
+}
+
+.user-comments{
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.border-box{
+    border: 1px solid #ccc;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.user-comments .user-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-comments .user-info img{
+    width: 30px;
+    height: 30px;
+}
+
+.user-comments .user-info .user-name{
+    margin: 0;
+    margin: 8px;
+    color: #c89979;
+    font-size: 16px;
+}
+
+.user-comments .user-info .user-email{
+    color: #cccccc;
+    font-style: italic;
+}
+
+.comment-submit{
+    padding: 5px 20px;
+    background: #c89979;
+    border-radius: 5px;
+    color: #ffff;
+}
+
+.comment-submit:hover{
+    color: #ffffff;
+    background: #333333;
+}
+
+.auth-comment{
+    position: relative;
+    /*overflow: hidden;*/
+}
+
+.auth-comment .fa-ellipsis-h{
+    cursor: pointer;
+    opacity: .5;
+}
+
+.auth-comment .action-dropdown{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    overflow: hidden;
+    padding: 15px 20px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 100;
+    width: 200px;
+    background-color: #fff;
+    transition: all .3s ease;
+    border: 1px solid #ebeef5;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+}
+
+.auth-comment .action-dropdown.open{
+    opacity: 1;
+    visibility: visible;
+}
+
+.border-reply{
+    padding: 10px 15px;
+    border-top: 1px solid #ccc;
+}
+
+.main-content{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.rating-stars ul {
+    list-style-type:none;
+    padding:0;
+
+    -moz-user-select:none;
+    -webkit-user-select:none;
+}
+
+.rating-stars ul > li.star > i.fa {
+    cursor: pointer;
+    font-size: 14px;
+    color:#ccc;
+}
+
+.product-rating li.star-rating{
+    color:#ccc;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.rating-stars ul > li.star.hover > i.fa{
+    color:#FFCC36;
+}
+
+.rating-stars ul > li.star.selected > i.fa {
+    color:#FF912C;
+}
+
+.cancel-edit-review{
+    border: none;
+    padding: 10px 30px;
+    border-radius: 3px;
+    background: #9e9e9e;
+    color: #fff;
 }
 /*# sourceMappingURL=style.css.map */

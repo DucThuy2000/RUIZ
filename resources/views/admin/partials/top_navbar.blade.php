@@ -28,7 +28,7 @@
                 @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="{{ route("auth.logout") }}">Logout</a>
+                <a class="dropdown-item" href="{{ route("authAdmin.logout") }}">Logout</a>
             </div>
         </li>
     </ul>

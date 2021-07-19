@@ -16,7 +16,7 @@
             sticky.addClass('is-sticky');
         }
     });
-    
+
 /*--
     Off Canvas
 -------------------------------------------*/
@@ -29,10 +29,10 @@
         $("body").removeClass('fix');
         $(".off-canvas-wrapper").removeClass('open');
     });
-    
-    
-/*-- 
-    Countdown Activation 
+
+
+/*--
+    Countdown Activation
 ------------------------------------*/
 	$('[data-countdown]').each(function () {
 		var $this = $(this),
@@ -41,23 +41,23 @@
 			$this.html(event.strftime('<div class="single-countdown"><span class="single-countdown__time">%D</span><span class="single-countdown__text">Days</span></div><div class="single-countdown"><span class="single-countdown__time">%H</span><span class="single-countdown__text">Hours</span></div><div class="single-countdown"><span class="single-countdown__time">%M</span><span class="single-countdown__text">Mins</span></div><div class="single-countdown"><span class="single-countdown__time">%S</span><span class="single-countdown__text">Secs</span></div>'));
 		});
 	});
-    
-    
-    
-    
+
+
+
+
 /*---
  Category Menu Active
----------------------------- */	
+---------------------------- */
     $(".categories_title").on("click", function() {
         $(this).toggleClass('active');
         $('.categories_menu_toggle').slideToggle('medium');
-    }); 
- 
+    });
+
     $('.categories-more-less').on('click', function(){
         $('.hide-child').slideToggle();
         $(this).toggleClass('rx-change');
-    });	
-    
+    });
+
 /* ---------------------
  Category menu
 --------------------- */
@@ -84,9 +84,9 @@
         $('.categories_menu_toggle li.menu_item_children > a').append('<span class="expand"></span>');
     }
     categorySubMenuToggle();
-    
 
-/*-- 
+
+/*--
     Responsive Mobile Menu
 --------------------------------------------------*/
 //Variables
@@ -115,7 +115,7 @@
             }
         }
     });
-    
+
 /*--
     Hero Slider
 --------------------------------------------*/
@@ -143,7 +143,7 @@ heroSlider.slick({
     ]
 });
 
-    
+
 /*--
     Product Slider
 --------------------------------------------*/
@@ -234,11 +234,11 @@ product_row_4.slick({
             }
         }
     ]
-});  
-    
-    
-/*-- 
-    brand Active Two 
+});
+
+
+/*--
+    brand Active Two
 -----------------------------*/
 var brandActive = $('.our-brand-active');
 brandActive.slick({
@@ -276,8 +276,8 @@ brandActive.slick({
         }
     ]
 });
-/*-- 
-    Testimonial Two Slider 
+/*--
+    Testimonial Two Slider
 -----------------------------*/
 var testimonialSliderTwo = $('.testimonial-two');
 testimonialSliderTwo.slick({
@@ -307,25 +307,26 @@ $('[data-countdown]').each(function() {
 	$this.countdown(finalDate, function(event) {
 		$this.html(event.strftime('<span class="cdown day"><span class="time-count">%-D</span> <p>Days</p></span> <span class="cdown hour"><span class="time-count">%-H</span> <p>Hours</p></span> <span class="cdown minutes"><span class="time-count">%M</span> <p>mins</p></span> <span class="cdown second"><span class="time-count">%S</span> <p>secs</p></span>'));
 	});
-}); 
-        
-    
+});
+
+
 /*----------
     price-slider active
--------------------------------*/  
+-------------------------------*/
 $( "#price-slider" ).slider({
+   orientation: "horizontal",
    range: true,
    min: 0,
-   max: 120,
-   values: [ 20, 115 ],
+   max: 100000,
+   values: [ 15000, 50000],
    slide: function( event, ui ) {
-        $( "#min-price" ).val('$' + ui.values[ 0 ] );
-        $( "#max-price" ).val('$' + ui.values[ 1 ] );
+        $( "#amount" ).val('$' + ui.values[ 0 ] + '- $' + ui.values[ 1 ] );
+        $( "#min-price" ).val(ui.values[ 0 ] );
+        $( "#max-price" ).val(ui.values[ 1 ] );
      }
   });
-  $( "#min-price" ).val('$' + $( "#price-slider" ).slider( "values", 0 ));   
-  $( "#max-price" ).val('$' + $( "#price-slider" ).slider( "values", 1 )); 
-   
+  $( "#amount" ).val('$' + $( "#price-slider" ).slider( "values", 0 ) + '- $' + $( "#price-slider" ).slider( "values", 1 ));
+
 /*--
     Category menu Activation
 ------------------------------*/
@@ -344,8 +345,8 @@ $( "#price-slider" ).slider({
             element.siblings('li').find('li').removeClass('open');
             element.siblings('li').find('ul').slideUp();
         }
-    }); 
-    
+    });
+
 // prodct details slider active
 $('.product-large-slider').slick({
     fade: true,
@@ -371,48 +372,48 @@ $('.product-nav').slick({
     }]
 });
 
-    
+
 // ScrollUp Active
 $('.nice-select').niceSelect ();
 
 // Image zoom effect
 $('.img-zoom').zoom();
-    
-// Fancybox Active   
+
+// Fancybox Active
 $('[data-fancybox="images"]').fancybox({
     hash: false,
 });
-    
+
 
 /*--
     showlogin toggle function
 --------------------------*/
 $( '#showlogin' ).on('click', function() {
     $('#checkout-login' ).slideToggle(500);
-}); 
-    
+});
+
 /*--
     showcoupon toggle function
 --------------------------*/
 $( '#showcoupon' ).on('click', function() {
     $('#checkout-coupon' ).slideToggle(500);
 });
-    
+
 /*--
-    Checkout 
+    CheckoutController
 --------------------------*/
 $("#chekout-box").on("change",function(){
     $(".account-create").slideToggle("100");
 });
-    
-/*-- 
-    Checkout 
+
+/*--
+    CheckoutController
 ---------------------------*/
 $("#chekout-box-2").on("change",function(){
     $(".ship-box-info").slideToggle("100");
-});        
-    
-     
+});
+
+
 /*--
     ScrollUp Active
 -----------------------------------*/
@@ -421,11 +422,11 @@ $.scrollUp({
     easingType: 'linear',
     scrollSpeed: 900,
     animation: 'fade'
-});    
-    
-    
-    
-    
-    
-    
+});
+
+
+
+
+
+
 })(jQuery);

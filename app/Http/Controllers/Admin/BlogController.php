@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\BlogCategory;
 use App\Http\Controllers\AdminController;
 use App\Helper\Functions;
 use App\Blog as MainModel;
@@ -27,10 +28,10 @@ class BlogController extends AdminController
                 ['label' => 'Content', 'name' => 'content', 'type' => 'ckeditor'],
                 ['label' => 'Description', 'name' => 'description', 'type' => 'textarea'],
                 ['label' => 'Quote', 'name' => 'quote', 'type' => 'textarea'],
-                //['label' => 'Category', 'name' => 'category_id', 'type' => 'select', 'modal' => Product_category::class],
-                //['label' => 'Tags', 'name' => 'tag_id', 'type' => 'multipleSelect', 'modal' => Product_tags::class],
+                ['label' => 'Category', 'name' => 'category_id', 'type' => 'select', 'modal' => BlogCategory::class],
                 ['label' => 'Type', 'name' => 'type', 'type' => 'select', 'data-source' => [
                     'Bài viết mới' => 'new',
+                    'Bài viết hot' => 'hot',
                 ]],
                 ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox'],
 

@@ -10,10 +10,14 @@ class Blog extends Model
         'quote', 'status', 'type', 'slug'];
 
     public function category(){
-
+        return $this->belongsTo("App\BlogCategory", "category_id");
     }
 
     public function tags(){
 
+    }
+
+    public function comments(){
+        return $this->hasMany("App\Comment", "post_id");
     }
 }

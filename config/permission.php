@@ -61,10 +61,31 @@ return [
         'delete' => 'Delete Blog'
     ],
 
+    'blog_category' => [
+        'index' => 'List Blog Category',
+        'create' => 'Create Blog Category',
+        'edit' => 'Edit Blog Category',
+        'delete' => 'Delete Blog Category'
+    ],
+
     'banner' => [
         'index' => 'List Banner',
         'create' => 'Create Banner',
         'edit' => 'Edit Banner',
         'delete' => 'Delete Banner'
+    ],
+
+    'coupon' => [
+        'index' => 'List Coupon',
+        'create' => 'Create Coupon',
+        'edit' => 'Edit Coupon',
+        'delete' => 'Delete Coupon'
+    ],
+
+    'widget' => [
+        'index' => 'List Widget',
+        'create' => 'Create Widget',
+        'edit' => 'Edit Widget',
+        'delete' => 'Delete Widget'
     ],
 ];
