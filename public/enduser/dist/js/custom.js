@@ -1,5 +1,14 @@
 (function ($){
     $(document).ready(function (){
+        /*------ Smooth scrolling for every a tag ------*/
+        $(document).on('click', '.btn_now_checkout', function (event) {
+            event.preventDefault();
+
+            $('html, body').animate({
+                scrollTop: $($.attr(this, 'href')).offset().top
+            }, 500);
+        });
+
         /*------ ADD TO CART ------*/
         $(".cart-btn").on('click', function (e){
             e.preventDefault();
@@ -16,7 +25,7 @@
 
                 success: function (data){
                     if(data.code === 200){
-                        $('.sweet-alert').fadeIn('slow');
+                        $('.sweet-alert .insert-alert').fadeIn('slow');
                         setInterval(function (){
                             location.reload().fadeIn("slow");
                         }, 1000)
@@ -25,9 +34,6 @@
 
                 complete: function (){
                     $(".overlay-snipper").removeClass("open");
-                    setTimeout(function (){
-                        $('.sweet-alert').fadeOut(500);
-                    },500)
                 },
 
                 error: function (){
@@ -57,7 +63,7 @@
 
                 success: function (data){
                     if(data.code === 200){
-                        $('.sweet-alert').fadeIn('slow');
+                        $('.sweet-alert .insert-alert').fadeIn('slow');
                         setInterval(function (){
                             location.reload().fadeIn("slow");
                         }, 1000)
@@ -66,9 +72,6 @@
 
                 complete: function (){
                     $(".overlay-snipper").removeClass("open");
-                    setTimeout(function (){
-                        $('.sweet-alert').fadeOut(500);
-                    },500)
                 },
 
                 error: function (){
@@ -208,7 +211,7 @@
             let province_id = $(this).val();
             let _this = $(this);
 
-            let url = "http://myapp.com/thanh-toan/get-district";
+            let url = "http://demo.clock.com/thanh-toan/get-district";
 
             $.ajax({
                 headers: {
@@ -247,7 +250,7 @@
         $("#select-district").on("change", function (){
             let district_id = $(this).val();
             let _this = $(this);
-            let url = "http://myapp.com/thanh-toan/get-ward";
+            let url = "http://demo.clock.com/thanh-toan/get-ward";
 
             $.ajax({
                 headers: {
@@ -342,7 +345,8 @@
 
                     success: function (data){
                         if(data.code === 200){
-                            window.location = "http://myapp.com/thanh-toan/ghi-nhan-don-hang";
+                            console.log(data.orderId);
+                            window.location = "http://demo.clock.com/thanh-toan/ghi-nhan-don-hang/" + data.orderId;
                         }
                     },
 
@@ -395,6 +399,69 @@
             return /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email);
         }
 
+        $(document).on("click", ".click-coupon", function (e){
+            e.preventDefault();
+
+            let nameCoupon = $(this).parent().find("#name_coupon").val();
+            let textPrice = $(".cart-subtotal #temporary-price").text();
+            let replaceTotalPriceToNumber = parseInt(textPrice.replace(",", ""));
+            let url = $(this).data("url");
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN' : $("meta[name='csrf-token']").attr("content")
+                },
+
+                url: url,
+                type: "POST",
+                data: {
+                    nameCoupon: nameCoupon,
+                },
+
+                beforeSend: function (){
+                    $(".overlay-snipper").addClass("open");
+                },
+
+                success: function (data){
+                    if(data.code === 200) {
+                        $(".sweet-alert .update-alert").fadeIn("slow");
+                        $(this).parent().find("#name_coupon").val(data.name);
+                        $("#coupon-price").text(new Intl.NumberFormat().format(data.data.price));
+                        replaceTotalPriceToNumber -= data.data.price;
+                        let numberFormat = new Intl.NumberFormat().format(replaceTotalPriceToNumber);
+                        $(".order-total #order-total-price").text(numberFormat);
+                        $(".order-total #input-total-price").val(replaceTotalPriceToNumber);
+                    }
+                    else if(data.code === 500){
+                        $(".sweet-alert .coupon-alert").fadeIn("slow");
+                    }
+                },
+
+                complete: function (){
+                    $(".overlay-snipper").removeClass("open");
+
+                    setTimeout(function (){
+                        $(".sweet-alert .update-alert").fadeOut(1000);
+                        $(".sweet-alert .coupon-alert").fadeOut(1000);
+                    }, 1000);
+                },
+
+                error: function (data){
+                    if(data.code === 500){
+                        $(".sweet-alert .coupon-alert").fadeIn("slow");
+                    }
+                }
+            })
+        })
+
+        $("#pay-cod").on("change", function (){
+            $(".bank-options").removeClass("active");
+        })
+
+        $("#pay-atm").on("change", function (){
+            $(".bank-options").addClass("active");
+        })
+
         /*------ WishList ------*/
         $(".wishlist-btn").on("click", function (event){
             event.preventDefault();
@@ -409,7 +476,7 @@
 
                 success: function (data){
                     if(data.code === 200){
-                        $('.sweet-alert').fadeIn('slow');
+                        $('.sweet-alert .insert-alert').fadeIn('slow');
                         setInterval(function (){
                             location.reload().fadeIn("slow");
                         }, 1000)
@@ -481,7 +548,7 @@
         $(document).on("click", ".reply-text", showReplyBox);
         function showReplyBox(e){
             e.preventDefault();
-            let defaulPicture = $(this).parents(".user-comments").find(".user-image-comment").attr("src");
+            let defaulPicture = $(this).parents(".comments-reply-area").find(".user-unique").attr("src");
             let _token = $(this).data("token");
             let url = $(this).data("url");
             let parentID = $(this).data("id");
@@ -640,6 +707,57 @@
 
 
         /*----------- End Review Product-----------*/
+
+        /*----------- FlatPickr Date -----------*/
+        flatpickr("#timePicker", {
+            locale: "vn",
+            dateFormat: "d/m/Y",
+            disableMobile: true,
+            altInput: true,
+            altFormat: "d/m/Y",
+            maxDate: new Date(),
+        });
+
+
+        /*----------- Update Profile -----------*/
+        $(".update-profile").on("submit", function (e){
+            e.preventDefault();
+            let url = $(this).data("url");
+
+            let formData = new FormData(this);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN' : $("meta[name='csrf-token']").attr("content")
+                },
+                type: 'POST',
+                url: url,
+                data: formData,
+                processData: false,
+                cache: false,
+                contentType: false,
+
+                beforeSend: function (){
+                    $(".overlay-snipper").addClass("open");
+                },
+
+                success: function (data){
+                    if(data.code === 200){
+                        $(this).find(".form-item #user_name").val(data.user_name);
+                        $(".user-profile-wrapper").find(".user-name").text(data.data.user_name);
+                        $(this).find(".form-item #user_phone").val(data.phone);
+                        $(this).find(".form-item #timePicker").val(data.date);
+                        $('.sweet-alert .update-alert').fadeIn('slow');
+                    }
+                },
+
+                complete: function (){
+                    $(".overlay-snipper").removeClass("open");
+                    setTimeout(function (){
+                        $('.sweet-alert .update-alert').fadeOut(1000);
+                    },1000)
+                }
+            })
+        })
     })
 
 })(jQuery);

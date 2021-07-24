@@ -5,7 +5,7 @@
         <div class="product-short">
             <p>Sort By :</p>
             <select class="nice-select" name="sortby" id="sortby">
-                <option value="{{Request::url()}}?loc=none">- Lọc theo -</option>
+                <option value="{{Request::url()}}?loc=none">- Mặc định -</option>
                 <option value="{{Request::url()}}?loc=kytu-az">Tên (A - Z)</option>
                 <option value="{{Request::url()}}?loc=kytu-za">Tên (Z - A)</option>
                 <option value="{{Request::url()}}?loc=gia-tang-dan">Giá (Thấp > Cao)</option>

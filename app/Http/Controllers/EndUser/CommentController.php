@@ -11,18 +11,18 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function store(Request $request, $slug){
+    public function store(Request $request, $id){
 
         $model = new Comment();
 
         //Get post_id
-        $singleBlog = Blog::where("slug", $slug)->first();
+        $singleBlog = Blog::find($id);
         $post_id = $singleBlog -> id;
         $model -> post_id = $post_id;
 
         //Get user_id
-        if(Auth::guard("customer")->check()) {
-            $user_id = Auth::guard("customer")->user()->id;
+        if(Auth::check()) {
+            $user_id = Auth::user()->id;
             $model -> user_id = $user_id;
         }
 
@@ -34,7 +34,7 @@ class CommentController extends Controller
 
     public function replyComment(Request $request){
         $parent_comment = Comment::where("id", "=", $request['parent_id'])->first();
-        $user_comment = Auth::guard("customer")->user();
+        $user_comment = Auth::user();
 
         $model = new Comment();
         $model -> post_id = $parent_comment -> post_id;

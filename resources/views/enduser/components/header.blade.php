@@ -6,49 +6,6 @@
 
 <header class="header">
 
-    <!-- Header Top Start -->
-    <div class="header-top-area d-none d-lg-block text-color-white bg-gren border-bm-1">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="header-top-settings">
-                        <ul class="nav align-items-center">
-                            <li class="language">English <i class="fa fa-angle-down"></i>
-                                <ul class="dropdown-list">
-                                    <li><a href="#">English</a></li>
-                                    <li><a href="#">French</a></li>
-                                </ul>
-                            </li>
-                            <li class="curreny-wrap">Currency <i class="fa fa-angle-down"></i>
-                                <ul class="dropdown-list curreny-list">
-                                    <li><a href="#">$ USD</a></li>
-                                    <li><a href="#"> € EURO</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="top-info-wrap text-right">
-                        <ul class="my-account-container">
-                            <li><a href="{{ route("cart.showCart") }}">Giỏ hàng</a></li>
-                            <li><a href="{{ route("wishList.showWishList") }}">Yêu thích</a></li>
-                            @if(!\Illuminate\Support\Facades\Auth::guard("customer")->check())
-                                <li><a href="{{ route("auth.login") }}">Đăng nhập</a></li>
-                            @else
-                                <li><a href="{{ route("auth.logout") }}">Đăng xuất</a></li>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <!-- Header Top End -->
-
     <!-- haeader Mid Start -->
     <div class="haeader-mid-area bg-gren border-bm-1 d-none d-lg-block ">
         <div class="container">
@@ -133,6 +90,28 @@
                                 @endif
                             </ul>
                         </div>
+
+                        <div class="user-home ml-2">
+                            @php
+                                if(\Illuminate\Support\Facades\Auth::check()){
+                                    $route = route("user_profile.showAccountDetail");
+                                }
+                                else{
+                                    $route = route("auth.login");
+                                }
+                            @endphp
+                            <a href="{{@$route}}">
+                                <i class="icon-user"></i>
+                            </a>
+                        </div>
+
+                        @if(\Illuminate\Support\Facades\Auth::check())
+                            <div class="user-logout ml-2">
+                                <a href="{{ route("auth.logout") }}">
+                                    <i class="icon-logout"></i>
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
 

@@ -88,4 +88,5 @@ return [
         'edit' => 'Edit Widget',
         'delete' => 'Delete Widget'
     ],
+
 ];

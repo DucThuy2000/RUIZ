@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\EndUser;
 
+use App\Bank;
+use App\Coupon;
 use App\District;
 use App\Http\Controllers\Controller;
 use App\Order;
@@ -17,13 +19,14 @@ class CheckoutController extends Controller
     protected $pathView = "enduser.pages.Checkout.";
 
     public function checkLoginToCheckOut(){
-        if( !Auth::guard("customer")->check() ){
+        if( !Auth::check() ){
             return redirect() -> route("auth.login");
         }
         else{
             $data["wishlist"] = session() -> get("wishList");
             $data["carts"] = session()->get("cart");
             $data["provinces"] = Province::orderBy("_name", "ASC")->get();
+            $data["banks"] = Bank::where("status", "active")->get();
 
             //dd($data["provinces"]);
             return view($this -> pathView . "checkout")->with($data);
@@ -56,7 +59,11 @@ class CheckoutController extends Controller
     }
 
     public function confirmCheckout(Request $request){
-        $user_id = Auth::guard("customer")->user()->id;
+        if(!empty($request['coupon_id'])){
+            $coupon = Coupon::where("name", $request['coupon_id'])->first();
+        }
+
+        $user_id = Auth::user()->id;
         $data = $request -> all();
         //dd($request -> all());
 
@@ -68,9 +75,16 @@ class CheckoutController extends Controller
         $order -> user_id = $user_id;
 
         foreach ($data as $key => $value){
-            if($key == "pay_method" || $key == "note"){
+            if($key == "pay_method" || $key == "note" || $key == "price_total"){
                 $order -> $key = $value;
-            }else{
+            }
+            else if($key == "bank"){
+                unset($key);
+            }
+            else if($key == "coupon_id"){
+                $order -> $key = @$coupon -> id;
+            }
+            else{
                 if($key == "province"){
                     $province_name = Province::find($value);
                     $value = $province_name -> _name;
@@ -92,16 +106,9 @@ class CheckoutController extends Controller
 
         //Save address id after store order_address into database
         $order -> address_id = $order_address -> id;
-
-        //Save total price of an order
-        $cart_detail = session() -> get("cart");
-        $price = 0;
-        foreach ($cart_detail as $product_id){
-            $price += $product_id['subtotal'] * $product_id['quantity'];
-            $order -> price_total = $price;
-        }
         $order -> save();
 
+        $cart_detail = session() -> get("cart");
         //Store data into order_detail table
         foreach ($cart_detail as $product_id){
             $order_detail = new OrderDetail();
@@ -113,18 +120,45 @@ class CheckoutController extends Controller
             $order_detail -> product_price = $product_id['subtotal'];
             $order_detail -> product_quantity = $product_id['quantity'];
             $order_detail -> price_total = $product_id['subtotal'] * $product_id['quantity'];
+            $order_detail -> status = 'Đang chờ xử lý';
             $order_detail -> save();
         }
 
         return response() -> json([
-            'code' => 200
+            'code' => 200,
+            'orderId' => $order -> id,
         ],200);
 
     }
 
-    public function checkoutSuccess(){
+    public function applyCoupon(Request $request){
+        $couponActive = Coupon::where("name", $request -> nameCoupon)->first();
+        if($couponActive){
+            return response() -> json([
+                'code' => 200,
+                'data' => $couponActive,
+            ],200);
+        }
+        else{
+            return response() -> json([
+                'code' => 500,
+            ]);
+        }
+    }
+
+    public function checkoutSuccess($id){
+        $data['wishlist'] = session() -> get("wishList");
+        //Xoá card sau khi thanh toán
         session() -> forget("cart");
         $data['carts'] = session() -> get("cart");
+
+        //Lấy order với id truyền lên
+        $data['order'] = Order::find($id);
+        //Lấy order detail vs id order
+        $data['order_details'] = $data['order'] -> orderDetails;
+        //Lấy thông tin banks
+        $data['banks'] = Bank::where("status","active")->get();
+
         return view($this -> pathView ."doneCheckout")->with($data);
     }
 

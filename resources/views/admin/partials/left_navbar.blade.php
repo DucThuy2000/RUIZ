@@ -37,6 +37,12 @@
                     Setting
                 </a>
 
+                <!---- Setting Navigate ---->
+                <a class="nav-link collapsed" href="{{ route('admin.bank.index') }}"  aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-university"></i></div>
+                    Bank
+                </a>
+
                 <!---- Coupon Navigate ---->
                 <a class="nav-link collapsed" href="{{ route('admin.coupon.index') }}"  aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-percentage"></i></div>

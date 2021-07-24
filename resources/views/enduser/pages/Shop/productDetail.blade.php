@@ -145,7 +145,7 @@
                                     @include("enduser.components.review_product", ["reviews" => @$reviews])
                                 </div>
                                 <!-- Start RAting Area -->
-                                @if(\Illuminate\Support\Facades\Auth::guard("customer")->check())
+                                @if(\Illuminate\Support\Facades\Auth::check())
                                     <div class="rating_wrap mt-50">
                                         <h5 class="rating-title-1">Thêm review cho sản phẩm </h5>
                                         <h6 class="rating-title-2">Đánh giá của bạn</h6>

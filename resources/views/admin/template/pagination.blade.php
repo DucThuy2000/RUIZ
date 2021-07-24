@@ -8,7 +8,7 @@
         </div>
         <ul class="pagination justify-content-end">
             <li class="page-item @if( $pagination -> onFirstPage()) disabled @endif">
-                <a class="page-link" href="{{ $pagination -> previousPageUrl() }}">Previous</a>
+                <a class="page-link" href="{{ $pagination -> previousPageUrl() }}">Trước</a>
             </li>
             @for($i = 1; $i <= $pagination -> lastPage(); $i++)
                 <li class="page-item">
@@ -16,7 +16,7 @@
                 </li>
             @endfor
             <li class="page-item @if($pagination -> currentPage() == $pagination -> lastPage() ) disabled @endif">
-                <a class="page-link" href="{{ $pagination -> nextPageUrl() }}">Next</a>
+                <a class="page-link" href="{{ $pagination -> nextPageUrl() }}">Sau</a>
             </li>
         </ul>
     </div>

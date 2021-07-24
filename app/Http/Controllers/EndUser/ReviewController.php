@@ -13,7 +13,7 @@ class ReviewController extends Controller
         $review = new Review();
 
         //Lấy id user review
-        $review -> user_id = Auth::guard("customer")->user()->id;
+        $review -> user_id = Auth::user()->id;
 
         //Lấy id product
         $review -> product_id = $id;

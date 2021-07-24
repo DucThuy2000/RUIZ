@@ -29,7 +29,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 col-sm-6 d-flex justify-content-center">
+                <div class="col-lg-2 col-md-6 col-sm-6">
                     <div class="widget-footer mt-40">
                         <h6 class="title-widget">{{ $footer2 -> name }}</h6>
                         <div class="widget-content mb--20">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 col-sm-6 d-flex justify-content-center">
+                <div class="col-lg-2 col-md-6 col-sm-6">
                     <div class="widget-footer mt-40">
                         <h6 class="title-widget">{{ $footer3 -> name }}</h6>
                         <div class="widget-content mb--20">
@@ -46,7 +46,36 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="widget-footer mt-40">
+                        <h6 class="title-widget">Tải App</h6>
+                        <ul class="footer-list">
+                            <li><img src="https://demo.hasthemes.com/ruiz-preview/ruiz/assets/images/brand/img-googleplay.jpg" alt=""></li>
+                            <li><img src="https://demo.hasthemes.com/ruiz-preview/ruiz/assets/images/brand/img-appstore.jpg" alt=""></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="copy-left-text">
+                        <p>Copyright &copy; <a href="#">Ruiz</a> 2019. All Right Reserved.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="copy-right-image">
+                        <img src="https://demo.hasthemes.com/ruiz-preview/ruiz/assets/images/icon/img-payment.png" alt="">
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </footer>
+

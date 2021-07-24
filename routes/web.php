@@ -28,7 +28,21 @@ Route::namespace("EndUser")->group(function(){
         Route::get("dang-ky", $controllerName . "register")->name("register");
         Route::post("kiem-tra-dang-ky", $controllerName . "checkRegister")->name("checkRegister");
         Route::get("dang-xuat", $controllerName . "logout")->name("logout");
+        Route::get('login/{provider}', $controllerName.'redirectToProvider')->name("socialLogin");
+        Route::get('login/{provider}/callback', $controllerName.'handleProviderCallback')->name("socialLoginCallBack");
     });
+
+    /*----- User Profile -----*/
+    $prefix = "ca-nhan";
+    $controller = "user_profile";
+    Route::prefix($prefix)->name($controller . ".")->group(function () use ($controller){
+        $controllerName = ucfirst($controller) . "Controller@";
+        Route::get('/', $controllerName.'showAccountDetail')->name("showAccountDetail");
+        Route::post('update-profile/{id}', $controllerName.'updateProfile')->name("updateProfile");
+        Route::get('don-hang-cua-toi', $controllerName.'showUserOrdered')->name("myOrder");
+        Route::get('don-hang-cua-toi/{id}', $controllerName.'showOrderDetail')->name("orderDetail");
+    });
+
     /*----- Cua Hang -----*/
     $prefix = "cua-hang";
     $controller = "shop";
@@ -73,8 +87,9 @@ Route::namespace("EndUser")->group(function(){
         Route::get('/', $controllerName."checkLoginToCheckOut")->name("checkLoginToCheckOut");
         Route::post('get-district', $controllerName."getDistrict")->name("getDistrict");
         Route::post('get-ward', $controllerName."getWard")->name("getWard");
+        Route::post('applyCoupon', $controllerName."applyCoupon")->name("applyCoupon");
         Route::post('confirmCheckout', $controllerName."confirmCheckout")->name("confirmCheckout");
-        Route::get('ghi-nhan-don-hang', $controllerName."checkoutSuccess")->name("checkoutSuccess");
+        Route::get('ghi-nhan-don-hang/{id}', $controllerName."checkoutSuccess")->name("checkoutSuccess");
     });
 
     /*----- Blog -----*/
@@ -92,7 +107,7 @@ Route::namespace("EndUser")->group(function(){
     $controller = "comment";
     Route::prefix($prefix)->name($controller . ".")->group(function () use ($controller){
         $controllerName = ucfirst($controller) . "Controller@";
-        Route::post("store/{slug}", $controllerName."store")->name("store");
+        Route::post("store/{id}", $controllerName."store")->name("store");
         Route::post("store-reply", $controllerName."replyComment")->name("replyComment");
         Route::post("sua-binh-luan/{id}", $controllerName."editComment")->name("editComment");
         Route::get("xoa-binh-luan/{id}", $controllerName."deleteComment")->name("deleteComment");

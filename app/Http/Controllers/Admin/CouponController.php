@@ -21,7 +21,7 @@ class CouponController extends AdminController
             'tab_label' => 'General (VI)',
             'items' => [
                 ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-                ['label' => 'Percentage', 'name' => 'percentage', 'type' => 'text'],
+                ['label' => 'Price', 'name' => 'price', 'type' => 'text'],
                 ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox'],
             ]
         ],
@@ -32,7 +32,7 @@ class CouponController extends AdminController
     protected $fieldList = [
         ['label' => 'iD', 'name' => 'id', 'type' => 'id'],
         ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-        ['label' => 'Percentage', 'name' => 'percentage', 'type' => 'text'],
+        ['label' => 'Price', 'name' => 'price', 'type' => 'text'],
         ['label' => 'Status', 'name' => 'status', 'type' => 'status'],
         ['label' => 'Created At', 'name' => 'created_at', 'type' => 'dateFormat'],
         ['label' => 'Updated At', 'name' => 'updated_at', 'type' => 'dateFormat']

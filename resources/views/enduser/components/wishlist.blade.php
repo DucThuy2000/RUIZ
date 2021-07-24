@@ -21,7 +21,7 @@
                     <td class="plantmore-product-name">
                         <a href="{{ route("shop.productDetail", ["slug" => @$item['slug']]) }}">{{ @$item['name'] }}</a>
                     </td>
-                    <td class="plantmore-product-price"><span class="amount">{{ number_format(@$item['price']) }}</span></td>
+                    <td class="plantmore-product-price"><span class="amount">${{ number_format(@$item['price']) }}</span></td>
                     <td class="plantmore-product-add-cart">
                         <a href="" class="cart-btn" data-url="{{ route("cart.addToCart", ["id" => @$item['id']]) }}">add to cart</a>
                     </td>

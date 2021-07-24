@@ -309,24 +309,6 @@ $('[data-countdown]').each(function() {
 	});
 });
 
-
-/*----------
-    price-slider active
--------------------------------*/
-$( "#price-slider" ).slider({
-   orientation: "horizontal",
-   range: true,
-   min: 0,
-   max: 100000,
-   values: [ 15000, 50000],
-   slide: function( event, ui ) {
-        $( "#amount" ).val('$' + ui.values[ 0 ] + '- $' + ui.values[ 1 ] );
-        $( "#min-price" ).val(ui.values[ 0 ] );
-        $( "#max-price" ).val(ui.values[ 1 ] );
-     }
-  });
-  $( "#amount" ).val('$' + $( "#price-slider" ).slider( "values", 0 ) + '- $' + $( "#price-slider" ).slider( "values", 1 ));
-
 /*--
     Category menu Activation
 ------------------------------*/

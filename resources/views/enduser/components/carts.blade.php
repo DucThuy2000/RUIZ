@@ -3,12 +3,12 @@
         <table class="table">
             <thead>
             <tr>
-                <th class="plantmore-product-thumbnail">Images</th>
-                <th class="cart-product-name">Product</th>
-                <th class="plantmore-product-price">Unit Price</th>
-                <th class="plantmore-product-quantity">Quantity</th>
-                <th class="plantmore-product-subtotal">Total</th>
-                <th class="plantmore-product-remove">Remove</th>
+                <th class="plantmore-product-thumbnail">Ảnh</th>
+                <th class="cart-product-name">Tên</th>
+                <th class="plantmore-product-price">Giá</th>
+                <th class="plantmore-product-quantity">Số lượng</th>
+                <th class="plantmore-product-subtotal">Tổng tiền</th>
+                <th class="plantmore-product-remove">Xóa</th>
             </tr>
             </thead>
             <tbody>
@@ -54,11 +54,6 @@
                     <a href="{{ route("shop.index") }}" class=" continue-btn">Tiếp tục mua hàng</a>
                 </div>
 
-                <div class="coupon">
-                    <h3>Mã giảm giá</h3>
-                    <input id="coupon_code" class="input-text" name="coupon_code" value="{{ @$coupon -> name }}" placeholder="Nhập mã giảm..." type="text">
-                    <a href="#" class="btn-coupon" data-url="{{ route("cart.applyCoupon") }}">Áp dụng</a>
-                </div>
             </div>
         </div>
         <div class="col-md-4 ml-auto">
@@ -71,7 +66,7 @@
                     <li>Tạm tính <span>${{ number_format(@$cartTotal - @$coupon -> percentage) }}</span></li>
                 </ul>
 
-                <a href="{{ route("checkout.checkLoginToCheckOut") }}" class="proceed-checkout-btn">Proceed to checkout</a>
+                <a href="{{ route("checkout.checkLoginToCheckOut") }}" class="proceed-checkout-btn">Thanh toán</a>
             </div>
         </div>
     </div>

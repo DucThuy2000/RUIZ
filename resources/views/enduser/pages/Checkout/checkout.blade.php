@@ -13,22 +13,21 @@
     <!-- breadcrumb-area end -->
 
     <!-- main-content-wrap start -->
-    <div class="main-content-wrap section-ptb checkout-page">
+    <form id="form-address-checkout">
+        <div class="main-content-wrap section-ptb checkout-page">
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="coupon-area">
                         <!-- coupon-accordion start -->
                         <div class="coupon-accordion">
-                            <h3>Have a coupon? <span class="coupon" id="showcoupon">Click here to enter your code</span></h3>
+                            <h3>Bạn có mã giảm giá không? <span class="coupon" id="showcoupon">Click here</span></h3>
                             <div class="coupon-content" id="checkout-coupon">
                                 <div class="coupon-info">
-                                    <form action="#">
-                                        <p class="checkout-coupon">
-                                            <input type="text" placeholder="Coupon code">
-                                            <button type="submit" class="btn button-apply-coupon" name="apply_coupon" value="Apply coupon">Apply coupon</button>
-                                        </p>
-                                    </form>
+                                    <p class="checkout-coupon">
+                                        <input type="text" placeholder="Mã giảm giá" name="coupon_id" id="name_coupon">
+                                        <a class="btn pt-2 pb-2 click-coupon" data-url="{{ route("checkout.applyCoupon") }}">Nhập code</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +41,6 @@
                     <div class="col-lg-6 col-md-6">
                         <!-- billing-details-wrap start -->
                         <div class="billing-details-wrap">
-                            <form id="form-address-checkout">
                                 <h3 class="shoping-checkboxt-title">Thông tin giao hàng</h3>
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -111,26 +109,30 @@
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-group pure-checkbox">
-                                                    <input type="radio" id="pay-atm" name="pay_method" value="atm">
+                                                    <input type="radio" id="pay-atm" name="pay_method" value="bank">
                                                     <label for="pay-atm">Thanh toán qua ATM</label>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12">
-                                                <div class="form-group pure-checkbox">
-                                                    <input type="radio" id="pay-momo" name="pay_method" value="momo">
-                                                    <label for="pay-momo">Thanh toán qua ví MoMo</label>
+                                            <div class="bank-options">
+                                                    @foreach($banks as $key => $bank)
+                                                        <div class="form-group pure-checkbox">
+                                                            <input type="radio" id="atm-banking-{{ $key + 1 }}" name="bank" value="{{ $key + 1 }}">
+                                                            <label for="atm-banking-{{ $key + 1 }}" class="bank-detail">
+                                                                <img src="{{ \App\Helper\Functions::getImage("bank", $bank -> picture, "thumbnail") }}" alt="{{ $bank->name }}">
+                                                                {{ $bank->name }}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <p class="single-form-row m-0">
-                                            <label>Order notes</label>
+                                            <label>Ghi chú</label>
                                             <textarea name="note" placeholder="Notes about your order, e.g. special notes for delivery." class="checkout-mess" rows="2" cols="5"></textarea>
                                         </p>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                         <!-- billing-details-wrap end -->
                     </div>
@@ -167,15 +169,19 @@
                                         <tfoot>
                                         <tr class="cart-subtotal">
                                             <th class="th-title">Giá tạm tính</th>
-                                            <td><span class="amount">${{ number_format($cartTotal) }}</span></td>
+                                            <td>$<span class="amount" id="temporary-price">{{ number_format($cartTotal) }}</span></td>
                                         </tr>
                                         <tr class="cart-subtotal">
                                             <th class="th-title">Giảm giá</th>
-                                            <td><span class="amount">- $0</span></td>
+                                            <td>- $<span class="amount" id="coupon-price">0</span></td>
                                         </tr>
                                         <tr class="order-total">
                                             <th class="th-title">Tổng giá</th>
-                                            <td><strong><span class="amount">${{ number_format($cartTotal) }}</span></strong>
+                                            <td>
+                                                <strong>
+                                                    $<span class="amount" id="order-total-price">{{ number_format($cartTotal) }}</span>
+                                                </strong>
+                                                <input type="hidden" name="price_total" id="input-total-price" value="{{ @$cartTotal }}">
                                             </td>
                                         </tr>
                                         </tfoot>
@@ -199,6 +205,7 @@
             <!-- checkout-details-wrapper end -->
         </div>
     </div>
+    </form>
     <!-- main-content-wrap end -->
 @stop
 

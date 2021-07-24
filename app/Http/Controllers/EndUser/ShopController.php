@@ -15,6 +15,11 @@ class ShopController extends Controller
 {
     protected $pathView = "enduser.pages.Shop.";
 
+    public function __construct(){
+        $maxValue = Product::max("price_final");
+        view() -> share("maxValue", $maxValue);
+    }
+
     public function sort($model){
         $sort = $_GET['loc'];
 
@@ -39,18 +44,26 @@ class ShopController extends Controller
         return $products;
     }
 
-    public function index(){
+    public function index(Request $request){
+
+        //dd($request->minPrice);
         $wishlist = session() -> get("wishList");
         $carts = session() -> get("cart");
         $tags = Product_tags::where('status', 'active')->get();
         $model = Product::where('status', 'active');
-        if(isset($_GET['loc'])) {
+        if( !empty($request -> minPrice && $request -> maxPrice)){
+            $minPrice = $request -> minPrice;
+            $maxPrice = $request -> maxPrice;
+            $products = $model -> whereBetween('price_final', [$minPrice, $maxPrice]) -> paginate(12) -> appends(request() -> query());
+        }
+        else if( isset($request -> loc) && empty($request -> minPrice && $request -> maxPrice) ) {
             $products = $this -> sort($model);
         }else{
             $products = $model->orderBy('id')->paginate(12);
         }
 
         $categories = Product_category::where('status','active')->get();
+
         return view($this -> pathView . "shop",
         compact("products", "categories", "carts", "tags", "wishlist"));
     }
@@ -74,7 +87,12 @@ class ShopController extends Controller
             $products = [];
         }
 
-        if(isset($_GET['loc'])){
+        if( !empty($request -> minPrice && $request -> maxPrice)){
+            $minPrice = $request -> minPrice;
+            $maxPrice = $request -> maxPrice;
+            $products = $category -> products() -> whereBetween('price_final', [$minPrice, $maxPrice]) -> paginate(12) -> appends(request() -> query());
+        }
+        else if(isset($_GET['loc'])){
             $products = $this -> sort($model);
         }
 
@@ -104,6 +122,8 @@ class ShopController extends Controller
 
 
     public function showProductByCategory(Request $request, $slug){
+        $category = Product_category::where("slug", $slug)->first();
+
         $wishlist = session() -> get("wishList");
         $tags = Product_tags::where('status', 'active')->get();
         $carts = session() -> get("cart");
@@ -113,7 +133,12 @@ class ShopController extends Controller
 
         $model = $category->products()->where('status', 'active');
 
-        if(isset($_GET['loc'])) {
+        if( !empty($request -> minPrice && $request -> maxPrice)){
+            $minPrice = $request -> minPrice;
+            $maxPrice = $request -> maxPrice;
+            $products = $model -> whereBetween('price_final', [$minPrice, $maxPrice]) -> paginate(12) -> appends(request() -> query());
+        }
+        else if(isset($_GET['loc'])) {
             $products = $this -> sort($model);
         }else{
             $products = $model -> paginate(12);
@@ -133,7 +158,12 @@ class ShopController extends Controller
 
         $model = $tag->products()->where('status', 'active');
 
-        if(isset($_GET['loc'])) {
+        if( !empty($request -> minPrice && $request -> maxPrice)){
+            $minPrice = $request -> minPrice;
+            $maxPrice = $request -> maxPrice;
+            $products = $model -> whereBetween('price_final', [$minPrice, $maxPrice]) -> paginate(12) -> appends(request() -> query());
+        }
+        else if(isset($_GET['loc'])) {
             $products = $this -> sort($model);
         }else{
             $products = $model -> paginate(12);
@@ -143,7 +173,7 @@ class ShopController extends Controller
             compact("products", "categories", "tag", "carts", "tags", "wishlist"));
     }
 
-    public function showProductByBrand($slug){
+    public function showProductByBrand(Request $request,$slug){
         $wishlist = session() -> get("wishList");
         $tags = Product_tags::where('status', 'active')->get();
         $carts = session() -> get("cart");
@@ -151,7 +181,18 @@ class ShopController extends Controller
 
         $partner = Product_category::where('slug', $slug)->first();
 
-        $products = $partner -> products() -> where('status', 'active') -> paginate(12);
+        $model = $partner -> products() -> where('status', 'active');
+
+        if( !empty($request -> minPrice && $request -> maxPrice)){
+            $minPrice = $request -> minPrice;
+            $maxPrice = $request -> maxPrice;
+            $products = $model -> whereBetween('price_final', [$minPrice, $maxPrice]) -> paginate(12) -> appends(request() -> query());
+        }
+        else if(isset($_GET['loc'])) {
+            $products = $this -> sort($model);
+        }else{
+            $products = $model -> paginate(12);
+        }
 
         return view($this -> pathView . "productsByPartner",
             compact("partner", "allPartner", "products", "carts", "tags", "wishlist"));

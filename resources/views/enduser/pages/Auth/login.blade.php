@@ -52,6 +52,16 @@
                                                     <button class="login-btn btn" type="submit"><span>Login</span></button>
                                                 </div>
                                             </div>
+                                            <p class="text-center">Hoặc đăng nhập với</p>
+                                            <ul class="social-icons d-flex justify-content-center">
+                                                @foreach(['facebook', 'google', 'github'] as $provider)
+                                                    <li>
+                                                        <a href="{{ route("auth.socialLogin", ['provider' => $provider]) }}" class="{{$provider}} social-icon" title="{{ ucfirst($provider) }}" style="height: 70px; width: 70px;">
+                                                            <i class="fab fa-{{$provider}}" style="line-height: 70px; font-size: 35px"></i>
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
                                         </form>
                                     </div>
                                 </div>

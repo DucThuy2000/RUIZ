@@ -14,7 +14,7 @@
                                     <p> {{ $slidebar -> description }} </p>
                                     <p>Starting At <strong>{{ number_format($slidebar -> price_base) }} VNĐ</strong></p>
                                     <div class="slide-btn-group">
-                                        <a href="#" class="btn btn-bordered btn-style-1">Shop Now</a>
+                                        <a href="{{ route("shop.index") }}" class="btn btn-bordered btn-style-1">Shop Now</a>
                                     </div>
                                 </div>
                             </div>

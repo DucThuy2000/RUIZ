@@ -2,12 +2,16 @@
     @foreach($reviews as $review)
         @php
             //Lấy thông tin user qua user_id
-            $user = \App\Customer::where("id", @$review -> user_id)->first();
+            $user = \App\User::where("id", @$review -> user_id)->first();
             //dd($user);
         @endphp
         <div class="pro_review mt-5">
             <div class="review_thumb">
-                <img alt="review images" src="{{ asset("picture/User-Default.jpg") }}">
+                @if(@$user->provider_id == NULL)
+                    <img alt="review images" src="{{ \App\Helper\Functions::getImage("user", @$user -> picture) }}">
+                @else
+                    <img class="review images" src="{{ @$user -> picture }}" alt="">
+                @endif
             </div>
             <div class="review_details">
                 <div class="review_info mb-10 rating-info">

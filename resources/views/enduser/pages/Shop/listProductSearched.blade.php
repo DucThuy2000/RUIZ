@@ -22,7 +22,7 @@
                         <div class="col-lg-3 order-lg-1 order-2">
                             <div class="shop-sidebar-wrap">
                                 <div class="shop-box-area">
-                                    @include("enduser.components.sidebar_filter_price")
+                                    @include("enduser.components.sidebar_filter_price", ["route" => Request::url() . "?keyword=" . $keyword ])
                                     @include("enduser.components.sidebar_tags")
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                                             <div class="product-short">
                                                 <p>Sort By :</p>
                                                 <select class="nice-select" name="sortby" id="sortby">
-                                                    <option value="{{Request::url()}}?keyword={{ $keyword }}&loc=none">- Lọc theo -</option>
+                                                    <option value="{{Request::url()}}?keyword={{ $keyword }}&loc=none">- Mặc định -</option>
                                                     <option value="{{Request::url()}}?keyword={{ $keyword }}&loc=kytu-az">Tên (A - Z)</option>
                                                     <option value="{{Request::url()}}?keyword={{ $keyword }}&loc=kytu-za">Tên (Z - A)</option>
                                                     <option value="{{Request::url()}}?keyword={{ $keyword }}&loc=gia-tang-dan">Giá (Thấp > Cao)</option>

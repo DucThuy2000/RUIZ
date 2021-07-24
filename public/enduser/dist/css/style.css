@@ -309,8 +309,6 @@ a:focus {
 .pagination-box {
   display: flex;
   margin-top: 40px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
   padding: 10px;
   justify-content: center;
 }
@@ -746,11 +744,11 @@ img.mfp-img {
   color: #ffffff;
 }
 
-.google-plus {
+.google{
   background-color: #D11718;
   color: #ffffff;
 }
-.google-plus:hover {
+.google:hover {
   background-color: #D11718;
   color: #ffffff;
 }
@@ -5423,6 +5421,17 @@ img.mfp-img {
     right: 0;
     z-index: 9999;
     transition: all .3s ease-in-out;
+}
+
+.sweet-alert .insert-alert{
+    display: none;
+}
+
+.sweet-alert .update-alert{
+    display: none;
+}
+
+.sweet-alert .coupon-alert{
     display: none;
 }
 
@@ -5719,4 +5728,306 @@ img.mfp-img {
     background: #9e9e9e;
     color: #fff;
 }
+
+.user-profile-wrapper{
+    padding: 50px 0;
+}
+
+.user-sidebar-components{
+    border-radius: 5px;
+    padding: 10px;
+    background: #fff;
+    height: 100%;
+    box-shadow: 0 0 4px 0 rgb(0 0 0 / 25%);
+}
+
+.user-sidebar-components .user-avatar{
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    max-width: 120px;
+    margin: 15px auto 10px;
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+.user-sidebar-components .user-avatar img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+}
+
+.user-sidebar-components .user-name {
+    text-align: center;
+    color: #c89979;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.user-sidebar-list .list-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #000;
+    padding: 10px 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color .1s ease;
+}
+
+.user-sidebar-list .list-item:hover{
+    color: #c89979;
+}
+
+.user-sidebar-list .list-item:not(:last-child){
+    border-bottom: 1px solid #cccccc;
+}
+
+.user-layout-main{
+    box-shadow: 0 0 4px 0 rgb(0 0 0 / 25%);
+    border-radius: 5px;
+    padding: 15px;
+    background: #fff;
+    height: 100%;
+}
+
+.user-layout-main .layout-title{
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0 30px;
+}
+
+.authen-form .form-group.half {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.authen-form .form-group.half .form-item {
+    flex: 0 0 49%;
+    max-width: 49%;
+}
+
+.authen-form label {
+    text-align: left;
+    color: #858a8d;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.authen-form input {
+    height: 45px;
+    padding: 0 15px;
+    border: 1px solid #ddd;
+    width: 100%;
+    margin: 5px 0;
+    border-radius: 30px;
+}
+
+.authen-form .form-item.button-action{
+    display: flex;
+}
+
+.authen-form button {
+    margin-bottom: 10px;
+    height: 40px;
+    border-radius: 30px;
+    padding: 0 15px;
+    width: 100%;
+}
+
+.authen-form button.btn {
+    background: #c89979;
+    color: #fff;
+    width: 100%;
+    border: none;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.authen-form .form-item.button-action .btn {
+    width: auto;
+    margin: 0 0 0 auto;
+}
+
+.form-item .form-control:disabled, .form-control[readonly] {
+    background: #ffffff;
+    opacity: 1;
+}
+
+.form-item .form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #cccccc;
+    box-shadow: none;
+    outline: 0;
+}
+
+.flatpickr-input{
+    background: #ffffff;
+}
+
+.user-layout-main .user-address{
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    position: relative;
+    margin-top: 15px;
+}
+
+.user-address .address-name{
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 700;
+    color: #c89979;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.address-col{
+    padding: 0 10px;
+}
+
+.user-layout-table{
+    overflow: auto;
+}
+
+.user-layout-table table{
+    width: 100%;
+    border: none;
+    margin: 20px 0;
+}
+
+.user-layout-table table td.col-center {
+    text-align: center;
+}
+
+.user-layout-table table thead td {
+    font-weight: 600;
+    border-bottom: 2px solid #c89979;
+}
+
+.user-layout-table table td {
+    padding: 10px 5px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.user-layout-table table td.nowrap {
+    white-space: nowrap;
+}
+
+.user-layout-table table tr:not(:last-of-type) td {
+    border-bottom: 1px solid #ddd;
+}
+
+.user-layout-table table td.col-id {
+    min-width: 180px;
+}
+
+.user-layout-table table .tag-group .tag-item.active {
+    background: #28a745;
+    color: #fff;
+}
+
+.user-layout-table table .tag-group .tag-item {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 30px;
+    white-space: nowrap;
+}
+
+.empty-order{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.empty-order span{
+    opacity: .5;
+    pointer-events: none;
+}
+
+.bank-options{
+    padding-left: 40px;
+    display: none;
+}
+
+.bank-options.active{
+    display: block;
+}
+
+.bank-options .bank-detail{
+    display: flex !important;
+    align-items: center;
+}
+
+.bank-options .bank-detail{
+    color: #cccccc;
+    font-size: 14px;
+}
+
+.bank-options .bank-detail img{
+    width: 150px;
+    display: block;
+    margin: 5px;
+}
+
+.cart-layout {
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+.cart-layout .cart-layout-wrapper h3 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 60px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.box_order_general .item .title_order {
+    width: 220px;
+}
+
+.box_order_general .item span {
+    display: inline-block;
+}
+
+.btn_now_checkout{
+    padding: 10px;
+    color: #ffffff;
+    background: #c89979;
+}
+
+.note {
+    padding: 10px;
+    border-left: 6px solid;
+    border-radius: 5px;
+}
+
+.note.note-order {
+    background: #e6e6e6;
+}
+
+.note.note-order {
+    margin-bottom: 15px;
+}
+.note.note-order {
+    border-left: 6px solid #804d8d;
+}
+
 /*# sourceMappingURL=style.css.map */

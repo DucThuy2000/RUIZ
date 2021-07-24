@@ -24,7 +24,7 @@
                     <div class="shop-sidebar-wrap">
                         <div class="shop-box-area">
                             @include("enduser.components.sidebar_categories" , ["categories" => $categories])
-                            @include("enduser.components.sidebar_filter_price")
+                            @include("enduser.components.sidebar_filter_price",["route" => Request::url()])
                             <!-- shop-sidebar start -->
                             @include("enduser.components.sidebar_tags")
                             <!-- shop-sidebar end -->
@@ -53,6 +53,7 @@
                                 <div class="tab-pane active" id="grid">
                                     <div class="shop-product-wrap">
                                         <div class="row">
+                                            @if(count($products) > 0)
                                             @foreach($products as $product)
                                                 <div class="col-lg-4 col-md-6">
                                                 <!-- single-product-area start -->
@@ -86,6 +87,9 @@
                                                 <!-- single-product-area end -->
                                             </div>
                                             @endforeach
+                                            @else
+                                                <span style="font-size: 24px;text-transform: uppercase;color: #333333;font-weight: 500;text-align: center;width: 100%;">Không có sản phẩm nào</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

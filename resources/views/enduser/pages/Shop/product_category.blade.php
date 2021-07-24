@@ -22,7 +22,7 @@
                     <div class="shop-sidebar-wrap">
                         <div class="shop-box-area">
                             @include("enduser.components.sidebar_categories" , ["categories" => $categories])
-                            @include("enduser.components.sidebar_filter_price")
+                            @include("enduser.components.sidebar_filter_price",["route" => Request::url()])
                             @include("enduser.components.sidebar_tags")
                         </div>
                     </div>

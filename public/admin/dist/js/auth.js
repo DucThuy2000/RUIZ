@@ -16,7 +16,7 @@
 
            success: function (data){
                 if(data.code === 200){
-                    window.location = "http://myapp.com/admin/user";
+                    window.location = "http://demo.clock.com/admin/user";
                 }
            },
 

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\EndUser;
 
-use App\Customer as MainModel;
+use App\User as MainModel;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -27,12 +28,11 @@ class AuthController extends Controller
         return view($this -> pathView . "login");
     }
 
-
     public function checkLogin(Request $request){
         $email = $request -> email;
         $password = $request -> password;
 
-        if( Auth::guard("customer")->attempt(["email" => $email, "password" => $password]) ){
+        if( Auth::attempt(["email" => $email, "password" => $password]) ){
             //dùng RouteServiceProvider để lấy session từ intended đã thêm
             return redirect() -> intended(RouteServiceProvider::HOME);
         }
@@ -64,7 +64,7 @@ class AuthController extends Controller
     }
 
     public function logout(){
-        Auth::guard("customer")->logout();
+        Auth::logout();
         return redirect() -> route("auth.login");
     }
 
@@ -78,7 +78,7 @@ class AuthController extends Controller
             // confirmed work khi name của input nhập lại mật khẩu có name là password_confirmation
             "password" => "required|min:8|confirmed",
             "phone" => "required",
-            "email" => "required|unique:customers,email",
+            "email" => "required",
 
         ],[
             "required" => ":attribute không được để trống",
@@ -96,5 +96,32 @@ class AuthController extends Controller
         ]);
 
         return $validate;
+    }
+
+    //Login with Socialite
+    public function redirectToProvider(string $provider){
+        return Socialite::driver($provider)->redirect();
+    }
+
+    public function handleProviderCallback(string $provider){
+        $user = Socialite::driver($provider)->user();
+        //dd($user);
+        $this -> registerOrLoginUserSocialite($user);
+        return redirect() -> intended(RouteServiceProvider::HOME);
+    }
+
+    public function registerOrLoginUserSocialite($data){
+        $user = MainModel::where("email", "=", $data -> email)->first();
+        //dd($user);
+        if(!$user){
+            $user = new MainModel();
+            $user->user_name = $data->name;
+            $user->email = $data->email;
+            $user->picture = $data->avatar;
+            $user->provider_id = $data->id;
+            $user->save();
+        }
+
+        Auth::login($user);
     }
 }
