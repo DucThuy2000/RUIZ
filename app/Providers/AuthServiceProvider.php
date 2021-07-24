@@ -27,8 +27,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //Before method to grant all abilities to a specific user
-        //$user is current user login server via AuthServiceProvider
+        //Before method to cấp tất cả khả năng cho 1 user nhất định
+        //$user is current user login server by AuthServiceProvider
         //return true is authorized otherwise isn't
         Gate::before(function ($user){
             foreach ($user -> roles as $role){

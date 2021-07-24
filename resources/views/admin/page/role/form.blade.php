@@ -54,7 +54,7 @@
                                     //dd($singleRecord);
                                     if(!empty($singleRecord))
                                     {
-                                        //json_decode($objec, true) => array
+                                        //json_decode($objec, true) => array (json_decode giải mã đoạn json thành array)
                                         $decodePermissions = json_decode($singleRecord -> permissions, true);
                                     }
                                 @endphp
