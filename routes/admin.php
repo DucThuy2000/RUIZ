@@ -21,6 +21,7 @@ Route::namespace("Admin")->prefix("admin")->middleware('auth')->name("admin.")->
         Route::get("edit/{id}", $controllerName . "edit")->middleware("can:" . $controller . ".edit")->name("edit");
         Route::post("update/{id}", $controllerName . "update")->middleware("can:" . $controller . ".edit")->name("update");
         Route::get("delete/{id}", $controllerName . "delete")->middleware("can:" . $controller . ".delete")->name("delete");
+        Route::get("delete-review/{id}", $controllerName . "deleteReview")->middleware("can:" . $controller . ".delete")->name("deleteReview");
     });
 
     /*------ Product Category ------*/
@@ -177,6 +178,47 @@ Route::namespace("Admin")->prefix("admin")->middleware('auth')->name("admin.")->
     /*------ Widget ------*/
     $prefix = "widget";
     $controller = "widget";
+    Route::prefix($prefix)->name($controller . ".")->group(function () use($controller){
+        $controllerName = ucfirst($controller) . "Controller@";
+        Route::get("/", $controllerName . "index")->middleware("can:" . $controller . ".index")->name("index");
+        Route::get("create", $controllerName . "create")->middleware("can:" . $controller . ".create")->name("create");
+        Route::post("store", $controllerName . "store")->middleware("can:" . $controller . ".create")->name("store");
+        Route::get("edit/{id}", $controllerName . "edit")->middleware("can:" . $controller . ".edit")->name("edit");
+        Route::post("update/{id}", $controllerName . "update")->middleware("can:" . $controller . ".edit")->name("update");
+        Route::get("delete/{id}", $controllerName . "delete")->middleware("can:" . $controller . ".delete")->name("delete");
+    });
+
+    /*------ Order ------*/
+    $prefix = "order";
+    $controller = "order";
+    Route::prefix($prefix)->name($controller . ".")->group(function () use($controller){
+        $controllerName = ucfirst($controller) . "Controller@";
+        Route::get("/", $controllerName . "index")->middleware("can:" . $controller . ".index")->name("index");
+        Route::get("create", $controllerName . "create")->middleware("can:" . $controller . ".create")->name("create");
+        Route::post("store", $controllerName . "store")->middleware("can:" . $controller . ".create")->name("store");
+        Route::get("edit/{id}", $controllerName . "edit")->middleware("can:" . $controller . ".edit")->name("edit");
+        Route::post("update/{id}", $controllerName . "update")->middleware("can:" . $controller . ".edit")->name("update");
+        Route::get("delete/{id}", $controllerName . "delete")->middleware("can:" . $controller . ".delete")->name("delete");
+        Route::get("view-order-detail/{id}", $controllerName . "viewOrderDetail")->name("viewOrderDetail");
+        Route::post("view-order-detail/{id}/change-status", $controllerName . "changeStatus")->name("changeStatus");
+    });
+
+    /*------ FAQ ------*/
+    $prefix = "faq";
+    $controller = "faq";
+    Route::prefix($prefix)->name($controller . ".")->group(function () use($controller){
+        $controllerName = ucfirst($controller) . "Controller@";
+        Route::get("/", $controllerName . "index")->middleware("can:" . $controller . ".index")->name("index");
+        Route::get("create", $controllerName . "create")->middleware("can:" . $controller . ".create")->name("create");
+        Route::post("store", $controllerName . "store")->middleware("can:" . $controller . ".create")->name("store");
+        Route::get("edit/{id}", $controllerName . "edit")->middleware("can:" . $controller . ".edit")->name("edit");
+        Route::post("update/{id}", $controllerName . "update")->middleware("can:" . $controller . ".edit")->name("update");
+        Route::get("delete/{id}", $controllerName . "delete")->middleware("can:" . $controller . ".delete")->name("delete");
+    });
+
+    /*------ Contact ------*/
+    $prefix = "contact";
+    $controller = "contact";
     Route::prefix($prefix)->name($controller . ".")->group(function () use($controller){
         $controllerName = ucfirst($controller) . "Controller@";
         Route::get("/", $controllerName . "index")->middleware("can:" . $controller . ".index")->name("index");

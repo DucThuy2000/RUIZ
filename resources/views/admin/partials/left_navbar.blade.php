@@ -82,6 +82,24 @@
                     </nav>
                 </div>
 
+                <!---- Orders Navigate ---->
+                <a class="nav-link collapsed" href="{{ route('admin.order.index') }}"  aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fab fa-jedi-order"></i></div>
+                    Orders
+                </a>
+
+                <!---- FAQ Navigate ---->
+                <a class="nav-link collapsed" href="{{ route('admin.faq.index') }}"  aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-question-circle"></i></div>
+                    FAQ
+                </a>
+
+                <!---- FAQ Navigate ---->
+                <a class="nav-link collapsed" href="{{ route('admin.contact.index') }}"  aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-question-circle"></i></div>
+                    Contact
+                </a>
+
             </div>
         </div>
         <div class="sb-sidenav-footer">

@@ -75,6 +75,13 @@ return [
         'delete' => 'Delete Banner'
     ],
 
+    'bank' => [
+        'index' => 'List Bank',
+        'create' => 'Create Bank',
+        'edit' => 'Edit Bank',
+        'delete' => 'Delete Bank'
+    ],
+
     'coupon' => [
         'index' => 'List Coupon',
         'create' => 'Create Coupon',
@@ -87,6 +94,27 @@ return [
         'create' => 'Create Widget',
         'edit' => 'Edit Widget',
         'delete' => 'Delete Widget'
+    ],
+
+    'order' => [
+        'index' => 'List Order',
+        'create' => 'Create Order',
+        'edit' => 'Edit Order',
+        'delete' => 'Delete Order'
+    ],
+
+    'faq' => [
+        'index' => 'List FAQ',
+        'create' => 'Create FAQ',
+        'edit' => 'Edit FAQ',
+        'delete' => 'Delete FAQ'
+    ],
+
+    'contact' => [
+        'index' => 'List Contact',
+        'create' => 'Create Contact',
+        'edit' => 'Edit Contact',
+        'delete' => 'Delete Contact'
     ],
 
 ];

@@ -51,8 +51,8 @@
                     <div class="widget-footer mt-40">
                         <h6 class="title-widget">Tải App</h6>
                         <ul class="footer-list">
-                            <li><img src="https://demo.hasthemes.com/ruiz-preview/ruiz/assets/images/brand/img-googleplay.jpg" alt=""></li>
-                            <li><img src="https://demo.hasthemes.com/ruiz-preview/ruiz/assets/images/brand/img-appstore.jpg" alt=""></li>
+                            <li><img src="{{ asset("picture/img-googleplay.jpg") }}" alt=""></li>
+                            <li><img src="{{ asset("picture/img-appstore.jpg") }}" alt=""></li>
                         </ul>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="copy-right-image">
-                        <img src="https://demo.hasthemes.com/ruiz-preview/ruiz/assets/images/icon/img-payment.png" alt="">
+                        <img src="{{ asset("picture/img-payment.png") }}" alt="">
 
                     </div>
                 </div>

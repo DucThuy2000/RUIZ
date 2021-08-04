@@ -1,5 +1,5 @@
 <div class="shop-sidebar mb-30">
-    <h4 class="title">Product tags</h4>
+    <h4 class="title">Tags</h4>
 
     <ul class="sidebar-tag">
         @foreach($tags as $tag)

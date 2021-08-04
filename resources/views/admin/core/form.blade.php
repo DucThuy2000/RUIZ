@@ -28,6 +28,13 @@
                                            href="#{{ $index }}" role="tab">{{ $tabs["tab_label"] }}</a>
                                     </li>
                                 @endforeach
+
+                                @if(strpos(Request::url(), "product/edit"))
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab"
+                                           href="#reviews-product" role="tab">Đánh giá</a>
+                                    </li>
+                                @endif
                             </ul>
                             <!------- End Tab ------->
 
@@ -43,6 +50,19 @@
                                         </div>
                                     </div>
                                 @endforeach
+
+                                @if(strpos(Request::url(), "product/edit"))
+
+                                    <div class="tab-pane"
+                                         id="reviews-product" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                @include("admin.template.show_reviews_product", ["product_id" => @$singleRecord -> id])
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                @endif
                             </div>
                             <!------- End Tab Content ------->
                         </div>

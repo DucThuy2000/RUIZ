@@ -28,31 +28,39 @@
         </div>
     </div>
 </form>
+@if(\Illuminate\Support\Facades\Auth::user() -> provider_id == null )
+    <h3 class="layout-title">Thay đổi mật khẩu</h3>
+    @include("admin.template.notify")
+    <form action="{{ route("auth.changePassword", ["id" => $user_profile -> id]) }}" method="POST" class="authen-form">
+        @csrf
+        <div class="form-group half">
+            <div class="form-item @if( session("error_password") )has-error @endif" id="old-password">
+                <label for="">Mật khẩu cũ</label>
+                <input type="password" name="old_password" id="old_password" class="form-change-password">
+                @if( session("error_password") )
+                    <span class="chkvl validate-error">{{ session("error_password") }}</span>
+                @endif
+            </div>
+            <div class="form-item @if($errors -> has("password"))has-error @endif">
+                <label for="">Mật khẩu mới</label>
+                <input type="password" name="password" id="password" value="" class="form-change-password">
+                @if($errors -> has("password"))
+                    <span class="chkvl validate-error">{{ $errors -> first('password') }}</span>
+                @endif
+            </div>
+        </div>
 
-<h3 class="layout-title">Thay đổi mật khẩu</h3>
-<form action="" method="POST" class="authen-form">
-    @csrf
-    <div class="form-group half">
-        <div class="form-item">
-            <label for="">Mật khẩu cũ</label>
-            <input type="password" placeholder="Mật khẩu cũ" name="old_password">
+        <div class="form-group half">
+            <div class="form-item">
+                <label for="">Xác nhận mật khẩu</label>
+                <input type="password" name="password_confirmation" id="password_confirmation">
+            </div>
+            <div class="form-item button-action align-items-center">
+                <button type="submit" class="btn">Thay đổi mật khẩu</button>
+            </div>
         </div>
-        <div class="form-item">
-            <label for="">Mật khẩu mới</label>
-            <input type="password" placeholder="Mật khẩu mới" name="password">
-        </div>
-    </div>
-
-    <div class="form-group half">
-        <div class="form-item">
-            <label for="">Xác nhận mật khẩu</label>
-            <input type="password" placeholder="Xác nhận mật khẩu" name="password_confirmed">
-        </div>
-        <div class="form-item button-action align-items-center">
-            <button type="submit" class="btn">Thay đổi mật khẩu</button>
-        </div>
-    </div>
-</form>
+    </form>
+@endif
 
 <h3 class="layout-title">Địa chỉ</h3>
 

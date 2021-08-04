@@ -1,4 +1,18 @@
 @extends("enduser.layout")
+@section("head_meta")
+    @php
+        if(isset($category)){
+            $title = $category -> name;
+        }
+        else{
+            $title = "Kinh nghiệm, cẩm nang";
+        }
+    @endphp
+    @include("enduser.meta", [
+    "title" => $title,
+    "url" => Request::url(),
+    ])
+@stop
 @section("front_content")
     <!-- breadcrumb-area start -->
     <div class="breadcrumb-area">

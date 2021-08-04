@@ -133,7 +133,7 @@ class CheckoutController extends Controller
 
     public function applyCoupon(Request $request){
         $couponActive = Coupon::where("name", $request -> nameCoupon)->first();
-        if($couponActive){
+        if(isset($couponActive)){
             return response() -> json([
                 'code' => 200,
                 'data' => $couponActive,

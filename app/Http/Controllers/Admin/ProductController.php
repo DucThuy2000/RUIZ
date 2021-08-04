@@ -7,6 +7,7 @@ use App\Product as MainModel;
 use App\Helper\Functions;
 use App\Product_category;
 use App\Product_tags;
+use App\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -152,6 +153,19 @@ class ProductController extends AdminController
 
         Session::flash("action_success", "Sửa mới thành công");
         return redirect() -> route("admin." . $this -> controllerName . ".index");
+    }
+
+    //Xóa review của product
+    public function deleteReview($id){
+        $review = Review::find($id);
+
+        if($review){
+            $review -> delete();
+
+            return response() -> json([
+                "code" => 200,
+            ],200);
+        }
     }
 
     public function uploadMultipleImage($object){

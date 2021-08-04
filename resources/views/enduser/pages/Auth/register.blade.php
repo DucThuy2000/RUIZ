@@ -1,4 +1,10 @@
 @extends("enduser.layout")
+@section("head_meta")
+    @include("enduser.meta", [
+    "title" => "Đăng ký",
+    "url" => Request::url(),
+    ])
+@stop
 @section("front_content")
     <!-- breadcrumb-area start -->
     <div class="breadcrumb-area">
@@ -36,7 +42,7 @@
                                             @csrf
                                             @include("admin.template.error")
                                             <div class="login-input-box">
-                                                <input type="text" name="name" placeholder="Tên tài khoản...">
+                                                <input type="text" name="user_name" placeholder="Tên tài khoản...">
                                                 <input name="email" placeholder="Email..." type="email">
                                                 <input type="password" name="password" placeholder="Mật khẩu...">
                                                 <input type="password" name="password_confirmation" placeholder="Nhập lại mật khẩu...">

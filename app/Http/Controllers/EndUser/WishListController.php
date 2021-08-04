@@ -35,7 +35,8 @@ class WishListController extends Controller
         }
 
         return response() -> json([
-            "code" => 200
+            "code" => 200,
+            "count_wishlist" => count($wishList),
         ],200);
     }
 
@@ -53,6 +54,7 @@ class WishListController extends Controller
             return response() -> json([
                 'code' => 200,
                 'data' => $wishlistView,
+                'count_wishlist' => count($wishlist),
             ],200);
         }
     }

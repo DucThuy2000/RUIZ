@@ -19,7 +19,7 @@ class AuthController extends Controller
         try{
             $email = $request -> email;
             $password = $request -> password;
-            $remember = $request -> remember_token ? true : false;
+            $remember = $request -> has('remember_token') ? true : false;
 
             if(Auth::attempt(['email' => $email, 'password' => $password], $remember)){
                 return response() -> json([

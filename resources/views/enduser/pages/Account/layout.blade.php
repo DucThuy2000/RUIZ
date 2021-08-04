@@ -1,4 +1,10 @@
 @extends("enduser.layout")
+@section("head_meta")
+    @include("enduser.meta", [
+    "title" => "Thông tin cá nhân",
+    "url" => Request::url(),
+    ])
+@stop
 @section("front_content")
     @php
         @$user = \Illuminate\Support\Facades\Auth::user();

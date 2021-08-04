@@ -1,5 +1,5 @@
 <div class="shop-sidebar mb-30">
-    <h4 class="title">Filter By Price</h4>
+    <h4 class="title">Lọc theo giá</h4>
     <!-- filter-price-content start -->
     <div class="filter-price-content">
         <form action="{{ @$route }}" method="GET">

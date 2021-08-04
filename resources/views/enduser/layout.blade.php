@@ -4,19 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Clock World</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!--- META FOR FACEBOOK ---->
-    <meta content="Clock" property="og:site_name"/>
-    <meta property="og:type" content="website">
-    <meta property="og:url" itemprop="url" content="http://demo.clock.com/"/>
-    <meta property="og:image" itemprop="thumbnailUrl" content="https://anyclass.vn/images/config/msyKLtGrer.png"/>
-    <meta content="Clock" itemprop="headline" property="og:title"/>
-    <meta content="Clock" itemprop="description" property="og:description"/>
-    <!--- END FOR FACEBOOK ---->
-    <link rel="shortcut icon" href="https://anyclass.vn/images/config/saCzbSvQrl.png" />
+    @yield("head_meta")
+    <link rel="shortcut icon" href="{{ asset("picture/icon.png") }}"/>
 
     <!-- CSS
 	============================================ -->
@@ -45,6 +37,7 @@
 
     <!-- Main Style CSS (Please use minify version for better website load performance) -->
     <link rel="stylesheet" href="{{ asset("enduser/dist/css/style.css") }}">
+    <link rel="stylesheet" href="{{ asset("admin/dist/css/core.css") }}">
     <!--<link rel="stylesheet" href="assets/css/style.min.css">-->
 
 </head>

@@ -426,6 +426,8 @@
                     if(data.code === 200) {
                         $(".sweet-alert .update-alert").fadeIn("slow");
                         $(this).parent().find("#name_coupon").val(data.name);
+
+                        //new Intl.NumberFormat() sẽ format số theo dạng chuẩn
                         $("#coupon-price").text(new Intl.NumberFormat().format(data.data.price));
                         replaceTotalPriceToNumber -= data.data.price;
                         let numberFormat = new Intl.NumberFormat().format(replaceTotalPriceToNumber);
@@ -433,6 +435,10 @@
                         $(".order-total #input-total-price").val(replaceTotalPriceToNumber);
                     }
                     else if(data.code === 500){
+                        //Nếu mã coupon sai thì trở về giá ban đầu
+                        $("#coupon-price").text(0);
+                        $(".order-total #order-total-price").text(textPrice);
+                        $(".order-total #input-total-price").val(replaceTotalPriceToNumber);
                         $(".sweet-alert .coupon-alert").fadeIn("slow");
                     }
                 },
@@ -477,14 +483,16 @@
                 success: function (data){
                     if(data.code === 200){
                         $('.sweet-alert .insert-alert').fadeIn('slow');
-                        setInterval(function (){
-                            location.reload().fadeIn("slow");
-                        }, 1000)
+                        $('#count-wishlist').text(data.count_wishlist);
                     }
                 },
 
                 complete: function (){
                     $(".overlay-snipper").removeClass("open");
+
+                    setInterval(function (){
+                        $('.sweet-alert .insert-alert').fadeOut();
+                    }, 2000)
                 }
             })
 
@@ -512,9 +520,7 @@
                 success: function (data){
                     if(data.code === 200){
                         $(".wishlist-table").html(data.data);
-                        setInterval(function (){
-                            location.reload().fadeIn("slow")
-                        },1000);
+                        $('#count-wishlist').text(data.count_wishlist);
                     }
                 },
 
@@ -758,6 +764,101 @@
                 }
             })
         })
+
+        /*----------- Forgot Password -----------*/
+        $('#form_resetPassword').on("submit", function (e){
+            e.preventDefault();
+
+            let url = $(this).data("url");
+            let formData = new FormData(this);
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: formData,
+                processData: false,
+                cache: false,
+                contentType: false,
+
+                beforeSend: function (){
+                    $(".overlay-snipper").addClass("open");
+                },
+
+                success: function (data){
+                    if(data.code === 200){
+                        window.location = 'http://demo.clock.com/forgot-password';
+                    }
+                },
+
+                complete: function (){
+                    $(".overlay-snipper").removeClass("open");
+                    setTimeout(function (){
+                        $('.sweet-alert .update-alert').fadeOut(1000);
+                    },1000)
+                }
+            })
+        })
+
+        /*----------- Reset Password -----------*/
+        $('#form-reset-password').on("submit", function (e){
+            e.preventDefault();
+            let url = $(this).data("url");
+            let formData = new FormData(this);
+            let _this = $(this);
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: formData,
+                processData: false,
+                cache: false,
+                contentType: false,
+
+                beforeSend: function (){
+                    $(".overlay-snipper").addClass("open");
+                },
+
+                success: function (data){
+                    if(data.code === 200){
+                        console.log(_this.find("#submit-reset-password"));
+                        //Xóa báo lỗi nếu thành công
+                        if($("#reset-password-wrapper").find(".text-error").length > 0){
+                            $("#reset-password-wrapper").find(".text-error").remove();
+                        }
+
+                        //Chuyển tới trang đăng nhập
+                        window.location = "http://demo.clock.com/dang-nhap";
+                    }
+                    else{
+                        printErrorMesseage(data.error);
+                    }
+                },
+
+                complete: function (){
+                    $(".overlay-snipper").removeClass("open");
+                    setTimeout(function (){
+                        $('.sweet-alert .update-alert').fadeOut(1000);
+                    },1000)
+                },
+            })
+        })
+
+        function printErrorMesseage(error){
+
+            if($("#reset-password-wrapper").find(".text-error").length <= 0){
+                $.each( error, function( key, value ) {
+                    $("#reset-password-wrapper").prepend('<p class="text-error">'+value+'</p>')
+                });
+            }
+
+            else{
+                $.each( error, function( key, value ) {
+                    $("#reset-password-wrapper").find(".text-error").text(value);
+                });
+            }
+        }
+
+
     })
 
 })(jQuery);

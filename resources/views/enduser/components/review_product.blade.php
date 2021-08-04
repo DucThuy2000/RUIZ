@@ -20,7 +20,7 @@
                             <li class="star-rating @if($i < @$review -> rating)selected @endif"><i class='fa fa-star fa-fw'></i></li>
                         @endfor
                     </ul>
-                    <h5>{{ @$user -> name }} - <span> {{ date_format(@$review -> updated_at, "d/m/Y H:i:s") }}</span></h5>
+                    <h5>{{ @$user -> user_name }} - <span> {{ date_format(@$review -> updated_at, "d/m/Y H:i:s") }}</span></h5>
 
                 </div>
                 <div class="main-content">

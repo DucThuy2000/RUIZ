@@ -42,6 +42,8 @@ class User_profileController extends Controller
 
         //Lấy orderDetails theo user id
         $data['order_details'] = OrderDetail::where("user_id", $user -> id)->paginate(10);
+        //dd($data['order_details']);
+
         //dd(count($data['order_details']));
         return view($this -> pathView . "layout")->with($data);
     }

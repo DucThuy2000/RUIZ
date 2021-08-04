@@ -38,7 +38,7 @@
 
                         <div class="user-wrap">
                             <a href="{{ route("wishList.showWishList") }}">
-                                <span class="cart-total">@if(!empty($wishlist)){{ count($wishlist) }} @else 0 @endif</span>
+                                <span class="cart-total" id="count-wishlist">@if(!empty($wishlist)){{ count($wishlist) }} @else 0 @endif</span>
                                 <i class="icon-heart"></i>
                             </a>
                         </div>

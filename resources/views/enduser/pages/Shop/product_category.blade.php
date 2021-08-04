@@ -1,4 +1,10 @@
 @extends("enduser.layout")
+@section("head_meta")
+    @include("enduser.meta", [
+    "title" => "Đồng hồ " . @$category -> name ,
+    "url" => Request::url(),
+    ])
+@stop
 @section("front_content")
     <!-- breadcrumb-area start -->
     <div class="breadcrumb-area">

@@ -30,6 +30,10 @@ Route::namespace("EndUser")->group(function(){
         Route::get("dang-xuat", $controllerName . "logout")->name("logout");
         Route::get('login/{provider}', $controllerName.'redirectToProvider')->name("socialLogin");
         Route::get('login/{provider}/callback', $controllerName.'handleProviderCallback')->name("socialLoginCallBack");
+        Route::get('forgot-password', $controllerName.'viewForgotPassword')->name("viewForgotPassword");
+        Route::get('reset-password/{email}', $controllerName.'viewResetPassword')->name("viewResetPassword");
+        Route::post('check-reset-password/{email}', $controllerName.'resetPassword')->name("resetPassword");
+        Route::post('change-password/{id}', $controllerName.'changePassword')->name("changePassword");
     });
 
     /*----- User Profile -----*/
@@ -121,6 +125,31 @@ Route::namespace("EndUser")->group(function(){
         Route::post("{id}", $controllerName."storeReview")->name("storeReview");
         Route::post("sua-danh-gia/{id}", $controllerName."editReview")->name("editReview");
         Route::get("xoa-danh-gia/{id}", $controllerName."deleteReview")->name("deleteReview");
+    });
+
+    /*----- Send Email -----*/
+    $prefix = "";
+    $controller = "sendEmail";
+    Route::prefix($prefix)->name($controller . ".")->group(function () use ($controller){
+        $controllerName = ucfirst($controller) . "Controller@";
+        Route::post("mail-to-retrieve-password", $controllerName."mailToRetrievePassword")->name("mailToRetrievePassword");
+        Route::post("mail-to-message", $controllerName."mailToMessageAdmin")->name("mailToMessageAdmin");
+    });
+
+    /*----- Frequently Questions -----*/
+    $prefix = "cau-hoi-thuong-gap";
+    $controller = "faq";
+    Route::prefix($prefix)->name($controller . ".")->group(function () use ($controller){
+        $controllerName = ucfirst($controller) . "Controller@";
+        Route::get("/", $controllerName."index")->name("index");
+    });
+
+    /*----- Contact -----*/
+    $prefix = "lien-he";
+    $controller = "contact";
+    Route::prefix($prefix)->name($controller . ".")->group(function () use ($controller){
+        $controllerName = ucfirst($controller) . "Controller@";
+        Route::get("/", $controllerName."index")->name("index");
     });
 
 });

@@ -1,4 +1,20 @@
 @extends("enduser.layout")
+@section("head_meta")
+    @php
+        if(count(@$products) > 0){
+            $metaTitle = "Có " . count($products) . " đồng hồ liên quan tới " . $keyword ;
+        }
+        else{
+
+            $metaTitle = "Không có đồng hồ liên quan tới " . $keyword ;
+        }
+    @endphp
+
+    @include("enduser.meta", [
+    "title" => $metaTitle,
+    "url" => Request::url(),
+    ])
+@stop
 @section("front_content")
     <!-- breadcrumb-area start -->
     <div class="breadcrumb-area">

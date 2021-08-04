@@ -3,6 +3,12 @@
 @endphp
 
 @extends("enduser.layout")
+@section("head_meta")
+    @include("enduser.meta", [
+    "title" => "Đăng nhập",
+    "url" => Request::url(),
+    ])
+@stop
 @section("front_content")
     <!-- breadcrumb-area start -->
     <div class="breadcrumb-area">
@@ -36,6 +42,7 @@
                             <div class="tab-pane active">
                                 <div class="login-form-container">
                                     <div class="login-register-form">
+                                        @include("admin.template.notify")
                                         <form action="{{ route("auth.checkLogin") }}" method="post">
                                             @csrf
                                             <div class="login-input-box">
@@ -43,10 +50,10 @@
                                                 <input type="password" name="password" placeholder="Password">
                                             </div>
                                             <div class="button-box">
-                                                <div class="login-toggle-btn">
-                                                    <input type="checkbox">
-                                                    <label>Remember me</label>
-                                                    <a href="#">Forgot Password?</a>
+                                                <div class="login-toggle-btn pure-checkbox">
+                                                    <input class="checkbox" type="checkbox" name="remember_me" id="remember_me">
+                                                    <label for="remember_me" style="cursor: pointer">Remember me</label>
+                                                    <a href="{{ route("auth.viewForgotPassword") }}">Quên mật khẩu ?</a>
                                                 </div>
                                                 <div class="button-box">
                                                     <button class="login-btn btn" type="submit"><span>Login</span></button>
