@@ -29,7 +29,7 @@ class AuthController extends Controller
 
         //Check nếu url previous là trang reset password thì setIntendedUrl sẽ là trang cá nhân
         if( strpos(url() -> previous(), "reset-password") ){
-            Redirect::setIntendedUrl("http://demo.clock.com/ca-nhan");
+            Redirect::setIntendedUrl("http://localhost/ca-nhan");
         }
         else{
             Redirect::setIntendedUrl(url()->previous());

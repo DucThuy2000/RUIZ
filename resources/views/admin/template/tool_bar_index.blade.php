@@ -1,16 +1,20 @@
 <div class="tool-bar">
     <div class="row">
         <div class="col-md-6">
-            <a href="{{ route("admin." . $controllerName . ".create") }}" class="">
-                <button type="button" class="btn btn-primary">
-                    <span><i class="fa fa-plus"></i> New</span>
-                </button>
-            </a>
-            <a href="#" class="">
-                <button type="button" class="btn btn-danger">
-                    <span><i class="fa fa-trash"></i> Delete</span>
-                </button>
-            </a>
+            @can($controllerName . ".create")
+                <a href="{{ route("admin." . $controllerName . ".create") }}" class="">
+                    <button type="button" class="btn btn-primary">
+                        <span><i class="fa fa-plus"></i> New</span>
+                    </button>
+                </a>
+            @endcan
+            @can($controllerName . ".delete")
+                <a href="#" class="">
+                    <button type="button" class="btn btn-danger">
+                        <span><i class="fa fa-trash"></i> Delete</span>
+                    </button>
+                </a>
+            @endcan
 {{--            @if(\Route::has('admin.' . $controllerName . ".ordering" ))--}}
 {{--                <a href="javascript:ordering('{{ route('admin.' . $controllerName . ".ordering" ) }}')">--}}
 {{--                    <button type="button" class="btn btn-warning">--}}

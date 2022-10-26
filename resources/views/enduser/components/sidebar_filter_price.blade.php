@@ -3,7 +3,7 @@
     <!-- filter-price-content start -->
     <div class="filter-price-content">
         <form action="{{ @$route }}" method="GET">
-            @if(Request::url() == "http://demo.clock.com/cua-hang/tim-kiem")
+            @if(Request::url() == "http://localhost/cua-hang/tim-kiem")
                 <input type="hidden" value="{{ $keyword }}" name="keyword">
             @endif
             <div id="price-slider" class="price-slider"></div>

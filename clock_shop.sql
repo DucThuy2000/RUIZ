@@ -210,7 +210,7 @@ CREATE TABLE `comments` (
   `user_id` int(11) NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `likes` int(11) NOT NULL DEFAULT 0,
-  `parent_id` text COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `parent_id` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

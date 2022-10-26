@@ -6,7 +6,9 @@
                 @foreach($fieldList as $key => $value)
                     <th scope="col" class="col-label">{{ $value["label"] }}</th>
                 @endforeach
+                @canany([$controllerName . ".delete", $controllerName . ".edit"])
                     <th scope="col" class="col-label">Action</th>
+                @endcanany()
             </tr>
         </thead>
         <tbody class="tbody">
@@ -57,7 +59,9 @@
                             @break
                         @endswitch
                     @endforeach
-                    <td>@include("admin.template.action")</td>
+                    @canany([$controllerName . ".delete", $controllerName . ".edit"])
+                        <td>@include("admin.template.action")</td>
+                    @endcanany
                 </tr>
             @endforeach
         </tbody>
