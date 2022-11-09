@@ -44,7 +44,7 @@
 
 <body>
 
-<div class="main-wrapper">
+<div class="main-wrapper d-flex flex-column h-100">
 
     <!--  Header Start -->
     @include("enduser.components.header")
@@ -71,7 +71,9 @@
             Mã không hợp lệ
         </div>
     </div>
-    @yield("front_content")
+    <div class="flex-grow-1">
+        @yield("front_content")
+    </div>
 
     <!-- footer Start -->
     @include("enduser.components.footer")

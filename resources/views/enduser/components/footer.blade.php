@@ -6,7 +6,7 @@
 @endphp
 
 <footer>
-    <div class="footer-top section-pb section-pt-60">
+    <div class="footer-top pb-3">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
