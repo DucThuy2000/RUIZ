@@ -401,7 +401,6 @@
 
         $(document).on("click", ".click-coupon", function (e){
             e.preventDefault();
-
             let nameCoupon = $(this).parent().find("#name_coupon").val();
             let textPrice = $(".cart-subtotal #temporary-price").text();
             let replaceTotalPriceToNumber = parseInt(textPrice.replace(",", ""));
@@ -764,6 +763,42 @@
                 }
             })
         })
+
+        /*----------- Cancel Order -----------*/
+        $(document).on("click", ".cancel-order", cancelOrder);
+        function cancelOrder(e){
+            e.preventDefault();
+            let _this = $(this);
+            let url = $(this).data('url');
+            Swal.fire({
+                title: 'Thông Báo',
+                text: "Bạn có chắc muốn hủy đơn hàng này không ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Hủy'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+
+                        success: function (data){
+                            Swal.fire(
+                                'Hủy đơn hàng thành công',
+                                'Đơn hàng đã được hủy.',
+                                'thành công'
+                            )
+                        },
+
+                        error: function (data){
+
+                        }
+                    })
+                }
+            })
+        }
 
         /*----------- Forgot Password -----------*/
         $('#form_resetPassword').on("submit", function (e){

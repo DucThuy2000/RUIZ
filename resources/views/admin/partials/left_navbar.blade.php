@@ -94,12 +94,6 @@
                     FAQ
                 </a>
 
-                <!---- FAQ Navigate ---->
-                <a class="nav-link collapsed" href="{{ route('admin.contact.index') }}"  aria-expanded="false" aria-controls="collapseLayouts">
-                    <div class="sb-nav-link-icon"><i class="fas fa-question-circle"></i></div>
-                    Contact
-                </a>
-
             </div>
         </div>
         <div class="sb-sidenav-footer">

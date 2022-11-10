@@ -12,7 +12,7 @@ class FaqController extends Controller
     public function index(){
         $data['wishlist'] = session() -> get("wishList");
         $data['carts'] = session() -> get("cart");
-        $data['faq'] = faq::where("status", "active") -> orderBy("id") -> get();
+        $data['faq'] = faq::orderBy("id") -> get();
         return view($this -> pathView . "index")->with($data);
     }
 }

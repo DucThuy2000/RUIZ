@@ -27,12 +27,16 @@
                     <div class="coupon-area">
                         <!-- coupon-accordion start -->
                         <div class="coupon-accordion">
-                            <h3>Bạn có mã giảm giá không? <span class="coupon" id="showcoupon">Click here</span></h3>
+                            <h3>Bạn có mã giảm giá không? <span class="coupon" id="showcoupon">Nhập mã giảm giá</span></h3>
                             <div class="coupon-content" id="checkout-coupon">
                                 <div class="coupon-info">
                                     <p class="checkout-coupon">
                                         <input type="text" placeholder="Mã giảm giá" name="coupon_id" id="name_coupon">
-                                        <a class="btn pt-2 pb-2 click-coupon" data-url="{{ route("checkout.applyCoupon") }}">Nhập code</a>
+                                        <a class="btn pt-2 pb-2 click-coupon" data-url="{{ route("checkout.applyCoupon") }}"
+                                            style="height: 36px;
+                                            line-height: 1.4;
+                                            padding: 0 6px;
+                                            margin-left: 10px;">Nhập code</a>
                                     </p>
                                 </div>
                             </div>
@@ -135,7 +139,7 @@
                                     <div class="col-lg-12">
                                         <p class="single-form-row m-0">
                                             <label>Ghi chú</label>
-                                            <textarea name="note" placeholder="Notes about your order, e.g. special notes for delivery." class="checkout-mess" rows="2" cols="5"></textarea>
+                                            <textarea name="note" class="checkout-mess" rows="2" cols="5"></textarea>
                                         </p>
                                     </div>
                                 </div>

@@ -41,7 +41,7 @@ class User_profileController extends Controller
         $order = Order::where("user_id", $user -> id)->get();
 
         //Lấy orderDetails theo user id
-        $data['order_details'] = OrderDetail::where("user_id", $user -> id)->paginate(10);
+        $data['orders'] = Order::where("user_id", $user -> id)->paginate(10);
         //dd($data['order_details']);
 
         //dd(count($data['order_details']));
@@ -51,11 +51,13 @@ class User_profileController extends Controller
     public function showOrderDetail($id){
         $data['wishlist'] = session() -> get("wishList");
         $data['carts'] = session() -> get("cart");
-        $data['product_detail'] = OrderDetail::find($id);
         $data['order_id'] = $id;
-
-        $data['order'] = Order::where("id", $data['product_detail'] -> order_id)->first();
-        $data['user_address'] = OrderAddress::where("id", $data['order'] -> address_id)->first();
+        $data['order'] = Order::where("id", $id)->first();
+        if ( $data['order'] ) {
+            $data['order_details'] = $data['order']->orderDetails()->get();
+            $data['user_address'] = OrderAddress::where("id", $data['order'] -> address_id)->first();
+        }
+//        dd($data['order-details']);
 
         return view($this -> pathView . "layout")->with($data);
     }
@@ -74,5 +76,20 @@ class User_profileController extends Controller
                 'data' => $user,
             ], 200);
         }
+    }
+
+    public function cancelOrder($id) {
+        // 1: cập nhật trạng thái của order theo id --> Hủy
+        // 2: cập nhật trạng thái của order_details theo id của order --> Hủy
+        Order::find($id)->update([
+            'status' => 'Hủy'
+        ]);
+        OrderDetail::where('order_id', $id)->update([
+            'status' => 'Hủy'
+        ]);
+        return response() -> json([
+            'code' => 200,
+            'data' => 'success',
+        ]);
     }
 }

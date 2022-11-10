@@ -1,6 +1,6 @@
 <h3 class="layout-title">Đơn hàng của tôi</h3>
 <div class="user-layout-table">
-    @if(count($order_details) <= 0)
+    @if(count($orders) <= 0)
         <div class="empty-order">
             <div class="empty-order-img"></div>
             <span>Chưa có đơn hàng</span>
@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($order_details as $count => $item)
+            @foreach(@$orders as $count => $item)
                 <tr>
                     <td class="col-center">{{ $count + 1 }}</td>
                     <td class="col-id col-center">
@@ -25,7 +25,17 @@
                     <td class="col-center nowrap">{{ date_format($item -> updated_at,"d/m/Y H:i:s") }}</td>
                     <td class="tags">
                         <div class="tag-group d-flex flex-wrap justify-content-center">
-                            <span class="active tag-item">{{ $item -> status }}</span>
+                            @switch($item->status)
+                                @case("Hoàn tất")
+                                    <span class="tag-item bg-success text-white" style="font-size: 12px">{{ $item -> status }}</span>
+                                @break
+                                @case("Đang xử lý")
+                                    <span class="tag-item bg-primary text-white" style="font-size: 12px">{{ $item -> status }}</span>
+                                @break
+                                @case("Hủy")
+                                    <span class="tag-item bg-danger text-white" style="font-size: 12px">{{ $item -> status }}</span>
+                                @break
+                            @endswitch
                         </div>
                     </td>
                 </tr>
@@ -35,7 +45,7 @@
     @endif
 </div>
 
-@include("enduser.components.pagination", ["pagination" => $order_details])
+@include("enduser.components.pagination", ["pagination" => $orders])
 
 <style>
     .empty-order-img{

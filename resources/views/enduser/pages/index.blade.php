@@ -18,9 +18,9 @@
                                     <h5>{{ $slidebar -> sale }}</h5>
                                     <h1>{{ $slidebar -> name }}</h1>
                                     <p> {{ $slidebar -> description }} </p>
-                                    <p>Starting At <strong>{{ number_format($slidebar -> price_base) }} VNĐ</strong></p>
+                                    <p>Giảm lên đến <strong>{{ number_format($slidebar -> price_base) }} VNĐ</strong></p>
                                     <div class="slide-btn-group">
-                                        <a href="{{ route("shop.index") }}" class="btn btn-bordered btn-style-1">Shop Now</a>
+                                        <a href="{{ route("shop.index") }}" class="btn btn-bordered btn-style-1">Mua hàng ngay</a>
                                     </div>
                                 </div>
                             </div>
@@ -174,7 +174,7 @@
                         <div class="singel-latest-blog">
                             <div class="aritcles-content">
                                 <div class="author-name">
-                                    post by: <a href="#"> {{ @$blog -> author }}</a> - {{ date_format(@$blog-> updated_at, "d/m/Y H:i:s") }}
+                                    Đăng bởi: <a href="#"> {{ @$blog -> author }}</a> - {{ date_format(@$blog-> updated_at, "d/m/Y H:i:s") }}
                                 </div>
                                 <h4>
                                     <a href="{{ route("blog.blogDetail", ["slug" => @$blog -> slug]) }}" class="articles-name">

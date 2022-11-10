@@ -3,11 +3,11 @@
         <table class="table">
             <thead>
             <tr>
-                <th class="plantmore-product-thumbnail">Images</th>
-                <th class="cart-product-name" style="width: 340px">Product</th>
-                <th class="plantmore-product-price">Unit Price</th>
-                <th class="plantmore-product-add-cart">Add to cart</th>
-                <th class="plantmore-product-remove">Remove</th>
+                <th class="plantmore-product-thumbnail">Hình ảnh</th>
+                <th class="cart-product-name" style="width: 340px">Sản phẩm</th>
+                <th class="plantmore-product-price">Giá</th>
+                <th class="plantmore-product-add-cart">Thêm giỏ hàng</th>
+                <th class="plantmore-product-remove">Xóa</th>
             </tr>
             </thead>
             <tbody>
@@ -23,7 +23,7 @@
                     </td>
                     <td class="plantmore-product-price"><span class="amount">${{ number_format(@$item['price']) }}</span></td>
                     <td class="plantmore-product-add-cart">
-                        <a href="" class="cart-btn" data-url="{{ route("cart.addToCart", ["id" => @$item['id']]) }}">add to cart</a>
+                        <a href="" class="cart-btn" data-url="{{ route("cart.addToCart", ["id" => @$item['id']]) }}">thêm giỏ hàng</a>
                     </td>
                     <td class="plantmore-product-remove">
                         <a href="#" class="delete-wishlist" data-id="{{ @$item['id'] }}">

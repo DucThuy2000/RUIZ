@@ -44,10 +44,10 @@
                         @endif
                         @break
                         @case("numberFormat")
-                        <td>${{ number_format($record -> {$name["name"]}) }}</td>
+                            <td>${{ number_format($record -> {$name["name"]}) }}</td>
                         @break
                         @case("dateFormat")
-                        <td>{{ $record -> {$name["name"]} -> format('d/m/Y') }}</td>
+                            <td>{{ $record -> {$name["name"]} -> format('d/m/Y') }}</td>
                         @break
                     @endswitch
                 @endforeach

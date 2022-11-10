@@ -79,13 +79,15 @@ class OrderController extends AdminController
         if(isset($request -> status)){
             $order -> status = $request -> status;
             $order -> save();
-
+            $order->orderDetails()->update([
+                'status' => $request -> status
+            ]);
             Session::flash("action_success", "Cập nhật trạng thái đơn hàng thành công !!");
             return back();
         }
     }
 
-    public function delete($id){
+    public function delete($id) {
         $record = $this -> model -> find($id);
         // Xóa địa chỉ sau khi xóa đơn hàng
         $orderAddress = OrderAddress::where("id", $record -> address_id)->first();

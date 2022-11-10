@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    <div class="footer-bottom">
+    <div class="footer-bottom" style="padding: 15px 0 !important;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">

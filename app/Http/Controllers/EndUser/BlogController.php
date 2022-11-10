@@ -34,10 +34,9 @@ class BlogController extends Controller
         $data['recentBlog'] = Blog::latest()->limit(4)->get();
 
         //Lấy comment theo post_id
-        $data['comments'] = $data['blogContent'] -> comments() -> where("parent_id", "=", 0) -> get();
+        $data['comments'] = $data['blogContent']->comments()->get();
         //dd($data['comments']);
         $data['commentsAll'] = $data['blogContent'] -> comments() -> latest() -> get();
-        //dd($data['comments']);
         return view($this -> pathView."blogDetail")->with($data);
     }
 

@@ -45,6 +45,7 @@ Route::namespace("EndUser")->group(function(){
         Route::post('update-profile/{id}', $controllerName.'updateProfile')->name("updateProfile");
         Route::get('don-hang-cua-toi', $controllerName.'showUserOrdered')->name("myOrder");
         Route::get('don-hang-cua-toi/{id}', $controllerName.'showOrderDetail')->name("orderDetail");
+        Route::post('cancel-order/{id}', $controllerName.'cancelOrder')->name("cancelOrder");
     });
 
     /*----- Cua Hang -----*/

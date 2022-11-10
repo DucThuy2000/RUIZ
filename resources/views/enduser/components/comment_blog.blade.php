@@ -44,105 +44,106 @@
                                 $user = \App\User::where("id", @$comment -> user_id)->first();
                                 $replies = \App\Comment::where("parent_id", @$comment -> id)->get();
                             @endphp
-                            <div class="user-comments border-box comment-wrapper">
-                                <div class="user-info">
-                                    <div class="d-flex align-items-center">
-                                        @if( @$user -> provider_id == NULL)
-                                            <img class="user-image-comment" src="{{ \App\Helper\Functions::getImage("user", @$user -> picture) }}" alt="">
-                                        @else
-                                            <img class="user-image-comment" src="{{ @$user -> picture }}" alt="">
-                                        @endif
-                                        <p class="user-name">{{ @$user -> user_name }}</p>
-                                        <p class="user-email">{{ @$user -> email }}</p>
-                                    </div>
-                                    <span class="date-comment">{{ date_format(@$comment -> updated_at, "d/m/Y H:i:s") }}</span>
-                                </div>
-                                <div class="main-content">
-                                    <p class="content-of-comment mb-0">{{ @$comment -> content }}</p>
-                                    @if(\Illuminate\Support\Facades\Auth::check())
-                                        @if( @$user -> id == \Illuminate\Support\Facades\Auth::user()->id )
-                                            <div class="auth-comment ml-2">
-                                                <i class="fas fa-ellipsis-h actions-comment"></i>
-                                                <ul class="action-dropdown">
-                                                    <li>
-                                                        <a data-url="{{ route("comment.editComment", ["id" => @$comment -> id]) }}"
-                                                           class="d-flex align-items-center mb-3 edit-comment" _token="{{ csrf_token() }}">
-                                                            <i class="fas fa-pencil-alt mr-2"></i> Sửa
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a data-url="{{ route("comment.deleteComment", ["id" => @$comment -> id]) }}" class="d-flex align-items-center delete-comment">
-                                                            <i class="far fa-trash-alt mr-2"></i> Xóa
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                            @if(!$comment->parent_id)
+                                <div class="user-comments border-box comment-wrapper">
+                                        <div class="user-info">
+                                            <div class="d-flex align-items-center">
+                                                @if( @$user -> provider_id == NULL)
+                                                    <img class="user-image-comment" src="{{ \App\Helper\Functions::getImage("user", @$user -> picture) }}" alt="">
+                                                @else
+                                                    <img class="user-image-comment" src="{{ @$user -> picture }}" alt="">
+                                                @endif
+                                                <p class="user-name">{{ @$user -> user_name }}</p>
+                                                <p class="user-email">{{ @$user -> email }}</p>
                                             </div>
-                                        @endif
+                                            <span class="date-comment">{{ date_format(@$comment -> updated_at, "d/m/Y H:i:s") }}</span>
+                                        </div>
+                                        <div class="main-content">
+                                            <p class="content-of-comment mb-0">{{ @$comment -> content }}</p>
+                                            @if(\Illuminate\Support\Facades\Auth::check())
+                                                @if( @$user -> id == \Illuminate\Support\Facades\Auth::user()->id )
+                                                    <div class="auth-comment ml-2">
+                                                        <i class="fas fa-ellipsis-h actions-comment"></i>
+                                                        <ul class="action-dropdown">
+                                                            <li>
+                                                                <a data-url="{{ route("comment.editComment", ["id" => @$comment -> id]) }}"
+                                                                   class="d-flex align-items-center mb-3 edit-comment" _token="{{ csrf_token() }}">
+                                                                    <i class="fas fa-pencil-alt mr-2"></i> Sửa
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a data-url="{{ route("comment.deleteComment", ["id" => @$comment -> id]) }}" class="d-flex align-items-center delete-comment">
+                                                                    <i class="far fa-trash-alt mr-2"></i> Xóa
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                @endif
+                                            @endif
+                                        </div>
+                                        <div class="bottom-comment">
+                                            <a class="reply-text"
+                                               data-url="{{ route("comment.replyComment") }}"
+                                               data-id="{{ @$comment -> id }}"
+                                               data-token="{{ csrf_token() }}">
+                                                Trả lời @if(count(@$replies) > 0)({{ count(@$replies) }}) @endif
+                                            </a>
+                                        </div>
+
+                                    @if(count(@$replies) > 0)
+                                        @foreach($replies as $reply)
+                                            @php
+                                                $user = \App\User::where("id", @$reply -> user_id)->first();
+                                            @endphp
+                                            <div class="user-comments border-reply reply-wrapper">
+                                                <div class="user-info">
+                                                    <div class="d-flex align-items-center">
+                                                        @if(@$user -> provider_id == NULL)
+                                                            <img class="user-image-comment" src="{{ \App\Helper\Functions::getImage("user",@$user -> picture) }}" alt="">
+                                                        @else
+                                                            <img class="user-image-comment" src="{{ @$user -> picture }}" alt="">
+                                                        @endif
+                                                        <p class="user-name">{{ @$user -> user_name }}</p>
+                                                        <p class="user-email">{{ @$user -> email }}</p>
+                                                    </div>
+                                                    <span class="date-comment">{{ date_format(@$reply -> updated_at, "d/m/Y H:i:s") }}</span>
+                                                </div>
+                                                <div class="main-content">
+                                                    <p class="content-of-comment mb-0">{{ @$reply -> content }}</p>
+                                                    @if(\Illuminate\Support\Facades\Auth::check())
+                                                        @if(@$user -> id == \Illuminate\Support\Facades\Auth::user()->id)
+                                                            <div class="auth-comment ml-2">
+                                                                <i class="fas fa-ellipsis-h actions-comment"></i>
+                                                                <ul class="action-dropdown">
+                                                                    <li>
+                                                                        <a data-url="{{ route("comment.editComment", ["id" => @$reply -> id]) }}"
+                                                                           class="d-flex align-items-center mb-3 edit-comment" _token="{{ csrf_token() }}">
+                                                                            <i class="fas fa-pencil-alt mr-2"></i> Sửa
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a data-url="{{ route("comment.deleteComment", ["id" => @$reply -> id]) }}" class="d-flex align-items-center delete-comment">
+                                                                            <i class="far fa-trash-alt mr-2"></i> Xóa
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        @endif
+                                                    @endif
+                                                </div>
+                                                <div class="bottom-comment">
+                                                    <a class="reply-text"
+                                                       data-url="{{ route("comment.replyComment") }}"
+                                                       data-id="{{ @$comment -> id }}"
+                                                       data-token="{{ csrf_token() }}">
+                                                        Trả lời
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     @endif
                                 </div>
-                                <div class="bottom-comment">
-                                    <a class="reply-text"
-                                       data-url="{{ route("comment.replyComment") }}"
-                                       data-id="{{ @$comment -> id }}"
-                                       data-token="{{ csrf_token() }}">
-                                        Trả lời @if(count(@$replies) > 0)({{ count(@$replies) }}) @endif
-                                    </a>
-                                </div>
-
-                                @if(count(@$replies) > 0)
-                                    @foreach($replies as $reply)
-                                        @php
-                                            $user = \App\User::where("id", @$reply -> user_id)->first();
-                                        @endphp
-                                        <div class="user-comments border-reply reply-wrapper">
-                                            <div class="user-info">
-                                                <div class="d-flex align-items-center">
-                                                    @if(@$user -> provider_id == NULL)
-                                                        <img class="user-image-comment" src="{{ \App\Helper\Functions::getImage("user",@$user -> picture) }}" alt="">
-                                                    @else
-                                                        <img class="user-image-comment" src="{{ @$user -> picture }}" alt="">
-                                                    @endif
-                                                    <p class="user-name">{{ @$user -> user_name }}</p>
-                                                    <p class="user-email">{{ @$user -> email }}</p>
-                                                </div>
-                                                <span class="date-comment">{{ date_format(@$reply -> updated_at, "d/m/Y H:i:s") }}</span>
-                                            </div>
-                                            <div class="main-content">
-                                                <p class="content-of-comment mb-0">{{ @$reply -> content }}</p>
-                                                @if(\Illuminate\Support\Facades\Auth::check())
-                                                    @if(@$user -> id == \Illuminate\Support\Facades\Auth::user()->id)
-                                                        <div class="auth-comment ml-2">
-                                                            <i class="fas fa-ellipsis-h actions-comment"></i>
-                                                            <ul class="action-dropdown">
-                                                                <li>
-                                                                    <a data-url="{{ route("comment.editComment", ["id" => @$reply -> id]) }}"
-                                                                       class="d-flex align-items-center mb-3 edit-comment" _token="{{ csrf_token() }}">
-                                                                        <i class="fas fa-pencil-alt mr-2"></i> Sửa
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a data-url="{{ route("comment.deleteComment", ["id" => @$reply -> id]) }}" class="d-flex align-items-center delete-comment">
-                                                                        <i class="far fa-trash-alt mr-2"></i> Xóa
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    @endif
-                                                @endif
-                                            </div>
-                                            <div class="bottom-comment">
-                                                <a class="reply-text"
-                                                   data-url="{{ route("comment.replyComment") }}"
-                                                   data-id="{{ @$comment -> id }}"
-                                                   data-token="{{ csrf_token() }}">
-                                                    Trả lời
-                                                </a>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @endif
-                            </div>
-
+                            @endif
                         @endforeach
                     @else
                         <div class="login-to-comment">
