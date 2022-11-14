@@ -4,6 +4,7 @@ namespace App\Http\Controllers\EndUser;
 
 use App\Http\Controllers\Controller;
 use App\Mail\MailHandle;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -42,18 +43,16 @@ class SendEmailController extends Controller
 
     public function mailToMessageAdmin(Request $request){
         $this -> validateMessageForm($request);
-
+        $time = Carbon::now('Asia/Ho_Chi_Minh');
         $data = [
             'type' => 'MessageFromUser',
             'name' => $request -> con_name,
-            'subject' => $request -> con_subject,
+            'subject' => 'PHẢN HỔI TỪ KHÁCH HÀNG '.$time->toDateTimeString(),
             'phone' => $request -> con_phone,
             'email' => $request -> con_email,
             'message' => $request -> con_message,
             'pathView' => $this -> pathView . "message_from_user",
-
         ];
-
         Mail::to("ndtdeveloper1705@gmail.com")->send( new MailHandle($data) );
         Session::flash("action_success", "Gửi email thành công");
         return back();
@@ -64,7 +63,6 @@ class SendEmailController extends Controller
             'con_name' => 'required',
             'con_email' => 'bail|required|email',
             'con_phone' => 'bail|required|numeric',
-            'con_subject' => 'required',
             'con_message' => 'required',
 
         ],[
@@ -76,7 +74,6 @@ class SendEmailController extends Controller
             'con_name' => 'Tên',
             'con_email' => 'Email',
             'con_phone' => 'Số điện thoại',
-            'con_subject' => 'Tiêu đề',
             'con_message' => 'Nội dung',
 
         ]);

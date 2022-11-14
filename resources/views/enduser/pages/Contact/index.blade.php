@@ -37,31 +37,25 @@
                                             @if($errors -> has("con_name"))
                                                 <p class="error-text">{{ $errors -> first("con_name") }}</p>
                                             @endif
-                                            <input name="con_name" type="text" placeholder="Name *">
+                                            <input name="con_name" type="text" placeholder="Họ và tên">
                                         </div>
                                         <div class="contact-inner">
                                             @if($errors -> has("con_email"))
                                                 <p class="error-text">{{ $errors -> first("con_email") }}</p>
                                             @endif
-                                            <input name="con_email" type="email" placeholder="Email *">
+                                            <input name="con_email" type="email" placeholder="Email">
                                         </div>
                                         <div class="contact-inner">
                                             @if($errors -> has("con_phone"))
                                                 <p class="error-text">{{ $errors -> first("con_phone") }}</p>
                                             @endif
-                                            <input name="con_phone" type="text" placeholder="Phone *">
-                                        </div>
-                                        <div class="contact-inner">
-                                            @if($errors -> has("con_subject"))
-                                                <p class="error-text">{{ $errors -> first("con_subject") }}</p>
-                                            @endif
-                                            <input name="con_subject" type="text" placeholder="Subject *">
+                                            <input name="con_phone" type="text" placeholder="Số điện thoại">
                                         </div>
                                         <div class="contact-inner contact-message">
                                             @if($errors -> has("con_message"))
                                                 <p class="error-text">{{ $errors -> first("con_message") }}</p>
                                             @endif
-                                            <textarea name="con_message" placeholder="Message *"></textarea>
+                                            <textarea name="con_message" placeholder="Nội dung"></textarea>
                                         </div>
                                     </div>
                                     <div class="contact-submit-btn">

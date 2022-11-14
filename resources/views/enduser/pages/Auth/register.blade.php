@@ -27,10 +27,10 @@
                         <!-- login-register-tab-list start -->
                         <div class="login-register-tab-list nav">
                             <a href="{{ route("auth.login") }}">
-                                <h4> login </h4>
+                                <h4> đăng nhập </h4>
                             </a>
                             <a class="active" href="{{ route("auth.register") }}">
-                                <h4> register </h4>
+                                <h4> đăng ký </h4>
                             </a>
                         </div>
                         <!-- login-register-tab-list end -->
@@ -50,7 +50,7 @@
                                             </div>
                                             <div class="button-box">
                                                 <button class="register-btn btn" type="submit">
-                                                    <span>Register</span>
+                                                    <span>Đăng ký</span>
                                                 </button>
                                             </div>
                                         </form>

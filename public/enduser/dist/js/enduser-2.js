@@ -345,7 +345,6 @@
 
                     success: function (data){
                         if(data.code === 200){
-                            console.log(data.orderId);
                             window.location = "http://localhost/thanh-toan/ghi-nhan-don-hang/" + data.orderId;
                         }
                     },

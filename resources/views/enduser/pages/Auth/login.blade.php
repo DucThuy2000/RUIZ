@@ -31,10 +31,10 @@
                         <!-- login-register-tab-list start -->
                         <div class="login-register-tab-list nav">
                             <a class="active" href="{{ route("auth.login") }}">
-                                <h4> login </h4>
+                                <h4> đăng nhập </h4>
                             </a>
                             <a href="{{ route("auth.register") }}">
-                                <h4> register </h4>
+                                <h4> đăng ký </h4>
                             </a>
                         </div>
                         <!-- login-register-tab-list end -->
@@ -56,7 +56,7 @@
                                                     <a href="{{ route("auth.viewForgotPassword") }}">Quên mật khẩu ?</a>
                                                 </div>
                                                 <div class="button-box">
-                                                    <button class="login-btn btn" type="submit"><span>Login</span></button>
+                                                    <button class="login-btn btn" type="submit"><span>Đăng nhập</span></button>
                                                 </div>
                                             </div>
                                             <p class="text-center font-weight-bold">Hoặc đăng nhập với</p>

@@ -26,12 +26,12 @@
     <div class="main-content-wrap section-ptb lagin-and-register-page">
         <div class="container">
             <div class="row">
-                <div class="col-lg-7 col-md-12 ml-auto mr-auto">
+                <div class="col-lg-9 col-md-12 ml-auto mr-auto">
                     <div class="login-register-wrapper">
                         <!-- login-register-tab-list start -->
                         <div class="login-register-tab-list nav">
                             <a class="active" href="{{ route("auth.viewForgotPassword") }}">
-                                <h4> forgot password </h4>
+                                <h4> quên mật khẩu </h4>
                             </a>
                         </div>
                         <!-- login-register-tab-list end -->
@@ -43,8 +43,8 @@
                                         <form id="form_resetPassword" data-url="{{ route("sendEmail.mailToRetrievePassword") }}">
                                             @csrf
                                             <div class="login-input-box d-flex">
-                                                <input type="text" name="email" class="mb-0" placeholder="Nhập địa chỉ email để lấy lại mật khẩu...">
-                                                <button class="login-btn btn mt-0 ml-3 h-50" type="submit"><span>submit</span></button>
+                                                <input style="width: 78% !important;" type="text" name="email" class="mb-0" placeholder="Nhập địa chỉ email để lấy lại mật khẩu...">
+                                                <button class="login-btn btn mt-0 ml-3 h-50" type="submit"><span>xác nhận</span></button>
                                             </div>
                                         </form>
                                     </div>

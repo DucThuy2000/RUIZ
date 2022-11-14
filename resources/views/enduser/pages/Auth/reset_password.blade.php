@@ -21,7 +21,7 @@
                         <!-- login-register-tab-list start -->
                         <div class="login-register-tab-list nav">
                             <a class="active" href="{{ route("auth.viewResetPassword", ['email' => $user_email]) }}">
-                                <h4> reset password </h4>
+                                <h4> Đặt lại mật khẩu </h4>
                             </a>
                         </div>
                         <!-- login-register-tab-list end -->
@@ -35,7 +35,7 @@
                                             <div class="login-input-box" id="login-input-box">
                                                 <input type="password" name="password" placeholder="Password...">
                                                 <input type="password" name="password_confirmation" placeholder="Password Confirmed...">
-                                                <button class="login-btn btn mt-0" type="submit" id="submit-reset-password"><span>submit</span></button>
+                                                <button class="login-btn btn mt-0" type="submit" id="submit-reset-password"><span>Xác nhận</span></button>
                                             </div>
                                         </form>
                                     </div>
