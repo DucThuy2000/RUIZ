@@ -112,7 +112,7 @@
 
 <!-- Main JS -->
 <script src="{{ asset("enduser/dist/js/main-script.js") }}"></script>
-<script src="{{ asset("enduser/dist/js/enduser.js") }}"></script>
+<script src="{{ asset("enduser/dist/js/enduser-2.js") }}"></script>
 @php
     if( isset($_GET['minPrice']) && isset($_GET['maxPrice'])){
         $minPrice = $_GET['minPrice'];

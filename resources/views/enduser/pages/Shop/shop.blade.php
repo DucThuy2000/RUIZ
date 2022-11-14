@@ -69,13 +69,16 @@
                                                             <img class="primary-image" src="{{ \App\Helper\Functions::getImage("product", $product->picture) }}" alt="">
                                                         </a>
                                                         @switch($product -> type)
-                                                            @case("new")
-                                                                <div class="label-product label-new">New</div>
+                                                            @case("mới")
+                                                                <div class="label-product label-new">{{ $product->type }}</div>
                                                             @break
-                                                            @case("sale")
-                                                                <div class="label-product label-sale">Sale</div>
+                                                            @case("giảm giá")
+                                                                <div class="label-product bg-warning">{{ $product->type }}</div>
                                                             @break
                                                         @endswitch
+                                                        @if($product->amount === 0)
+                                                            <div class="label-product bg-danger">Hết hàng</div>
+                                                        @endif
                                                         @include("enduser.components.actions", ["id_cart" => $product -> id])
                                                     </div>
                                                     <div class="product-caption">

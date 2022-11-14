@@ -157,6 +157,10 @@
                             <label for="processing">Đang xử lý</label>
                         </div>
                         <div class="form-group pure-checkbox">
+                            <input type="radio" name="status" id="deleted" value="Đang giao hàng">
+                            <label for="deleted">Đang giao hàng</label>
+                        </div>
+                        <div class="form-group pure-checkbox">
                             <input type="radio" name="status" id="done" value="Hoàn tất">
                             <label for="done">Hoàn tất</label>
                         </div>

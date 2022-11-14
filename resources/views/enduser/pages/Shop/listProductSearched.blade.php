@@ -85,11 +85,11 @@
                                                                     <img class="primary-image" src="{{ \App\Helper\Functions::getImage("product", $product->picture) }}" alt="">
                                                                 </a>
                                                                 @switch($product -> type)
-                                                                    @case("new")
-                                                                    <div class="label-product label-new">New</div>
+                                                                    @case("mới")
+                                                                    <div class="label-product label-new">{{ $product->type }}</div>
                                                                     @break
-                                                                    @case("sale")
-                                                                    <div class="label-product label-sale">Sale</div>
+                                                                    @case("giảm giá")
+                                                                    <div class="label-product label-sale">{{ $product->type }}</div>
                                                                     @break
                                                                 @endswitch
                                                                 @include("enduser.components.actions", ["id_cart" => $product -> id])

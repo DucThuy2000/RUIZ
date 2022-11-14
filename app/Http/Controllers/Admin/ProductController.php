@@ -25,6 +25,7 @@ class ProductController extends AdminController
             'tab_label' => 'General (VI)',
             'items' => [
                 ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
+                ['label' => 'Amount', 'name' => 'amount', 'type' => 'text'],
                 ['label' => 'Description', 'name' => 'description', 'type' => 'textarea'],
                 ['label' => 'Price Base', 'name' => 'price_base', 'type' => 'text'],
                 ['label' => 'Price Final', 'name' => 'price_final', 'type' => 'text'],
@@ -34,9 +35,9 @@ class ProductController extends AdminController
                 ['label' => 'Category', 'name' => 'category_id', 'type' => 'select', 'modal' => Product_category::class],
                 ['label' => 'Tags', 'name' => 'tag_id', 'type' => 'multipleSelect', 'modal' => Product_tags::class],
                 ['label' => 'Type', 'name' => 'type', 'type' => 'select', 'data-source' => [
-                    'Best Seller' => 'best seller',
-                    'New arrivals' => 'new',
-                    'On sale' => 'sale',
+                    'Bán chạy' => 'bán chạy',
+                    'Mới' => 'mới',
+                    'Giảm giá' => 'giảm giá',
                 ]],
                 ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox'],
 

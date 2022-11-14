@@ -593,7 +593,8 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Xóa'
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Hủy'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
@@ -777,19 +778,27 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Hủy'
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Hủy',
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        type: 'GET',
+                        headers: {
+                            'X-CSRF-TOKEN' : $("meta[name='csrf-token']").attr("content")
+                        },
+                        type: 'POST',
                         url: url,
 
                         success: function (data){
-                            Swal.fire(
-                                'Hủy đơn hàng thành công',
-                                'Đơn hàng đã được hủy.',
-                                'thành công'
-                            )
+                            if (data.data === 'success') {
+                                Swal.fire(
+                                    'Hủy đơn hàng thành công',
+                                    'Đơn hàng đã được hủy.',
+                                    'thành công'
+                                ).then((result) => {
+                                    e.target.remove();
+                                });
+                            }
                         },
 
                         error: function (data){

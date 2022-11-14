@@ -79,12 +79,13 @@ class User_profileController extends Controller
     }
 
     public function cancelOrder($id) {
+        $order = Order::find($id);
         // 1: cập nhật trạng thái của order theo id --> Hủy
         // 2: cập nhật trạng thái của order_details theo id của order --> Hủy
-        Order::find($id)->update([
+        $order->update([
             'status' => 'Hủy'
         ]);
-        OrderDetail::where('order_id', $id)->update([
+        $order->orderDetails()->update([
             'status' => 'Hủy'
         ]);
         return response() -> json([

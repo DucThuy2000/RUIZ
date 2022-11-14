@@ -29,6 +29,9 @@
                                 @case("Hoàn tất")
                                     <span class="tag-item bg-success text-white" style="font-size: 12px">{{ $item -> status }}</span>
                                 @break
+                                @case("Đang giao hàng")
+                                <span class="tag-item bg-info text-white" style="font-size: 12px">{{ $item -> status }}</span>
+                                @break
                                 @case("Đang xử lý")
                                     <span class="tag-item bg-primary text-white" style="font-size: 12px">{{ $item -> status }}</span>
                                 @break

@@ -92,8 +92,8 @@
                                 </li>
                             </ul>
                             <ul class="stock-cont">
-                                <li class="product-sku">Sku: <span>{{ @$single_product -> id }}</span></li>
-                                <li class="product-stock-status">Categories:
+                                <li class="product-sku">Số lượng: <span>{{ @$single_product -> amount }}</span></li>
+                                <li class="product-stock-status">Danh mục:
                                     <a href="{{ route("shop.showProductByCategory",["slug" => @$single_product -> categories -> slug]) }}">
                                         {{ @$single_product -> categories -> name }}
                                     </a>
@@ -101,20 +101,12 @@
                                 @php
                                     $tags = $single_product -> tags() -> pluck('name') -> toArray();
                                 @endphp
-                                <li class="product-stock-status">Tag:
+                                <li class="product-stock-status">Nhãn:
                                     @foreach($tags as $tag)
                                          <a href="#">{{ $tag }},</a>
                                     @endforeach
                                 </li>
                             </ul>
-                            <div class="share-product-socail-area">
-                                <p>Share this product</p>
-                                <ul class="single-product-share">
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-pinterest"></i></a></li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -218,12 +210,12 @@
                                     <a href="{{ route("shop.productDetail", ["slug" => @$item -> slug]) }}" class="d-flex justify-content-center">
                                         <img class="primary-image" src="{{ \App\Helper\Functions::getImage("product", @$item -> picture) }}" alt="">
                                     </a>
-                                    @switch(@$item -> type)
-                                        @case("new")
-                                        <div class="label-product label-new">New</div>
+                                    @switch($item -> type)
+                                        @case("mới")
+                                        <div class="label-product label-new">{{ $item->type }}</div>
                                         @break
-                                        @case("sale")
-                                        <div class="label-product label-sale">Sale</div>
+                                        @case("giảm giá")
+                                        <div class="label-product label-sale">{{ $item->type }}</div>
                                         @break
                                     @endswitch
                                     @include("enduser.components.actions", ["id_cart" => @$item->id])
