@@ -8,7 +8,7 @@ class Order extends Model
 {
     protected $table = "order";
 
-    protected $fillable = ['status'];
+    protected $fillable = ['status', 'updated_at'];
 
     public function orderDetails(){
         return $this->hasMany("App\OrderDetail", "order_id");

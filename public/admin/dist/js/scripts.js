@@ -80,13 +80,14 @@
         let _this = $(this);
         let url = $(this).data('url');
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Xác nhận xóa dữ liệu',
+            text: "Dữ liệu được xóa sẽ không lấy lại được!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Xác nhận',
+            cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
@@ -98,9 +99,9 @@
                             _this.parent().parent().parent().remove();
                         }
                         Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
+                            'Đã xóa!',
+                            'Dữ liệu đã xóa thành công.',
+                            'thành công'
                         )
                     },
 
@@ -112,5 +113,9 @@
         })
     }
     $(document).on("click",".delete-button", deleteRecord);
+
+    setTimeout(function() {
+        $(".alert").alert('close');
+    }, 2000);
 
 })(jQuery);

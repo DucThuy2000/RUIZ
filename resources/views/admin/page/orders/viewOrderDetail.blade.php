@@ -44,7 +44,7 @@
                                         <tr>
                                             <td class="td-label">Trạng thái</td>
                                             <td>
-                                                <label class="label mr-3 @if( @$order -> status == "Hoàn tất")label-success @elseif(@$order -> status == "Đang xử lý") label-warning @else label-danger @endif">
+                                                <label class="label mr-3 text-dark text-bold" style="font-size: 16px">
                                                     {{ @$order -> status }}
                                                 </label>
                                                 <a href="" data-toggle="modal" data-target="#updateStatus">Cập nhật</a>

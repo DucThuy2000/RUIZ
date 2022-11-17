@@ -39,8 +39,7 @@ class UserController extends AdminController
     protected $fieldList = [
         ['label' => 'iD', 'name' => 'id', 'type' => 'id'],
         ['label' => 'Avatar', 'name' => 'picture', 'type' => 'picture'],
-        ['label' => 'First Name', 'name' => 'first_name', 'type' => 'first_name'],
-        ['label' => 'Last Name', 'name' => 'last_name', 'type' => 'last_name'],
+        ['label' => 'First Name', 'name' => 'user_name', 'type' => 'text'],
         ['label' => 'Role', 'name' => 'role', 'type' => 'role'],
         ['label' => 'Created At', 'name' => 'created_at', 'type' => 'dateFormat'],
         ['label' => 'Updated At', 'name' => 'updated_at', 'type' => 'dateFormat']

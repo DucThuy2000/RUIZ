@@ -75,7 +75,6 @@ class ProductController extends AdminController
         view()->share("fieldForm", $this -> fieldForm);
         view()->share("fieldList", $this -> fieldList);
         $this -> model = new MainModel();
-
     }
 
     public function store(Request $request){

@@ -1,6 +1,6 @@
 
 <div class="table-content">
-    <table class="table">
+    <table class="table mb-0">
         <thead class="thead-dark">
             <tr>
                 @foreach($fieldList as $key => $value)
@@ -12,23 +12,24 @@
             </tr>
         </thead>
         <tbody class="tbody">
-            @foreach($data as $record)
-                <tr>
-                    @foreach($fieldList as $key => $name)
-                        @switch($name["type"])
-                            @case("id")
+            @if($data->count() > 0)
+                @foreach($data as $record)
+                    <tr>
+                        @foreach($fieldList as $key => $name)
+                            @switch($name["type"])
+                                @case("id")
                                 <th scope="row">{{ $record -> {$name["name"]} }}</th>
-                            @break
-                            @case("text")
+                                @break
+                                @case("text")
                                 <td>{{ $record -> {$name["name"]} }}</td>
-                            @break
-                            @case("first_name")
+                                @break
+                                @case("first_name")
                                 <td>{{ $record -> {$name["name"]} }}</td>
-                            @break
-                            @case("last_name")
+                                @break
+                                @case("last_name")
                                 <td>{{ $record -> {$name["name"]} }}</td>
-                            @break
-                            @case("status")
+                                @break
+                                @case("status")
                                 @if( $record -> {$name["name"]} == "active")
                                     <td>
                                         <label class="label label-success">{{ $record -> {$name["name"]} }}</label>
@@ -38,8 +39,8 @@
                                         <label class="label label-danger">{{ $record -> {$name["name"]} }}</label>
                                     </td>
                                 @endif
-                            @break
-                            @case("role")
+                                @break
+                                @case("role")
                                 @php
                                     $roleName = $record -> roles -> pluck('name') -> toArray();
                                 @endphp
@@ -48,22 +49,27 @@
                                         <label class="label label-success">{{ $value }}</label>
                                     @endforeach
                                 </td>
-                            @break
-                            @case("picture")
+                                @break
+                                @case("picture")
                                 <td class="show-image">
                                     <img src="{{ \App\Helper\Functions::getImage($folderUpload, $record -> {$name["name"]}) }}">
                                 </td>
-                            @break
-                            @case("dateFormat")
+                                @break
+                                @case("dateFormat")
                                 <td>{{ $record -> {$name["name"]} -> format('d/m/Y') }}</td>
-                            @break
-                        @endswitch
-                    @endforeach
-                    @canany([$controllerName . ".delete", $controllerName . ".edit"])
-                        <td>@include("admin.template.action")</td>
-                    @endcanany
+                                @break
+                            @endswitch
+                        @endforeach
+                        @canany([$controllerName . ".delete", $controllerName . ".edit"])
+                            <td>@include("admin.template.action")</td>
+                        @endcanany
+                    </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="{{count($fieldList) + 1}}">Không có dữ liệu</td>
                 </tr>
-            @endforeach
+            @endif
         </tbody>
     </table>
 </div>

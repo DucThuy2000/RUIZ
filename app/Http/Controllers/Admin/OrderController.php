@@ -9,6 +9,7 @@ use App\Helper\Functions;
 use App\Http\Controllers\AdminController;
 use App\OrderAddress;
 use App\OrderDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Session;
 
@@ -50,7 +51,7 @@ class OrderController extends AdminController
         $this -> model = new MainModel();
     }
 
-    public function index(){
+    public function index(Request $request) {
         $data = $this -> model -> latest() -> paginate(12);
 
         return view($this -> pathView . "index", compact("data"));
@@ -76,11 +77,14 @@ class OrderController extends AdminController
 
     public function changeStatus(Request $request,$id){
         $order = Order::find($id);
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
         if(isset($request -> status)){
-            $order -> status = $request -> status;
-            $order -> save();
+            $order->status = $request->status;
+            $order->updated_at = $now;
+            $order->save();
             $order->orderDetails()->update([
-                'status' => $request -> status
+                'status' => $request -> status,
+                'updated_at' => $now
             ]);
             Session::flash("action_success", "Cập nhật trạng thái đơn hàng thành công !!");
             return back();

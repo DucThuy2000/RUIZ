@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Image;
@@ -19,9 +20,23 @@ class AdminController extends BaseController
     protected $folderUpload;
     protected $resize;
 
-    public function index(){
-        $data = $this -> model -> paginate(10);
-        return view($this -> pathView . "index",compact("data"));
+    public function index(Request $request) {
+        $data = $this->model;
+        if (Schema::hasColumn($this->model->getTable(), 'name')){
+            $data = $data->where('name', 'like', '%'.$request->get('search-key').'%');
+        }
+
+        if (Schema::hasColumn($this->model->getTable(), 'user_name')){
+            $data = $data->where('user_name', 'like', '%'.$request->get('search-key').'%');
+        }
+
+        if (Schema::hasColumn($this->model->getTable(), 'question')){
+            $data = $data->where('question', 'like', '%'.$request->get('search-key').'%');
+        }
+
+        $data = $data->paginate(10);
+
+        return view($this -> pathView . "index", compact("data"));
     }
 
     public function create(){

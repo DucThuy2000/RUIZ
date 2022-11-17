@@ -37,6 +37,10 @@
                             <td>
                                 <label class="label label-warning">{{ $record -> {$name["name"]} }}</label>
                             </td>
+                        @elseif($record -> {$name["name"]} == "Đang giao hàng")
+                            <td>
+                                <label class="label bg-primary">{{ $record -> {$name["name"]} }}</label>
+                            </td>
                         @else
                             <td>
                                 <label class="label label-danger">{{ $record -> {$name["name"]} }}</label>
