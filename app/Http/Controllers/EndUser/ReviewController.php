@@ -4,6 +4,7 @@ namespace App\Http\Controllers\EndUser;
 
 use App\Http\Controllers\Controller;
 use App\Review;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,6 +21,7 @@ class ReviewController extends Controller
 
         //Lấy thông tin review
         $review -> content = $request['review'];
+        $review->updated_at = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
 
         if($request['rating'] == null){
             $review -> rating = 0;

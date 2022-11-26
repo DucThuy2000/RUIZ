@@ -172,24 +172,24 @@
                                                     {{ $cart['name'] }} <strong class="product-quantity"> × {{ $cart['quantity'] }}</strong>
                                                 </td>
                                                 <td class="product-total">
-                                                    <span class="amount">${{ number_format($totalPrice) }}</span>
+                                                    <span class="amount">{{ number_format($totalPrice) }} VND</span>
                                                 </td>
                                         @endforeach
                                         </tbody>
                                         <tfoot>
                                         <tr class="cart-subtotal">
                                             <th class="th-title">Giá tạm tính</th>
-                                            <td>$<span class="amount" id="temporary-price">{{ number_format($cartTotal) }}</span></td>
+                                            <td><span class="amount" id="temporary-price">{{ number_format($cartTotal) }} VND</span></td>
                                         </tr>
                                         <tr class="cart-subtotal">
                                             <th class="th-title">Giảm giá</th>
-                                            <td>- $<span class="amount" id="coupon-price">0</span></td>
+                                            <td>- <span class="amount" id="coupon-price">0</span> VND</td>
                                         </tr>
                                         <tr class="order-total">
                                             <th class="th-title">Tổng giá</th>
                                             <td>
                                                 <strong>
-                                                    $<span class="amount" id="order-total-price">{{ number_format($cartTotal) }}</span>
+                                                    <span class="amount" id="order-total-price">{{ number_format($cartTotal) }} VND</span>
                                                 </strong>
                                                 <input type="hidden" name="price_total" id="input-total-price" value="{{ @$cartTotal }}">
                                             </td>

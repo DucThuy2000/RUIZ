@@ -34,13 +34,13 @@
                         </div>
 
                     </div>
-                    <div class="product-nav">
+{{--                    <div class="product-nav">--}}
 {{--                        @foreach($gallery as $item)--}}
 {{--                            <div class="pro-nav-thumb">--}}
 {{--                                <img src="{{ \App\Helper\Functions::getImage("product", $item) }}" alt="product-details" />--}}
 {{--                            </div>--}}
 {{--                        @endforeach--}}
-                    </div>
+{{--                    </div>--}}
                     <!--// Product Details Left -->
                 </div>
 
@@ -66,22 +66,33 @@
                             </div>
                             <div class="price-box">
                                 @if(@$single_product -> price_final == @$single_product -> price_base)
-                                    <span class="new-price">${{ number_format(@$single_product -> price_final) }}</span>
+                                    <span class="new-price">{{ number_format(@$single_product -> price_final) }} VND</span>
                                 @else
-                                    <span class="new-price">${{ number_format(@$single_product -> price_final) }}</span>
-                                    <span class="old-price">${{ number_format(@$single_product -> price_base) }}</span>
+                                    <span class="new-price">{{ number_format(@$single_product -> price_final) }} VND</span>
+                                    <span class="old-price">{{ number_format(@$single_product -> price_base) }} VND</span>
                                 @endif
                             </div>
 
                             <div class="single-add-to-cart">
                                 <form action="" class="cart-quantity d-flex" method="GET"
-                                      data-url="{{ route("cart.addCartForDetailProduct", ["id" => @$single_product -> id]) }}">
+                                      data-url="{{ route("cart.addCartForDetailProduct", ["id" => @$single_product -> id]) }}"
+                                >
                                     <div class="quantity">
                                         <div class="cart-plus-minus">
-                                            <input type="number" min="0" class="input-text quantity" name="quantity" value="1" title="Qty">
+                                            <input
+                                                type="text" min="0" maxlength="3"
+                                                class="input-text quantity" id="input-quantity"
+                                                name="quantity" value="0"
+                                                data-check-cart="true"
+                                                data-url="{{ route('cart.checkProductQuantity', $single_product->id) }}"
+                                            >
                                         </div>
                                     </div>
-                                    <button class="add-to-cart" type="submit">Thêm giỏ hàng</button>
+                                    @if(@$single_product->amount > 0)
+                                        <button class="add-to-cart" type="submit">Thêm giỏ hàng</button>
+                                    @else
+                                        <button style="cursor: auto; background: #ccc; border: 1px solid #ccc;color: white; padding: 5px 10px" disabled>Thêm giỏ hàng</button>
+                                    @endif
                                 </form>
                             </div>
                             <ul class="single-add-actions">
@@ -145,7 +156,6 @@
                                 <!-- Start RAting Area -->
                                 @if(\Illuminate\Support\Facades\Auth::check())
                                     <div class="rating_wrap mt-50">
-                                        <h5 class="rating-title-1">Thêm review cho sản phẩm </h5>
                                         <h6 class="rating-title-2">Đánh giá của bạn</h6>
                                         <div class="rating_list">
                                             <div class="review_info mb-10 rating-stars">
@@ -218,16 +228,19 @@
                                         <div class="label-product label-sale">{{ $item->type }}</div>
                                         @break
                                     @endswitch
-                                    @include("enduser.components.actions", ["id_cart" => @$item->id])
+                                    @if($item->amount === 0)
+                                        <div class="label-product bg-danger">Hết hàng</div>
+                                    @endif
+                                    @include("enduser.components.actions", ["id_cart" => @$item->id, "amount" => @$item->amount])
                                 </div>
                                 <div class="product-caption">
                                     <h4 class="product-name"><a href="product-details.html">{{ @$item -> name }}</a></h4>
                                     <div class="price-box">
                                         @if(@$item -> price_final == @$item -> price_base)
-                                            <span class="new-price">${{ number_format(@$item -> price_final) }}</span>
+                                            <span class="new-price">{{ number_format(@$item -> price_final) }} VND</span>
                                         @else
-                                            <span class="new-price">${{ number_format(@$item -> price_final) }}</span>
-                                            <span class="old-price">${{ number_format(@$item -> price_base) }}</span>
+                                            <span class="new-price">{{ number_format(@$item -> price_final) }} VND</span>
+                                            <span class="old-price">{{ number_format(@$item -> price_base) }} VND</span>
                                         @endif
                                     </div>
                                 </div>

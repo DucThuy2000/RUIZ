@@ -46,38 +46,38 @@
         $(".cart-quantity").on("submit", function (e){
             e.preventDefault();
 
-            let quantity = $(this).find('input[type=number]').val();
-
+            let input = $(this).find('input#input-quantity');
             let url = $(this).data("url");
+            if ( !input.hasClass("invalid-quantity") && input.val() > 0 ) {
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data:{
+                        "quantity": input.val()
+                    },
 
-            $.ajax({
-                type: "GET",
-                url: url,
-                data:{
-                    "quantity": quantity
-                },
+                    beforeSend: function (){
+                        $(".overlay-snipper").addClass("open");
+                    },
 
-                beforeSend: function (){
-                    $(".overlay-snipper").addClass("open");
-                },
+                    success: function (data){
+                        if(data.code === 200){
+                            $('.sweet-alert .insert-alert').fadeIn('slow');
+                            setInterval(function (){
+                                location.reload().fadeIn("slow");
+                            }, 1000)
+                        }
+                    },
 
-                success: function (data){
-                    if(data.code === 200){
-                        $('.sweet-alert .insert-alert').fadeIn('slow');
-                        setInterval(function (){
-                            location.reload().fadeIn("slow");
-                        }, 1000)
+                    complete: function (){
+                        $(".overlay-snipper").removeClass("open");
+                    },
+
+                    error: function (){
+
                     }
-                },
-
-                complete: function (){
-                    $(".overlay-snipper").removeClass("open");
-                },
-
-                error: function (){
-
-                }
-            })
+                })
+            }
         })
 
         /*------ UPDATE CART ------*/
@@ -89,7 +89,7 @@
             let array = [];
             let totalProduct = $(".cart-detail");
             let id = totalProduct.find(".id-product");
-            let quantity = totalProduct.find(".quantity-input");
+            let quantity = totalProduct.find(".quantity");
             let url = $(".table-content").data("url");
 
             for(var i = 0; i < totalProduct.length; ++i){
@@ -402,7 +402,7 @@
             e.preventDefault();
             let nameCoupon = $(this).parent().find("#name_coupon").val();
             let textPrice = $(".cart-subtotal #temporary-price").text();
-            let replaceTotalPriceToNumber = parseInt(textPrice.replace(",", ""));
+            let replaceTotalPriceToNumber = parseInt(textPrice.replace(/,/g, ""));
             let url = $(this).data("url");
 
             $.ajax({
@@ -427,6 +427,7 @@
 
                         //new Intl.NumberFormat() sẽ format số theo dạng chuẩn
                         $("#coupon-price").text(new Intl.NumberFormat().format(data.data.price));
+                        console.log(replaceTotalPriceToNumber);
                         replaceTotalPriceToNumber -= data.data.price;
                         let numberFormat = new Intl.NumberFormat().format(replaceTotalPriceToNumber);
                         $(".order-total #order-total-price").text(numberFormat);
@@ -568,7 +569,7 @@
                 '        </div>\n' +
                 '    </div>\n' +
                 '    <div class="comment-form-submit mt-30 d-flex justify-content-end">\n' +
-                '        <button class="btn btn-secondary mr-2 text-white btn-cancel">Cancel</button>\n' +
+                '        <button class="btn btn-secondary mr-2 text-white btn-cancel">Hủy</button>\n' +
                 '        <input type="submit" value="Trả lời" class="comment-submit">\n' +
                 '    </div>\n' +
                 '</div></form>'
@@ -639,7 +640,7 @@
                 '        </div>\n' +
                 '    </div>\n' +
                 '    <div class="comment-form-submit mt-30 d-flex justify-content-end">\n' +
-                '        <button class="btn btn-secondary mr-2 text-white btn-edit-cancel">Cancel</button>\n' +
+                '        <button class="btn btn-secondary mr-2 text-white btn-edit-cancel">Hủy</button>\n' +
                 '        <input type="submit" value="Sửa" class="comment-submit">\n' +
                 '    </div>\n' +
                 '</div></form>'
@@ -901,7 +902,41 @@
             }
         }
 
+        function checkProductQuantity(e) {
+            const value = e.target.value;
+            const _url = $(this).data('url');
+            const isCheckCart = $(this).data('check-cart');
+            const _this = $(this);
+            $.ajax({
+                url: _url,
+                data: {
+                    amount: value,
+                    isCheckCart: isCheckCart,
+                },
+                beforeSend: function (){
+                    $(".overlay-snipper").addClass("open");
+                },
 
+                success: function (data){
+                    if ( !data.code ) {
+                        _this.addClass("invalid-quantity");
+                        $(".sweet-alert .quantity-false-alert").html("Không được đặt quá số lượng sản phẩm");
+                        $(".sweet-alert .quantity-false-alert").fadeIn('slow');
+                    } else {
+                        _this.removeClass("invalid-quantity");
+                    }
+                },
+
+                complete: function (){
+                    $(".overlay-snipper").removeClass("open");
+                    setTimeout(function (){
+                        $('.sweet-alert .quantity-false-alert').fadeOut(1000);
+                    },1000)
+                },
+            })
+        }
+
+        $('#input-quantity').on('change', checkProductQuantity);
     })
 
 })(jQuery);

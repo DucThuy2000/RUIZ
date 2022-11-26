@@ -25,21 +25,21 @@
                                         </tr>
                                         <tr>
                                             <td class="td-label">Tổng đơn hàng</td>
-                                            <td>${{ number_format(@$order -> price_total) }}</td>
+                                            <td>{{ number_format(@$order -> price_total) }} VND</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Giảm giá</td>
                                             <td>
                                                 @if(isset($order_coupon))
-                                                    ${{ number_format($order_coupon) }}
+                                                    {{ number_format($order_coupon) }} VND
                                                 @else
-                                                    $0
+                                                    0 VND
                                                 @endif
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Tổng thanh toán</td>
-                                            <td>${{ number_format( @$order -> price_total - $order_coupon )}}</td>
+                                            <td>{{ number_format( @$order -> price_total - $order_coupon )}} VND</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Trạng thái</td>
@@ -122,9 +122,9 @@
                                         <img src="{{ \App\Helper\Functions::getImage("product", @$item -> product_picture, "thumbnail") }}" alt="{{ @$item -> product_name }}">
                                     </td>
                                     <td>{{ @$item -> product_name }}</td>
-                                    <td>{{ number_format(@$item -> product_price) }}</td>
+                                    <td>{{ number_format(@$item -> product_price) }} VND</td>
                                     <td>{{ @$item -> product_quantity }}</td>
-                                    <td>{{ number_format(@$item -> price_total) }}</td>
+                                    <td>{{ number_format(@$item -> price_total) }} VND</td>
                                 </tr>
                             @endforeach
                             </tbody>

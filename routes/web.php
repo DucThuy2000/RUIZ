@@ -72,6 +72,7 @@ Route::namespace("EndUser")->group(function(){
         Route::get('cap-nhat', $controllerName . "updateCart")->name("updateCart");
         Route::get('xoa-san-pham', $controllerName . "deleteProduct")->name("deleteProduct");
         Route::get('ap-dung-coupon', $controllerName . "applyCoupon")->name("applyCoupon");
+        Route::get('kiem-tra-so-luong/{product}', $controllerName . "checkProductQuantity")->name("checkProductQuantity");
     });
 
     /*----- WishList -----*/

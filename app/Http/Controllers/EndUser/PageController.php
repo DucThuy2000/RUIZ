@@ -32,8 +32,9 @@ class PageController extends Controller
         ])->orderBy('id')->limit(2)->get();
 
         $best_seller = Product::where([
-           ['status','active'],
-           ['type','bán chạy']
+            ['status','active'],
+            ['type','bán chạy'],
+            ['amount', '>', 0]
         ])->limit(10)->latest()->get();
 
         $banners = Banner::where([
@@ -46,7 +47,8 @@ class PageController extends Controller
 
         $product_sale = Product::where([
             ['status' , 'active'],
-            ['type','giảm giá']
+            ['type','giảm giá'],
+            ['amount', '>', 0]
         ])->limit(10)->latest()->get();
 
         return view($this -> pathView . "index"

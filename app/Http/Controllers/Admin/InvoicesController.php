@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Coupon;
-use App\Order;
-use App\Order as MainModel; //Alias (bí danh) 'use' để gọi đến namespace App\Bank với bí danh là MainModel
+use App\Invoices as MainModel; //Alias (bí danh) 'use' để gọi đến namespace App\Bank với bí danh là MainModel
 use App\Helper\Functions;
 use App\Http\Controllers\AdminController;
-use App\OrderAddress;
-use App\OrderDetail;
+use App\InvoicesDetail;
+use App\Partner;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Session;
 
-class OrderController extends AdminController
+class InvoicesController extends AdminController
 {
-    protected $pathView = "admin.page.orders.";
+    protected $pathView = "admin.page.invoices.";
 
     protected $resize = [
         'thumbnail' => ['width' => 800],
@@ -27,14 +25,11 @@ class OrderController extends AdminController
     protected $removeRedundant = ["_token", "tag_id"];
 
     protected $fieldList = [
-        ['label' => 'Mã', 'name' => 'id', 'type' => 'id'],
-        ['label' => 'Khách hàng', 'name' => 'user_name', 'type' => 'otherModel'],
-        ['label' => 'Email', 'name' => 'email', 'type' => 'otherModel'],
-        ['label' => 'SĐT', 'name' => 'phone', 'type' => 'otherModel'],
-        ['label' => 'Phương thức thanh toán', 'name' => 'pay_method', 'type' => 'text'],
-        ['label' => 'Tổng tiền', 'name' => 'price_total', 'type' => 'numberFormat'],
-        ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'status'],
-        ['label' => 'Ngày tạo', 'name' => 'created_at', 'type' => 'dateFormat'],
+        ['label' => 'Code', 'name' => 'name', 'type' => 'id'],
+        ['label' => 'Created By', 'name' => 'created_by', 'type' => 'otherModel'],
+        ['label' => 'Product Amount', 'name' => 'price_total', 'type' => 'numberFormat'],
+        ['label' => 'Total Price', 'name' => 'price_total', 'type' => 'numberFormat'],
+        ['label' => 'Created Date', 'name' => 'created_at', 'type' => 'dateFormat'],
     ];
 
     public function __construct(){
@@ -51,19 +46,12 @@ class OrderController extends AdminController
         $this -> model = new MainModel();
     }
 
-    public function index(Request $request) {
-        $data = $this->model;
-        $searchKey = $request->get('search-key');
-        if ( $searchKey ) {
-            $data = $data->whereHas('user', function($q) use ($searchKey) {
-                $q->where('user_name', 'like', '%'.$searchKey.'%');
-            });
-        }
-        $data = $data->latest()->paginate(12);
-        return view($this -> pathView . "index", compact("data"));
+    public function create() {
+        $data['partners'] = Partner::all();
+        return view($this -> pathView . "form")->with($data);;
     }
 
-    public function viewOrderDetail(Request $request, $id){
+    public function invoiceDetail(Request $request, $id){
         $data['order'] = Order::find($id);
 
         //Get giá coupon
@@ -79,22 +67,6 @@ class OrderController extends AdminController
         $data['user'] = $data['order'] -> user;
 
         return view($this -> pathView . "viewOrderDetail")->with($data);
-    }
-
-    public function changeStatus(Request $request,$id){
-        $order = Order::find($id);
-        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
-        if(isset($request -> status)){
-            $order->status = $request->status;
-            $order->updated_at = $now;
-            $order->save();
-            $order->orderDetails()->update([
-                'status' => $request -> status,
-                'updated_at' => $now
-            ]);
-            Session::flash("action_success", "Cập nhật trạng thái đơn hàng thành công !!");
-            return back();
-        }
     }
 
     public function delete($id) {

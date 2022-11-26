@@ -50,9 +50,9 @@
                                                 <img src="{{ \App\Helper\Functions::getImage("product", @$order_detail -> product_picture, "thumbnail") }}" alt="">
                                             </td>
                                             <td>{{ @$order_detail -> product_name }}</td>
-                                            <td>${{ number_format(@$order_detail -> product_price) }}</td>
+                                            <td>{{ number_format(@$order_detail -> product_price) }} VND</td>
                                             <td>{{ @$order_detail -> product_quantity }}</td>
-                                            <td>${{ number_format(@$order_detail -> price_total) }}</td>
+                                            <td>{{ number_format(@$order_detail -> price_total) }} VND</td>
                                             <td>
                                                 <span class="badge badge-success">
                                                     {{ @$order_detail -> status }}
@@ -70,7 +70,7 @@
                                         <td colspan="6">
                                             <h6>Tổng</h6>
                                         </td>
-                                        <td><span>${{ number_format(@$order -> price_total) }}</span></td>
+                                        <td><span>{{ number_format(@$order -> price_total) }} VND</span></td>
                                     </tr>
                                 </tbody>
                             </table>

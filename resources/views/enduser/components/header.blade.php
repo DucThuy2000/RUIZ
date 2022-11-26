@@ -48,7 +48,7 @@
                                 <i class="icon-basket-loaded"></i>
                                 <span class="cart-total">@if(!empty($carts)){{ count(@$carts) }} @else 0 @endif</span>
                             </a>
-                            <ul class="mini-cart">
+                            <ul class="mini-cart" style="width: 350px;">
                                 @if(!empty($carts))
                                     @foreach($carts as $item)
                                         @php
@@ -66,15 +66,15 @@
                                                 </a>
                                                 <div class="quanti-price-wrap">
                                                     <span class="quantity">{{ $item['quantity'] }} ×</span>
-                                                    <div class="price-box"><span class="new-price">${{ number_format($item['subtotal']) }}</span></div>
+                                                    <div class="price-box"><span class="new-price">{{ number_format($item['subtotal']) }} VND</span></div>
                                                 </div>
                                             </div>
                                         </li>
                                     @endforeach
                                     <li class="subtotal-box">
                                         <div class="subtotal-title">
-                                            <h3>Sub-Total :</h3>
-                                            <span>${{number_format(@$totalPrice)}}</span>
+                                            <h3>Tổng tiền :</h3>
+                                            <span>{{number_format(@$totalPrice)}} VND</span>
                                         </div>
                                     </li>
                                     <li class="mini-cart-btns">

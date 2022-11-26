@@ -58,6 +58,7 @@ class ProductController extends AdminController
         ['label' => 'iD', 'name' => 'id', 'type' => 'id'],
         ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
         ['label' => 'Picture', 'name' => 'picture', 'type' => 'picture'],
+        ['label' => 'Amount', 'name' => 'amount', 'type' => 'text'],
         ['label' => 'Status', 'name' => 'status', 'type' => 'status'],
         ['label' => 'Created At', 'name' => 'created_at', 'type' => 'dateFormat'],
         ['label' => 'Updated At', 'name' => 'updated_at', 'type' => 'dateFormat']

@@ -61,6 +61,10 @@
             Sản phẩm được thêm thành công
         </div>
 
+        <div class="alert alert-danger quantity-false-alert" style="display: none" role="alert">
+            <i class="fas fa-check-circle"></i>
+        </div>
+
         <div class="alert alert-success update-alert" role="alert">
             <i class="fas fa-check-circle"></i>
             Cập nhật thành công
@@ -119,8 +123,8 @@
         $maxPrice = $_GET['maxPrice'];
     }
     else{
-        $minPrice = 500;
-        $maxPrice = 50000;
+        $minPrice = 0;
+        $maxPrice = 5000000000;
     }
 @endphp
 <script>
@@ -135,16 +139,16 @@
             orientation: "horizontal",
             range: true,
             min: 0,
-            max: {{ @$maxValue }} + 15000,
+            max: {{ @$maxValue }},
             values: [ {{ $minPrice }}, {{ $maxPrice }} ],
             slide: function( event, ui ) {
-                $( "#amount" ).val('$' + ui.values[ 0 ] + '- $' + ui.values[ 1 ] );
+                $( "#amount" ).val( ui.values[ 0 ] + ' VND - ' + ui.values[ 1 ] + ' VND' );
                 $( "#min-price" ).val(ui.values[ 0 ] );
                 $( "#max-price" ).val(ui.values[ 1 ] );
             }
         });
 
-        $( "#amount" ).val('$' + $( "#price-slider" ).slider( "values", 0 ) + ' - $' + $( "#price-slider" ).slider( "values", 1 ));
+        $( "#amount" ).val($( "#price-slider" ).slider( "values", 0 ) + ' VND - ' + $( "#price-slider" ).slider( "values", 1 ) + ' VND');
         $( "#min-price" ).val($( "#price-slider" ).slider( "values", 0 ));
         $( "#max-price" ).val($( "#price-slider" ).slider( "values", 1 ));
     })

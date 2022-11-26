@@ -26,6 +26,7 @@ class WishListController extends Controller
             $wishList[$id] = [
                 'id' => $products -> id,
                 'name' => $products -> name,
+                'amount'=> $products->amount,
                 'price' => $products -> price_final,
                 'picture' => $products -> picture,
                 'slug' => $products -> slug

@@ -4,7 +4,7 @@
     @endphp
     <div class="d-flex align-items-center justify-content-between">
         <div class="justify-content-start">
-            <span>Showing {{ $pagination -> firstItem() }} to {{ $pagination -> lastItem() }} items of {{ $pagination -> total() }} items</span>
+            <span>Hiển thị từ {{ $pagination -> firstItem() }} đến {{ $pagination -> lastItem() }} trên {{ $pagination -> total() }} dữ liệu </span>
         </div>
         <ul class="pagination justify-content-end">
             <li class="page-item @if( $pagination -> onFirstPage()) disabled @endif">

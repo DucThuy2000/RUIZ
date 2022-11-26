@@ -59,13 +59,13 @@
                     {{ @$product_detail -> product_name }}
                 </td>
                 <td class="plantmore-product-price">
-                    <span class="amount subtotal-text">${{ number_format(@$product_detail -> product_price) }}</span>
+                    <span class="amount subtotal-text">{{ number_format(@$product_detail -> product_price) }} VND</span>
                 </td>
                 <td class="plantmore-product-quantity">
                     <span class="subtotal-text">{{ @$product_detail -> product_quantity }}</span>
                 </td>
                 <td class="product-subtotal">
-                    <span class="amount">${{number_format(@$product_detail -> price_total) }}</span>
+                    <span class="amount">{{number_format(@$product_detail -> price_total) }} VND</span>
                 </td>
             </tr>
         @endforeach

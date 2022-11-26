@@ -67,16 +67,19 @@
                                                                     <div class="label-product label-sale">{{ $product->type }}</div>
                                                                     @break
                                                                 @endswitch
-                                                                @include("enduser.components.actions", ["id_cart" => $product -> id])
+                                                                @if($product->amount === 0)
+                                                                    <div class="label-product bg-danger">Hết hàng</div>
+                                                                @endif
+                                                                @include("enduser.components.actions", ["id_cart" => $product -> id, "amount" => $product->amount])
                                                             </div>
                                                             <div class="product-caption">
                                                                 <h4 class="product-name"><a href="#">{{ $product -> name }}</a></h4>
                                                                 <div class="price-box">
                                                                     @if($product -> price_final == $product -> price_base)
-                                                                        <span class="new-price">${{ number_format($product -> price_final) }}</span>
+                                                                        <span class="new-price">{{ number_format($product -> price_final) }} VND</span>
                                                                     @else
-                                                                        <span class="new-price">${{ number_format($product -> price_final) }}</span>
-                                                                        <span class="old-price">${{ number_format($product -> price_base) }}</span>
+                                                                        <span class="new-price">{{ number_format($product -> price_final) }} VND</span>
+                                                                        <span class="old-price">{{ number_format($product -> price_base) }} VND</span>
                                                                     @endif
                                                                 </div>
                                                             </div>

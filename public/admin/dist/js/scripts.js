@@ -118,4 +118,41 @@
         $(".alert").alert('close');
     }, 2000);
 
+    $(document).on("click", ".add-new-pd-for-invoice", addNewProductForInvoice);
+    function addNewProductForInvoice(event) {
+        const _length = $(".invoice-group").length + 1;
+        const ele = '<div class="invoice-group my-4 d-flex flex-column">\n' +
+        '                        <h4 class="font-weight-bold mb-2 text-uppercase">Sản phẩm '+_length+'</h4>\n' +
+        '                        <div class="card p-3">\n' +
+        '                            <div class="row">\n' +
+        '                                <div class="col-lg-3 mb-20">\n' +
+        '                                    <div class="form-group">\n' +
+        '                                        <label for="" class="mb-1 font-weight-bold">Nhà cung cấp</label>\n' +
+        '                                        <select class="form-control form-checkout" id="select-province" name="partner_id"></select>\n' +
+        '                                    </div>\n' +
+        '                                </div>\n' +
+        '                                <div class="col-lg-3 mb-20">\n' +
+        '                                    <div class="form-group">\n' +
+        '                                        <label for="" class="mb-1 font-weight-bold">Sản phẩm</label>\n' +
+        '                                        <select class="form-control form-checkout" id="select-province" name="partner_id"></select>\n' +
+        '                                    </div>\n' +
+        '                                </div>\n' +
+        '                                <div class="col-lg-3 mb-20">\n' +
+        '                                    <div class="form-group">\n' +
+        '                                        <label for="" class="mb-1 font-weight-bold">Số lượng</label>\n' +
+        '                                        <input type="number" name="amount" class="form-control">\n' +
+        '                                    </div>\n' +
+        '                                </div>\n' +
+        '                                <div class="col-lg-3 mb-20">\n' +
+        '                                    <div class="form-group">\n' +
+        '                                        <label for="" class="mb-1 font-weight-bold">Giá nhập</label>\n' +
+        '                                        <input type="text" name="price" class="form-control">\n' +
+        '                                    </div>\n' +
+        '                                </div>\n' +
+        '                            </div>\n' +
+        '                        </div>\n' +
+        '                    </div>';
+        const lastInvoiceGroupElement = $(".invoice-group").last();
+        $(ele).insertAfter(lastInvoiceGroupElement);
+    }
 })(jQuery);

@@ -24,13 +24,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    @if(!empty($wishlist))
                     @include("enduser.components.wishlist")
-                    @else
-                    <div class="col-lg-12 d-flex justify-content-center">
-                        <span class="cart-notification font-weight-bold" style="font-size: 24px">Danh sách yêu thích trống</span>
-                    </div>
-                    @endif
                 </div>
             </div>
         </div>

@@ -10,6 +10,14 @@ Route::prefix("auth")->name("authAdmin.")->group(function (){
 /*------ Admin ------*/
 Route::namespace("Admin")->prefix("admin")->middleware('auth')->name("admin.")->group(function (){
 
+    /*------ Thống kê Routes ------*/
+    $prefix = "statistical";
+    $controller = "statistical";
+    Route::prefix($prefix)->name($controller . ".")->group(function () use($controller){
+        $controllerName = ucfirst($controller) . "Controller@";
+        Route::get("/", $controllerName . "index")->middleware("can:" . $controller . ".index")->name("index");
+    });
+
     /*------ Product Routes ------*/
     $prefix = "product";
     $controller = "product";
@@ -229,4 +237,17 @@ Route::namespace("Admin")->prefix("admin")->middleware('auth')->name("admin.")->
         Route::get("delete/{id}", $controllerName . "delete")->middleware("can:" . $controller . ".delete")->name("delete");
     });
 
+    /*------ Invoices ------*/
+    $prefix = "invoices";
+    $controller = "invoices";
+    Route::prefix($prefix)->name($controller . ".")->group(function () use($controller){
+        $controllerName = ucfirst($controller) . "Controller@";
+        Route::get("/", $controllerName . "index")->middleware("can:" . $controller . ".index")->name("index");
+        Route::get("create", $controllerName . "create")->middleware("can:" . $controller . ".create")->name("create");
+        Route::post("store", $controllerName . "store")->middleware("can:" . $controller . ".create")->name("store");
+        Route::get("edit/{id}", $controllerName . "edit")->middleware("can:" . $controller . ".edit")->name("edit");
+        Route::post("update/{id}", $controllerName . "update")->middleware("can:" . $controller . ".edit")->name("update");
+        Route::get("delete/{id}", $controllerName . "delete")->middleware("can:" . $controller . ".delete")->name("delete");
+        Route::get("invoice-detail/{id}", $controllerName . "invoiceDetail")->name("invoiceDetail");
+    });
 });

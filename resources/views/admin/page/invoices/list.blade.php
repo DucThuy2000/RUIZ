@@ -5,6 +5,9 @@
             @foreach($fieldList as $key => $value)
                 <th scope="col" class="col-label">{{ $value["label"] }}</th>
             @endforeach
+            @can($controllerName . ".delete")
+                <th scope="col" class="col-label">Action</th>
+            @endcan
         </tr>
         </thead>
         <tbody class="tbody">
@@ -54,6 +57,16 @@
                             @break
                         @endswitch
                     @endforeach
+                    @can($controllerName . ".delete")
+                        <td>
+                            <div class="el-button-group">
+                                <a style="outline: none" class="el-button el-button--danger el-button--mini delete-button"
+                                   data-url="{{ route("admin." . $controllerName . ".delete" , ["id" => $record['id']] ) }}">
+                                    <span><i class="fa fa-trash"></i></span>
+                                </a>
+                            </div>
+                        </td>
+                    @endcan
                 </tr>
             @endforeach
         @else

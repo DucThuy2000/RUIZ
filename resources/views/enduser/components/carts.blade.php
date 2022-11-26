@@ -1,4 +1,5 @@
 <form action="#" class="cart-table" id="cart-table" data-url="{{ route("cart.deleteProduct") }}">
+    @if(!empty($carts))
     <div class="table-content table-responsive" data-url="{{ route("cart.updateCart") }}">
         <table class="table">
             <thead>
@@ -28,13 +29,19 @@
                         <a href="{{ route("shop.productDetail", ["slug" => @$item['slug']]) }}">{{ @$item['name'] }}</a>
                     </td>
                     <td class="plantmore-product-price">
-                        <span class="amount subtotal-text">${{ number_format(@$item['subtotal']) }}</span>
+                        <span class="amount subtotal-text">{{ number_format(@$item['subtotal']) }} VND</span>
                     </td>
                     <td class="plantmore-product-quantity">
-                        <input value="{{ @$item['quantity'] }}" type="number" class="quantity-input" min="0">
+                        <input
+                            type="text" min="0" maxlength="3"
+                            class="input-text quantity" id="input-quantity"
+                            name="quantity" value="{{ @$item['quantity'] }}"
+                            data-check-cart="false"
+                            data-url="{{ route('cart.checkProductQuantity', @$item["id"]) }}"
+                        >
                     </td>
                     <td class="product-subtotal">
-                        <span class="amount">${{ number_format(@$totalPrice) }}</span>
+                        <span class="amount">{{ number_format(@$totalPrice) }} VND</span>
                     </td>
                     <td class="plantmore-product-remove">
                         <a class="delete-cart" href="" data-id="{{ @$item['id'] }}">
@@ -61,15 +68,20 @@
                 <h2>Đơn hàng</h2>
 
                 <ul>
-                    <li>Đơn hàng <span>${{ number_format(@$cartTotal) }}</span></li>
-                    <li>Giảm giá <span>@if(isset($coupon)) -${{ $coupon -> percentage }} @else - $0 @endif</span></li>
-                    <li>Tạm tính <span>${{ number_format(@$cartTotal - @$coupon -> percentage) }}</span></li>
+                    <li>Đơn hàng <span>{{ number_format(@$cartTotal) }} VND</span></li>
+                    <li>Giảm giá <span>@if(isset($coupon)) - {{ $coupon -> percentage }} VND @else - 0 VND @endif</span></li>
+                    <li>Tạm tính <span>{{ number_format(@$cartTotal - @$coupon -> percentage) }} VND</span></li>
                 </ul>
 
                 <a href="{{ route("checkout.checkLoginToCheckOut") }}" class="proceed-checkout-btn">Thanh toán</a>
             </div>
         </div>
     </div>
+    @else
+        <div class="col-lg-12 d-flex justify-content-center">
+            <span class="cart-notification">Giỏ hàng trống</span>
+        </div>
+    @endif
 </form>
 
 <style>

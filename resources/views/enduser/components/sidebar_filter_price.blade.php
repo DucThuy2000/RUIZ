@@ -10,9 +10,9 @@
             <div class="filter-price-wapper">
                 <input type="submit" class="add-to-cart-button" value="FILTER">
                 <div class="filter-price-cont">
-                    <span>Price:</span>
+                    <span>Giá:</span>
                     <div class="d-flex">
-                        <input type="text" id="amount" style="border: none; outline: none">
+                        <input type="text" id="amount" style="border: none; outline: none" class="w-100">
                         <input type="hidden" name="minPrice" id="min-price">
                         <input type="hidden" name="maxPrice" id="max-price">
                     </div>

@@ -73,6 +73,28 @@ class CartController extends Controller
         ], 200);
     }
 
+    public function checkProductQuantity(Product $product, Request $request) {
+        $cart = session()->get("cart");
+        $quantityInput = $request->get('amount');
+        if ( isset($cart[$product->id]) && $request->get('isCheckCart') == "true" ) {
+            $quantityInput += $cart[$product->id]["quantity"];
+        }
+
+        if ( $product->amount < $quantityInput ) {
+            return response() -> json([
+                "code" => false,
+                "message" => "failure",
+                "product" => $product,
+            ], 200);
+        }
+
+        return response() -> json([
+            "code" => true,
+            "message" => "success",
+            "product" => $product
+        ], 200);
+    }
+
     public function updateCart(Request $request){
         $getAllProduct = session() -> get("cart");
 

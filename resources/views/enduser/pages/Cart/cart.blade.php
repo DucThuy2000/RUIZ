@@ -23,13 +23,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    @if(!empty($carts))
-                        @include("enduser.components.carts")
-                    @else
-                        <div class="col-lg-12 d-flex justify-content-center">
-                            <span class="cart-notification">Giỏ hàng trống</span>
-                        </div>
-                    @endif
+                    @include("enduser.components.carts")
                 </div>
             </div>
         </div>

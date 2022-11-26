@@ -18,7 +18,7 @@
                                     <h5>{{ $slidebar -> sale }}</h5>
                                     <h1>{{ $slidebar -> name }}</h1>
                                     <p> {{ $slidebar -> description }} </p>
-                                    <p>Giảm lên đến <strong>{{ number_format($slidebar -> price_base) }} VNĐ</strong></p>
+                                    <p>Giảm lên đến <strong>{{ number_format($slidebar -> price_base) }} VND</strong></p>
                                     <div class="slide-btn-group">
                                         <a href="{{ route("shop.index") }}" class="btn btn-bordered btn-style-1">Mua hàng ngay</a>
                                     </div>
@@ -72,16 +72,16 @@
                                     <a class="product-wrapper" href="{{ route("shop.productDetail", ['slug' => $product -> slug]) }}">
                                         <img class="primary-image" src="{{ \App\Helper\Functions::getImage("product", $product -> picture) }}" alt="">
                                     </a>
-                                    @include("enduser.components.actions", ["id_cart" => $product -> id])
+                                    @include("enduser.components.actions", ["id_cart" => $product -> id, "amount" => $product->amount])
                                 </div>
                                 <div class="product-caption">
                                     <h4 class="product-name"><a href="{{ route("shop.productDetail", ['slug' => $product -> slug]) }}">{{ $product -> name }}</a></h4>
                                     <div class="price-box">
                                         @if($product -> price_final == $product -> price_base)
-                                            <span class="new-price">${{ number_format($product -> price_final) }}</span>
+                                            <span class="new-price">{{ number_format($product -> price_final) }} VND</span>
                                         @else
-                                            <span class="new-price">${{ number_format($product -> price_final) }}</span>
-                                            <span class="old-price">${{ number_format($product -> price_base) }}</span>
+                                            <span class="new-price">{{ number_format($product -> price_final) }} VND</span>
+                                            <span class="old-price">{{ number_format($product -> price_base) }} VND</span>
                                         @endif
                                     </div>
                                 </div>
@@ -135,16 +135,16 @@
                                     <a class="product-wrapper" href="{{ route("shop.productDetail", ['slug' => $product -> slug]) }}">
                                         <img class="primary-image" src="{{ \App\Helper\Functions::getImage("product", $product -> picture) }}" alt="">
                                     </a>
-                                    @include("enduser.components.actions", ["id_cart" => $product -> id])
+                                    @include("enduser.components.actions", ["id_cart" => $product -> id, "amount" => $product->amount])
                                 </div>
                                 <div class="product-caption">
                                     <h4 class="product-name"><a href="">{{ $product -> name }}</a></h4>
                                     <div class="price-box">
                                         @if($product -> price_final == $product -> price_base)
-                                            <span class="new-price">${{ number_format($product -> price_final) }}</span>
+                                            <span class="new-price">{{ number_format($product -> price_final) }} VND</span>
                                         @else
-                                            <span class="new-price">${{ number_format($product -> price_final) }}</span>
-                                            <span class="old-price">${{ number_format($product -> price_base) }}</span>
+                                            <span class="new-price">{{ number_format($product -> price_final) }} VND</span>
+                                            <span class="old-price">{{ number_format($product -> price_base) }} VND</span>
                                         @endif
                                     </div>
                                 </div>
