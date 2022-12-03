@@ -30,10 +30,10 @@ class ContactController extends AdminController
     protected $removeRedundant = ["_token", "tag_id"];
 
     protected $fieldList = [
-        ['label' => 'iD', 'name' => 'id', 'type' => 'id'],
-        ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-        ['label' => 'Content', 'name' => 'content', 'type' => 'text'],
-        ['label' => 'Status', 'name' => 'status', 'type' => 'status'],
+        ['label' => 'Mã', 'name' => 'id', 'type' => 'id'],
+        ['label' => 'Tên', 'name' => 'name', 'type' => 'text'],
+        ['label' => 'Nội dung', 'name' => 'content', 'type' => 'text'],
+        ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'status'],
     ];
 
     public function __construct(){

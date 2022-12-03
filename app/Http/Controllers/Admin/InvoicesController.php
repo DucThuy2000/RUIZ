@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Invoices;
 use App\Invoices as MainModel; //Alias (bí danh) 'use' để gọi đến namespace App\Bank với bí danh là MainModel
 use App\Helper\Functions;
 use App\Http\Controllers\AdminController;
 use App\InvoicesDetail;
 use App\Partner;
+use App\Product;
+use App\Product_category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 class InvoicesController extends AdminController
@@ -25,11 +29,11 @@ class InvoicesController extends AdminController
     protected $removeRedundant = ["_token", "tag_id"];
 
     protected $fieldList = [
-        ['label' => 'Code', 'name' => 'name', 'type' => 'id'],
-        ['label' => 'Created By', 'name' => 'created_by', 'type' => 'otherModel'],
-        ['label' => 'Product Amount', 'name' => 'price_total', 'type' => 'numberFormat'],
-        ['label' => 'Total Price', 'name' => 'price_total', 'type' => 'numberFormat'],
-        ['label' => 'Created Date', 'name' => 'created_at', 'type' => 'dateFormat'],
+        ['label' => 'Mã', 'name' => 'name', 'type' => 'id'],
+        ['label' => 'Người tạo', 'name' => 'created_by', 'type' => 'text'],
+        ['label' => 'Số lượng sản phẩm', 'name' => 'amount', 'type' => 'text'],
+        ['label' => 'Tổng tiền', 'name' => 'total_price', 'type' => 'numberFormat'],
+        ['label' => 'Ngày tạo', 'name' => 'created_at', 'type' => 'dateFormat'],
     ];
 
     public function __construct(){
@@ -46,56 +50,71 @@ class InvoicesController extends AdminController
         $this -> model = new MainModel();
     }
 
+    public function getProductCategories() {
+        $productCategories = Product_category::all();
+        return response()->json([
+            'message'=>'success',
+            'data'=>$productCategories
+        ]);
+    }
+
+    public function getProduct($id) {
+        $products = Product::where('category_id', $id)->get();
+
+        return response()->json([
+            'message'=>'success',
+            'products'=>$products
+        ]);
+    }
+
     public function create() {
-        $data['partners'] = Partner::all();
+        $data['partners'] = Product_category::all();
         return view($this -> pathView . "form")->with($data);;
     }
 
-    public function invoiceDetail(Request $request, $id){
-        $data['order'] = Order::find($id);
+    public function store(Request $request)
+    {
+        $productID = $request->get('product_id');
 
-        //Get giá coupon
-        $data['order_coupon'] = Coupon::where("id", $data['order'] -> coupon_id) -> pluck("price") -> first();
+        $this->model->name = $this->generateRandomString();
+        $this->model->created_by = Auth::user()->user_name;
+        $this->model->amount = array_sum($request->get('amount'));
+        $this->model->total_price = array_sum($request->get('price'));
+        $this->model->save();
 
-        //Get order details qua relationship đã tạo ở order model
-        $data['order_details'] = $data['order'] -> orderDetails;
+        foreach ($productID as $key=>$id) {
+            $product = Product::where('id', $id)->first();
+            $product->amount += $request->get('amount')[$key];
+            $product->price_base = $request->get('price')[$key] + ($request->get('price')[$key] * 30 / 100);
+            $product->save();
 
-        //Get order address qua relationship đã tạo ở order model
-        $data['order_address'] = $data['order'] -> orderAddress;
+            $invoiceDetail = new InvoicesDetail();
+            $invoiceDetail->invoices_id = $this->model->id;
+            $invoiceDetail->product_id = $id;
+            $invoiceDetail->partner_id = $request->get('partner_id')[$key];
+            $invoiceDetail->amount += $request->get('amount')[$key];
+            $invoiceDetail->price += $request->get('price')[$key];
+            $invoiceDetail->save();
+        }
 
-        //Get user qua relationship đã tạo ở order model
-        $data['user'] = $data['order'] -> user;
-
-        return view($this -> pathView . "viewOrderDetail")->with($data);
+        return redirect() -> route("admin." . $this -> controllerName . ".index");
     }
 
-    public function delete($id) {
-        $record = $this -> model -> find($id);
-        // Xóa địa chỉ sau khi xóa đơn hàng
-        $orderAddress = OrderAddress::where("id", $record -> address_id)->first();
-        $orderAddress -> delete();
-
-        //Xóa các sản phẩm trong đơn hàng
-        $orderDetails = OrderDetail::where("order_id", $record -> id)->get();
-
-        foreach ($orderDetails as $item){
-            $item -> delete();
+    public function generateRandomString($length = 10)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
+        return $randomString;
+    }
 
-        //Xoá đơn hàng
-        $record -> delete();
-
-        if($record){
-            return response() -> json([
-                "code" => 200,
-                "message" => "Delete success"
-            ],200);
-        }
-        else{
-            return response() -> json([
-                "code" => 500,
-                "message" => "Cant delete this record"
-            ], 500);
-        }
+    public function invoiceDetail(Request $request, $id){
+        $data['invoice'] = Invoices::find($id);
+        $data['invoiceDetail'] = $data['invoice']->invoiceDetail;
+//        dd($data);
+        return view($this -> pathView . "invoices_detail")->with($data);
     }
 }

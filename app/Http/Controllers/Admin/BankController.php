@@ -33,12 +33,12 @@ class BankController extends AdminController
     protected $removeRedundant = ["_token", "tag_id"];
 
     protected $fieldList = [
-        ['label' => 'iD', 'name' => 'id', 'type' => 'id'],
-        ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-        ['label' => 'Picture', 'name' => 'picture', 'type' => 'picture'],
-        ['label' => 'Account Name', 'name' => 'account_name', 'type' => 'text'],
-        ['label' => 'Branch', 'name' => 'branch', 'type' => 'text'],
-        ['label' => 'Status', 'name' => 'status', 'type' => 'status'],
+        ['label' => 'Mã', 'name' => 'id', 'type' => 'id'],
+        ['label' => 'Tên', 'name' => 'name', 'type' => 'text'],
+        ['label' => 'Ảnh', 'name' => 'picture', 'type' => 'picture'],
+        ['label' => 'Tên tài khoản', 'name' => 'account_name', 'type' => 'text'],
+        ['label' => 'Chi nhánh', 'name' => 'branch', 'type' => 'text'],
+        ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'status'],
     ];
 
     public function __construct(){

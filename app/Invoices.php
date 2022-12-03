@@ -9,6 +9,6 @@ class Invoices extends Model
     protected $table = 'invoices';
 
     public function invoiceDetail(){
-        return $this->hasMany("App\InvoicesDetail", "invoice_id");
+        return $this->hasMany("App\InvoicesDetail", "invoices_id");
     }
 }

@@ -30,12 +30,12 @@ class CouponController extends AdminController
     protected $removeRedundant = ["_token", "tag_id"];
 
     protected $fieldList = [
-        ['label' => 'iD', 'name' => 'id', 'type' => 'id'],
-        ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-        ['label' => 'Price', 'name' => 'price', 'type' => 'text'],
-        ['label' => 'Status', 'name' => 'status', 'type' => 'status'],
-        ['label' => 'Created At', 'name' => 'created_at', 'type' => 'dateFormat'],
-        ['label' => 'Updated At', 'name' => 'updated_at', 'type' => 'dateFormat']
+        ['label' => 'Mã', 'name' => 'id', 'type' => 'id'],
+        ['label' => 'Tên', 'name' => 'name', 'type' => 'text'],
+        ['label' => 'Giá', 'name' => 'price', 'type' => 'text'],
+        ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'status'],
+        ['label' => 'Ngày tạo', 'name' => 'created_at', 'type' => 'dateFormat'],
+        ['label' => 'Ngày cập nhật', 'name' => 'updated_at', 'type' => 'dateFormat']
     ];
 
     public function __construct(){

@@ -32,12 +32,12 @@ class FaqController extends AdminController
     protected $removeRedundant = ["_token", "tag_id"];
 
     protected $fieldList = [
-        ['label' => 'iD', 'name' => 'id', 'type' => 'id'],
-        ['label' => 'Question', 'name' => 'question', 'type' => 'text'],
-        ['label' => 'Answer', 'name' => 'answer', 'type' => 'text'],
-        ['label' => 'Status', 'name' => 'status', 'type' => 'status'],
-        ['label' => 'Created_at', 'name' => 'created_at', 'type' => 'dateFormat'],
-        ['label' => 'Updated_at', 'name' => 'updated_at', 'type' => 'dateFormat'],
+        ['label' => 'Mã', 'name' => 'id', 'type' => 'id'],
+        ['label' => 'Câu hỏi', 'name' => 'question', 'type' => 'text'],
+        ['label' => 'Câu trả lời', 'name' => 'answer', 'type' => 'text'],
+        ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'status'],
+        ['label' => 'Ngày tạo', 'name' => 'created_at', 'type' => 'dateFormat'],
+        ['label' => 'Ngày cập nhật', 'name' => 'updated_at', 'type' => 'dateFormat'],
     ];
 
     public function __construct(){

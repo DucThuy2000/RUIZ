@@ -249,5 +249,7 @@ Route::namespace("Admin")->prefix("admin")->middleware('auth')->name("admin.")->
         Route::post("update/{id}", $controllerName . "update")->middleware("can:" . $controller . ".edit")->name("update");
         Route::get("delete/{id}", $controllerName . "delete")->middleware("can:" . $controller . ".delete")->name("delete");
         Route::get("invoice-detail/{id}", $controllerName . "invoiceDetail")->name("invoiceDetail");
+        Route::get("get-product/{id}", $controllerName . "getProduct")->name("getProduct");
+        Route::get("get-product-categories", $controllerName . "getProductCategories")->name("getProductCategories");
     });
 });

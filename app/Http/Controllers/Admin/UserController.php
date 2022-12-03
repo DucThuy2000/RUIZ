@@ -37,12 +37,12 @@ class UserController extends AdminController
     ];
 
     protected $fieldList = [
-        ['label' => 'iD', 'name' => 'id', 'type' => 'id'],
-        ['label' => 'Avatar', 'name' => 'picture', 'type' => 'picture'],
-        ['label' => 'Name', 'name' => 'user_name', 'type' => 'text'],
-        ['label' => 'Role', 'name' => 'role', 'type' => 'role'],
-        ['label' => 'Created At', 'name' => 'created_at', 'type' => 'dateFormat'],
-        ['label' => 'Updated At', 'name' => 'updated_at', 'type' => 'dateFormat']
+        ['label' => 'Mã', 'name' => 'id', 'type' => 'id'],
+        ['label' => 'Ảnh', 'name' => 'picture', 'type' => 'picture'],
+        ['label' => 'Tên', 'name' => 'user_name', 'type' => 'text'],
+        ['label' => 'Vai trò', 'name' => 'role', 'type' => 'role'],
+        ['label' => 'Ngày tạo', 'name' => 'created_at', 'type' => 'dateFormat'],
+        ['label' => 'Ngày cập nhật', 'name' => 'updated_at', 'type' => 'dateFormat']
     ];
 
     protected $removeRedundant = ['_token','password_confirmation', 'id_role'];

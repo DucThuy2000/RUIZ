@@ -39,11 +39,11 @@ class Product_tagsController extends AdminController
     ];
 
     protected $fieldList = [
-        ['label' => 'iD', 'name' => 'id', 'type' => 'id'],
-        ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-        ['label' => 'Status', 'name' => 'status', 'type' => 'status'],
-        ['label' => 'Created At', 'name' => 'created_at', 'type' => 'dateFormat'],
-        ['label' => 'Updated At', 'name' => 'updated_at', 'type' => 'dateFormat']
+        ['label' => 'Mã', 'name' => 'id', 'type' => 'id'],
+        ['label' => 'Tên', 'name' => 'name', 'type' => 'text'],
+        ['label' => 'Ảnh', 'name' => 'picture', 'type' => 'picture'],
+        ['label' => 'Ngày tạo', 'name' => 'created_at', 'type' => 'dateFormat'],
+        ['label' => 'Ngày cập nhật', 'name' => 'updated_at', 'type' => 'dateFormat']
     ];
 
     protected $removeRedundant = ['token','something'];

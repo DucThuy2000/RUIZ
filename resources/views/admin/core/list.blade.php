@@ -7,7 +7,7 @@
                     <th scope="col" class="col-label">{{ $value["label"] }}</th>
                 @endforeach
                 @canany([$controllerName . ".delete", $controllerName . ".edit"])
-                    <th scope="col" class="col-label">Action</th>
+                    <th scope="col" class="col-label">Hành động</th>
                 @endcanany()
             </tr>
         </thead>

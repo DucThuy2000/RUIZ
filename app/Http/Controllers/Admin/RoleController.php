@@ -24,10 +24,10 @@ class RoleController extends AdminController
     ];
 
     protected $fieldList = [
-        ['label' => 'iD', 'name' => 'id', 'type' => 'id'],
-        ['label' => 'Role Name', 'name' => 'name', 'type' => 'text'],
-        ['label' => 'Created At', 'name' => 'created_at', 'type' => 'dateFormat'],
-        ['label' => 'Updated At', 'name' => 'updated_at', 'type' => 'dateFormat']
+        ['label' => 'Mã', 'name' => 'id', 'type' => 'id'],
+        ['label' => 'Vai trò', 'name' => 'name', 'type' => 'text'],
+        ['label' => 'Ngày tạo', 'name' => 'created_at', 'type' => 'dateFormat'],
+        ['label' => 'Ngày cập nhật', 'name' => 'updated_at', 'type' => 'dateFormat']
     ];
 
     protected $removeRedundant = ['_token'];

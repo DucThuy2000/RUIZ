@@ -7,7 +7,7 @@
                     @include("admin.template.notify")
                     <div class="sc-table">
                         @include("admin.template.tool_bar_index")
-                        @include("admin.page.orders.list")
+                        @include("admin.page.invoices.list")
                     </div>
                     @include("admin.template.pagination", ["pagination" => $data])
                 </div>
