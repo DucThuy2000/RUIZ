@@ -20,8 +20,8 @@ class Blog_categoryController extends AdminController
         'general_tab' => [
             'tab_label' => 'General (VI)',
             'items' => [
-                ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-                ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox'],
+                ['label' => 'Tên', 'name' => 'name', 'type' => 'text'],
+                ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'checkbox'],
             ]
         ],
 

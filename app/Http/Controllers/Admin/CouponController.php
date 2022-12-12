@@ -20,9 +20,9 @@ class CouponController extends AdminController
         'general_tab' => [
             'tab_label' => 'General (VI)',
             'items' => [
-                ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-                ['label' => 'Price', 'name' => 'price', 'type' => 'text'],
-                ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox'],
+                ['label' => 'Mã khuyến mãi', 'name' => 'name', 'type' => 'text'],
+                ['label' => 'Giá tiền', 'name' => 'price', 'type' => 'text'],
+                ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'checkbox'],
             ]
         ],
     ];

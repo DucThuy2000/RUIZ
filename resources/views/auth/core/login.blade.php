@@ -1,12 +1,7 @@
 @extends("auth.layout")
 @section("content")
-    <div class="user_card">
-        <div class="d-flex justify-content-center">
-            <div class="brand_logo_container">
-                <img src="https://cdn.freebiesupply.com/logos/large/2x/pinterest-circle-logo-png-transparent.png" class="brand_logo" alt="Logo">
-            </div>
-        </div>
-        <div class="d-flex justify-content-center form_container">
+    <div class="user_card" style="height: auto">
+        <div class="d-flex justify-content-center form_container" style="margin-top:0; padding: 30px">
             <form method="POST" id="login-form" data-url="{{ route("authAdmin.authenticate") }}">
                 @csrf
                 <div class="input-group mb-3">

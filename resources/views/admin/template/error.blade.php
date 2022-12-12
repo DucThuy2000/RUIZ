@@ -5,7 +5,7 @@
         </button>
         <ul>
             @foreach( $errors -> all() as $error )
-                <li><strong> {{ $error }} </strong></li>
+                <li style="color: white"><strong> {{ $error }} </strong></li>
             @endforeach
         </ul>
     </div>

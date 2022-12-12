@@ -243,7 +243,7 @@ Route::namespace("Admin")->prefix("admin")->middleware('auth')->name("admin.")->
     Route::prefix($prefix)->name($controller . ".")->group(function () use($controller){
         $controllerName = ucfirst($controller) . "Controller@";
         Route::get("/", $controllerName . "index")->middleware("can:" . $controller . ".index")->name("index");
-        Route::get("create", $controllerName . "create")->middleware("can:" . $controller . ".create")->name("create");
+        Route::get("create/{type}", $controllerName . "create")->middleware("can:" . $controller . ".create")->name("create");
         Route::post("store", $controllerName . "store")->middleware("can:" . $controller . ".create")->name("store");
         Route::get("edit/{id}", $controllerName . "edit")->middleware("can:" . $controller . ".edit")->name("edit");
         Route::post("update/{id}", $controllerName . "update")->middleware("can:" . $controller . ".edit")->name("update");

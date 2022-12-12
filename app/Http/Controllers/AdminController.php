@@ -34,12 +34,11 @@ class AdminController extends BaseController
             $data = $data->where('question', 'like', '%'.$request->get('search-key').'%');
         }
 
-        $data = $data->paginate(10);
-
+        $data = $data->latest()->paginate(10);
         return view($this -> pathView . "index", compact("data"));
     }
 
-    public function create(){
+    public function create() {
         return view($this -> pathView . "form");
     }
 
@@ -138,14 +137,21 @@ class AdminController extends BaseController
         $request -> validate(
         [
             // Điều kiện bắt buộc
-            'name' => 'bail|required|max:255'
+            'name' => 'bail|required|max:255',
+            'amount' => 'required|numeric',
+            'price_base' => 'required|numeric',
+            'picture' => 'required',
         ], [
             // Ràng buộc điều kiện
             'required' => ':attribute không được đễ trống',
-            'max:255' => ':attribute không được quá 255 kí tự'
+            'max:255' => ':attribute không được quá 255 kí tự',
+            'numeric' => ':attribute phải là số',
         ], [
             // Translation
-            'name' => 'Tên'
+            'name' => 'Tên',
+            'amount' => 'Số lượng',
+            'price_base' => 'Giá',
+            'picture' => 'Hình ảnh'
         ]);
     }
 

@@ -18,7 +18,7 @@ class RoleController extends AdminController
         'general_tab' => [
             'tab_label' => 'General (VI)',
             'items' => [
-                ['label' => 'Role Name', 'name' => 'name', 'type' => 'text'],
+                ['label' => 'Tên quyền', 'name' => 'name', 'type' => 'text'],
             ]
         ],
     ];

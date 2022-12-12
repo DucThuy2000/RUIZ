@@ -1,4 +1,5 @@
 (function ($){
+    const mainUrl = "http://localhost/";
     $(document).ready(function (){
         /*------ Smooth scrolling for every a tag ------*/
         $(document).on('click', '.btn_now_checkout', function (event) {
@@ -46,7 +47,7 @@
         $(".cart-quantity").on("submit", function (e){
             e.preventDefault();
 
-            let input = $(this).find('input#input-quantity');
+            let input = $(this).find('input.input-quantity');
             let url = $(this).data("url");
             if ( !input.hasClass("invalid-quantity") && input.val() > 0 ) {
                 $.ajax({
@@ -79,51 +80,6 @@
                 })
             }
         })
-
-        /*------ UPDATE CART ------*/
-        //This will "delegate" the event. It will run for all .update-btn links no matter when they are added to the DOM.
-        $(document).on('click', '.update-btn', updateCart);
-        function updateCart(ev){
-            ev.preventDefault();
-
-            let array = [];
-            let totalProduct = $(".cart-detail");
-            let id = totalProduct.find(".id-product");
-            let quantity = totalProduct.find(".quantity");
-            let url = $(".table-content").data("url");
-
-            for(var i = 0; i < totalProduct.length; ++i){
-                array.push({
-                    "id": id[i].value,
-                    "quantity": quantity[i].value
-                })
-            }
-
-            $.ajax({
-                url: url,
-                data: {
-                    data : array
-                },
-
-                beforeSend: function (){
-                    $(".overlay-snipper").addClass("open");
-                },
-
-                success: function (data){
-                    if(data.code === 200){
-                        $("#cart-table").html(data.data);
-                    }
-                },
-
-                complete: function (){
-                    $(".overlay-snipper").removeClass("open");
-                },
-
-                error: function (){
-
-                }
-            })
-        }
 
         /*------ COUPON CART ------*/
         $(document).on("click", ".btn-coupon", applyCoupon);
@@ -902,11 +858,22 @@
             }
         }
 
+        function updateCartAfterInputQuantity(input) {
+            const originalPrice = input.parents(".cart-detail").find(".original-price span.amount");
+            const subtotalProdInCart = input.parents(".cart-detail").find(".product-subtotal span.amount");
+            if ( subtotalProdInCart.length > 0 && originalPrice.length > 0 ) {
+                const originalPriceNumber = Number(originalPrice.html().replace(/,/g, ''));
+                const priceUpdated = originalPriceNumber * input.val();
+                subtotalProdInCart.html(new Intl.NumberFormat().format(priceUpdated));
+            }
+        }
+
         function checkProductQuantity(e) {
             const value = e.target.value;
             const _url = $(this).data('url');
             const isCheckCart = $(this).data('check-cart');
             const _this = $(this);
+
             $.ajax({
                 url: _url,
                 data: {
@@ -924,6 +891,8 @@
                         $(".sweet-alert .quantity-false-alert").fadeIn('slow');
                     } else {
                         _this.removeClass("invalid-quantity");
+                        updateCartAfterInputQuantity(_this);
+                        _this.parents(".cart-table").find("#total-price-cart").html(new Intl.NumberFormat().format(data.totalPrice));
                     }
                 },
 
@@ -936,7 +905,17 @@
             })
         }
 
-        $('#input-quantity').on('change', checkProductQuantity);
+        $('.input-quantity').on('change', checkProductQuantity);
     })
+
+    $(document).on('click', '.proceed-checkout-btn', goToCheckOut);
+    function goToCheckOut() {
+        const form = $(this).parents('.cart-table');
+        const invalidQuantity = form.find('.invalid-quantity');
+
+        if ( invalidQuantity.length === 0 ) {
+            window.location = mainUrl + 'thanh-toan';
+        }
+    }
 
 })(jQuery);

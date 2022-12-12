@@ -21,10 +21,10 @@ class FaqController extends AdminController
         'general_tab' => [
             'tab_label' => 'General (VI)',
             'items' => [
-                ['label' => 'Question', 'name' => 'question', 'type' => 'text'],
-                ['label' => 'Answer', 'name' => 'answer', 'type' => 'textarea'],
-                ['label' => 'Description', 'name' => 'description', 'type' => 'textarea'],
-                ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox'],
+                ['label' => 'Câu hỏi', 'name' => 'question', 'type' => 'text'],
+                ['label' => 'Câu trả lời', 'name' => 'answer', 'type' => 'textarea'],
+                ['label' => 'Mô tả', 'name' => 'description', 'type' => 'textarea'],
+                ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'checkbox'],
             ]
         ],
     ];

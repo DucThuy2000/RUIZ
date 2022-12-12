@@ -24,22 +24,22 @@ class ProductController extends AdminController
         'general_tab' => [
             'tab_label' => 'General (VI)',
             'items' => [
-                ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-                ['label' => 'Amount', 'name' => 'amount', 'type' => 'text'],
-                ['label' => 'Description', 'name' => 'description', 'type' => 'textarea'],
-                ['label' => 'Price Base', 'name' => 'price_base', 'type' => 'text'],
-                ['label' => 'Price Final', 'name' => 'price_final', 'type' => 'text'],
-                ['label' => 'Information', 'name' => 'information', 'type' => 'ckeditor'],
-                ['label' => 'Picture', 'name' => 'picture', 'type' => 'file'],
-                ['label' => 'Gallery', 'name' => 'gallery', 'type' => 'multipleFile'],
-                ['label' => 'Category', 'name' => 'category_id', 'type' => 'select', 'modal' => Product_category::class],
-                ['label' => 'Tags', 'name' => 'tag_id', 'type' => 'multipleSelect', 'modal' => Product_tags::class],
-                ['label' => 'Type', 'name' => 'type', 'type' => 'select', 'data-source' => [
+                ['label' => 'Tên sản phẩm', 'name' => 'name', 'type' => 'text'],
+                ['label' => 'Số lượng', 'name' => 'amount', 'type' => 'text'],
+                ['label' => 'Mô tả', 'name' => 'description', 'type' => 'textarea'],
+                ['label' => 'Giá gốc', 'name' => 'price_base', 'type' => 'text'],
+                ['label' => 'Giá bán', 'name' => 'price_final', 'type' => 'text'],
+                ['label' => 'Thông tin sản phẩm', 'name' => 'information', 'type' => 'ckeditor'],
+                ['label' => 'Hỉnh ảnh', 'name' => 'picture', 'type' => 'file'],
+                ['label' => 'Hình ảnh mô tả', 'name' => 'gallery', 'type' => 'multipleFile'],
+                ['label' => 'Danh mục sản phẩm', 'name' => 'category_id', 'type' => 'select', 'modal' => Product_category::class],
+                ['label' => 'Nhãn sản phẩm', 'name' => 'tag_id', 'type' => 'multipleSelect', 'modal' => Product_tags::class],
+                ['label' => 'Loại sản phẩm', 'name' => 'type', 'type' => 'select', 'data-source' => [
                     'Bán chạy' => 'bán chạy',
                     'Mới' => 'mới',
                     'Giảm giá' => 'giảm giá',
                 ]],
-                ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox'],
+                ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'checkbox'],
 
             ]
         ],

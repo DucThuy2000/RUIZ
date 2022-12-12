@@ -20,12 +20,12 @@ class BannerController extends AdminController
         'general_tab' => [
             'tab_label' => 'General (VI)',
             'items' => [
-                ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-                ['label' => 'Sale', 'name' => 'sale', 'type' => 'text'],
-                ['label' => 'Description', 'name' => 'description', 'type' => 'text'],
-                ['label' => 'Price Base', 'name' => 'price_base', 'type' => 'text'],
-                ['label' => 'Picture', 'name' => 'picture', 'type' => 'file'],
-                ['label' => 'Type', 'name' => 'type', 'type' => 'select', 'data-source' => [
+                ['label' => 'Tên', 'name' => 'name', 'type' => 'text'],
+                ['label' => 'Giảm giá', 'name' => 'sale', 'type' => 'text'],
+                ['label' => 'Mô tả', 'name' => 'description', 'type' => 'text'],
+                ['label' => 'Giá', 'name' => 'price_base', 'type' => 'text'],
+                ['label' => 'Hình ảnh', 'name' => 'picture', 'type' => 'file'],
+                ['label' => 'Loại banner', 'name' => 'type', 'type' => 'select', 'data-source' => [
                     'Banner' => 0,
                     'Slider' => 1
                 ]],
@@ -33,7 +33,7 @@ class BannerController extends AdminController
                     'Trang chủ' => 'trang chủ',
                     'Trang chủ - dưới slidebar' => 'trang chủ - dưới slidebar',
                 ]],
-                ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox'],
+                ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'checkbox'],
             ]
         ],
 

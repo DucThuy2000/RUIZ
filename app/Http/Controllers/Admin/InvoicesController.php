@@ -7,13 +7,12 @@ use App\Invoices as MainModel; //Alias (bí danh) 'use' để gọi đến names
 use App\Helper\Functions;
 use App\Http\Controllers\AdminController;
 use App\InvoicesDetail;
-use App\Partner;
 use App\Product;
 use App\Product_category;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use Illuminate\Support\Str;
 
 class InvoicesController extends AdminController
 {
@@ -69,19 +68,11 @@ class InvoicesController extends AdminController
 
     public function create() {
         $data['partners'] = Product_category::all();
-        return view($this -> pathView . "form")->with($data);;
+        return view($this -> pathView . "form")->with($data);
     }
 
-    public function store(Request $request)
-    {
+    public function storeOldProduct(Request $request) {
         $productID = $request->get('product_id');
-
-        $this->model->name = $this->generateRandomString();
-        $this->model->created_by = Auth::user()->user_name;
-        $this->model->amount = array_sum($request->get('amount'));
-        $this->model->total_price = array_sum($request->get('price'));
-        $this->model->save();
-
         foreach ($productID as $key=>$id) {
             $product = Product::where('id', $id)->first();
             $product->amount += $request->get('amount')[$key];
@@ -95,6 +86,45 @@ class InvoicesController extends AdminController
             $invoiceDetail->amount += $request->get('amount')[$key];
             $invoiceDetail->price += $request->get('price')[$key];
             $invoiceDetail->save();
+        }
+    }
+
+    public function storeNewProduct(Request $request) {
+        $productName = $request->get('name');
+
+        foreach ($productName as $key=>$name) {
+            $product = new Product();
+            $product->name = $name;
+            $product->slug = Str::slug($name);
+            $product->type = 'Mới';
+            $product->category_id = $request->get('partner_id')[$key];
+            $product->status = 'inactive';
+            $product->amount += $request->get('amount')[$key];
+            $product->price_base = $request->get('price')[$key] + ($request->get('price')[$key] * 15 / 100);
+            $product->save();
+
+            $invoiceDetail = new InvoicesDetail();
+            $invoiceDetail->invoices_id = $this->model->id;
+            $invoiceDetail->product_id = $product->id;
+            $invoiceDetail->partner_id = $request->get('partner_id')[$key];
+            $invoiceDetail->amount += $request->get('amount')[$key];
+            $invoiceDetail->price += $request->get('price')[$key];
+            $invoiceDetail->save();
+        }
+    }
+
+    public function store(Request $request)
+    {
+        $this->model->name = $this->generateRandomString();
+        $this->model->created_by = Auth::user()->user_name;
+        $this->model->amount = array_sum($request->get('amount'));
+        $this->model->total_price = array_sum($request->get('price'));
+        $this->model->save();
+
+        if ( $request->get('type') === 'old' ) {
+            $this->storeOldProduct($request);
+        } else {
+            $this->storeNewProduct($request);
         }
 
         return redirect() -> route("admin." . $this -> controllerName . ".index");

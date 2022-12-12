@@ -25,13 +25,13 @@ class UserController extends AdminController
             'tab_label' => 'General (VI)',
             'items' => [
                 ['label' => 'Email', 'name' => 'email', 'type' => 'email'],
-                ['label' => 'First Name', 'name' => 'first_name', 'type' => 'text'],
-                ['label' => 'Last Name', 'name' => 'last_name', 'type' => 'text'],
-                ['label' => 'Password', 'name' => 'password', 'type' => 'password'],
-                ['label' => 'Re Password', 'name' => 'password_confirmation', 'type' => 'password'],
-                ['label' => 'Role', 'name' => 'id_role', 'type' => 'multipleSelect', 'modal' => Role::class],
+                ['label' => 'Họ', 'name' => 'first_name', 'type' => 'text'],
+                ['label' => 'Tên', 'name' => 'last_name', 'type' => 'text'],
+                ['label' => 'Mật khẩu', 'name' => 'password', 'type' => 'password'],
+                ['label' => 'Xác nhận mật khẩu', 'name' => 'password_confirmation', 'type' => 'password'],
+                ['label' => 'Quyền', 'name' => 'id_role', 'type' => 'multipleSelect', 'modal' => Role::class],
                 ['label' => 'Avatar', 'name' => 'picture', 'type' => 'file'],
-                ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox']
+                ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'checkbox']
             ]
         ]
     ];

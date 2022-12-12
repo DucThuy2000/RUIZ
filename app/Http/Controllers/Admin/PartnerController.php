@@ -20,9 +20,9 @@ class PartnerController extends AdminController
         'general_tab' => [
             'tab_label' => 'General (VI)',
             'items' => [
-                ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-                ['label' => 'Picture', 'name' => 'picture', 'type' => 'file'],
-                ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox']
+                ['label' => 'Tên', 'name' => 'name', 'type' => 'text'],
+                ['label' => 'Hình ảnh', 'name' => 'picture', 'type' => 'file'],
+                ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'checkbox']
             ]
         ],
         'seo_tab' => [

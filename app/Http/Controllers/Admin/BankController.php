@@ -20,12 +20,12 @@ class BankController extends AdminController
         'general_tab' => [
             'tab_label' => 'General (VI)',
             'items' => [
-                ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-                ['label' => 'Picture', 'name' => 'picture', 'type' => 'file'],
-                ['label' => 'Branch', 'name' => 'branch', 'type' => 'text'],
-                ['label' => 'Account Name', 'name' => 'account_name', 'type' => 'text'],
-                ['label' => 'Account Number', 'name' => 'account_number', 'type' => 'text'],
-                ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox'],
+                ['label' => 'Tên ngân hàng', 'name' => 'name', 'type' => 'text'],
+                ['label' => 'Hình ảnh', 'name' => 'picture', 'type' => 'file'],
+                ['label' => 'Chi nhánh', 'name' => 'branch', 'type' => 'text'],
+                ['label' => 'Tên tài khoản', 'name' => 'account_name', 'type' => 'text'],
+                ['label' => 'Số tài khoản', 'name' => 'account_number', 'type' => 'text'],
+                ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'checkbox'],
             ]
         ],
     ];

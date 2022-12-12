@@ -81,7 +81,7 @@
                                         <div class="cart-plus-minus">
                                             <input
                                                 type="text" min="0" maxlength="3"
-                                                class="input-text quantity" id="input-quantity"
+                                                class="input-text quantity input-quantity"
                                                 name="quantity" value="0"
                                                 data-check-cart="true"
                                                 data-url="{{ route('cart.checkProductQuantity', $single_product->id) }}"

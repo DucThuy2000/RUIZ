@@ -29,9 +29,16 @@
                                 </div>
                                 <div class="col-lg-3 mb-20">
                                     <div class="form-group">
-                                        <label for="" class="mb-1 font-weight-bold">Sản phẩm</label>
-                                        <select class="form-control form-checkout select-product" name="product_id[]">
-                                        </select>
+                                        @if(str_contains(\Request::url(), 'old'))
+                                            <input type="hidden" name="type" value="old">
+                                            <label for="" class="mb-1 font-weight-bold">Sản phẩm</label>
+                                            <select class="form-control form-checkout select-product" name="product_id[]">
+                                            </select>
+                                        @else
+                                            <input type="hidden" name="type" value="new">
+                                            <label for="" class="mb-1 font-weight-bold">Tên sản phẩm</label>
+                                            <input type="text" class="form-control" name="name[]">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-3 mb-20">
@@ -50,7 +57,10 @@
                         </div>
                     </div>
                     <div class="box-body justify-content-end d-flex">
-                        <button type="button" class="btn btn-info add-new-pd-for-invoice">Thêm mới sản phẩm</button>
+                        <button type="button" class="btn btn-info add-new-pd-for-invoice"
+                                data-type="{{ str_contains(\Request::url(), 'old') ? 'old' : 'new'}}">
+                            Thêm mới sản phẩm
+                        </button>
                         <button type="submit" class="btn btn-success ml-2">Lưu</button>
                         <a class="btn btn-secondary ml-2" href="{{ route("admin." . $controllerName . ".index") }}">Hủy</a>
                     </div>

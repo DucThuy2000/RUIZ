@@ -46,6 +46,7 @@ class CartController extends Controller
         ], 200);
     }
 
+
     public function addCartForDetailProduct(Request $request, $id){
         $cart = session() -> get("cart");
         $product = Product::find($id);
@@ -76,6 +77,7 @@ class CartController extends Controller
     public function checkProductQuantity(Product $product, Request $request) {
         $cart = session()->get("cart");
         $quantityInput = $request->get('amount');
+        $totalPrice = 0;
         if ( isset($cart[$product->id]) && $request->get('isCheckCart') == "true" ) {
             $quantityInput += $cart[$product->id]["quantity"];
         }
@@ -86,12 +88,19 @@ class CartController extends Controller
                 "message" => "failure",
                 "product" => $product,
             ], 200);
+        } else if ( $request->get('isCheckCart') == "false" ) {
+            $cart[$product->id]["quantity"] = $quantityInput;
+            session() -> put("cart", $cart);
+            foreach ($cart as $c) {
+                $totalPrice += $c["quantity"] * $c["subtotal"];
+            }
         }
 
         return response() -> json([
             "code" => true,
             "message" => "success",
-            "product" => $product
+            "product" => $product,
+            "totalPrice" => $totalPrice
         ], 200);
     }
 

@@ -18,7 +18,7 @@
 
                             @foreach($invoiceDetail as $item)
                                 <tr>
-                                    <td>
+                                    <td class="show-image">
                                         <img src="{{ \App\Helper\Functions::getImage("product", @$item->product->picture, "thumbnail") }}" alt="{{ @$item->product->name }}">
                                     </td>
                                     <td>{{ @$item->product->name }}</td>

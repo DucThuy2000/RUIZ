@@ -20,9 +20,9 @@ class ContactController extends AdminController
         'general_tab' => [
             'tab_label' => 'General (VI)',
             'items' => [
-                ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-                ['label' => 'Content', 'name' => 'content', 'type' => 'text'],
-                ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox'],
+                ['label' => 'Tên liên hệ', 'name' => 'name', 'type' => 'text'],
+                ['label' => 'Nội dung', 'name' => 'content', 'type' => 'text'],
+                ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'checkbox'],
             ]
         ],
     ];

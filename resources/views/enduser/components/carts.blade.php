@@ -28,20 +28,22 @@
                     <td class="plantmore-product-name">
                         <a href="{{ route("shop.productDetail", ["slug" => @$item['slug']]) }}">{{ @$item['name'] }}</a>
                     </td>
-                    <td class="plantmore-product-price">
-                        <span class="amount subtotal-text">{{ number_format(@$item['subtotal']) }} VND</span>
+                    <td class="plantmore-product-price original-price">
+                        <span class="amount subtotal-text">{{ number_format(@$item['subtotal']) }}</span>
+                        <span>VND</span>
                     </td>
                     <td class="plantmore-product-quantity">
                         <input
                             type="text" min="0" maxlength="3"
-                            class="input-text quantity" id="input-quantity"
+                            class="input-text quantity input-quantity"
                             name="quantity" value="{{ @$item['quantity'] }}"
                             data-check-cart="false"
                             data-url="{{ route('cart.checkProductQuantity', @$item["id"]) }}"
                         >
                     </td>
                     <td class="product-subtotal">
-                        <span class="amount">{{ number_format(@$totalPrice) }} VND</span>
+                        <span class="amount">{{ number_format(@$totalPrice) }}</span>
+                        <span>VND</span>
                     </td>
                     <td class="plantmore-product-remove">
                         <a class="delete-cart" href="" data-id="{{ @$item['id'] }}">
@@ -57,7 +59,7 @@
         <div class="col-md-8">
             <div class="coupon-all">
                 <div class="coupon2">
-                    <a href="#" class="update-btn">Cập nhật giỏ hàng</a>
+                    {{-- <a href="#" class="update-btn">Cập nhật giỏ hàng</a> --}}
                     <a href="{{ route("shop.index") }}" class=" continue-btn">Tiếp tục mua hàng</a>
                 </div>
 
@@ -68,12 +70,19 @@
                 <h2>Đơn hàng</h2>
 
                 <ul>
-                    <li>Đơn hàng <span>{{ number_format(@$cartTotal) }} VND</span></li>
                     <li>Giảm giá <span>@if(isset($coupon)) - {{ $coupon -> percentage }} VND @else - 0 VND @endif</span></li>
-                    <li>Tạm tính <span>{{ number_format(@$cartTotal - @$coupon -> percentage) }} VND</span></li>
+                    <li class="d-flex justify-content-between">
+                        <span>Tạm tính</span>
+                        <div>
+                            <span class="ml-1">VND</span>
+                            <span id="total-price-cart">
+                                {{ number_format(@$cartTotal - @$coupon -> percentage) }}
+                            </span>
+                        </div>
+                    </li>
                 </ul>
 
-                <a href="{{ route("checkout.checkLoginToCheckOut") }}" class="proceed-checkout-btn">Thanh toán</a>
+                <a class="proceed-checkout-btn">Thanh toán</a>
             </div>
         </div>
     </div>

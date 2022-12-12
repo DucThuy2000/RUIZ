@@ -21,19 +21,19 @@ class BlogController extends AdminController
         'general_tab' => [
             'tab_label' => 'General (VI)',
             'items' => [
-                ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-                ['label' => 'Picture', 'name' => 'picture', 'type' => 'file'],
-                ['label' => 'Author', 'name' => 'author', 'type' => 'text'],
-                ['label' => 'Title', 'name' => 'title', 'type' => 'text'],
-                ['label' => 'Content', 'name' => 'content', 'type' => 'ckeditor'],
-                ['label' => 'Description', 'name' => 'description', 'type' => 'textarea'],
-                ['label' => 'Quote', 'name' => 'quote', 'type' => 'textarea'],
-                ['label' => 'Category', 'name' => 'category_id', 'type' => 'select', 'modal' => BlogCategory::class],
-                ['label' => 'Type', 'name' => 'type', 'type' => 'select', 'data-source' => [
+                ['label' => 'Tên', 'name' => 'name', 'type' => 'text'],
+                ['label' => 'Hỉnh ảnh', 'name' => 'picture', 'type' => 'file'],
+                ['label' => 'Tác giả', 'name' => 'author', 'type' => 'text'],
+                ['label' => 'Chủ đề', 'name' => 'title', 'type' => 'text'],
+                ['label' => 'Nội dung', 'name' => 'content', 'type' => 'ckeditor'],
+                ['label' => 'Mô tả', 'name' => 'description', 'type' => 'textarea'],
+                ['label' => 'Trích dẫn', 'name' => 'quote', 'type' => 'textarea'],
+                ['label' => 'Loại bài viết', 'name' => 'category_id', 'type' => 'select', 'modal' => BlogCategory::class],
+                ['label' => 'Kiểu bài viết', 'name' => 'type', 'type' => 'select', 'data-source' => [
                     'Bài viết mới' => 'new',
                     'Bài viết hot' => 'hot',
                 ]],
-                ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox'],
+                ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'checkbox'],
 
             ]
         ],

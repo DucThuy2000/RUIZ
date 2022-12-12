@@ -20,15 +20,15 @@ class WidgetController extends AdminController
         'general_tab' => [
             'tab_label' => 'General (VI)',
             'items' => [
-                ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-                ['label' => 'Content', 'name' => 'content', 'type' => 'ckeditor'],
+                ['label' => 'Tên', 'name' => 'name', 'type' => 'text'],
+                ['label' => 'Nội dung', 'name' => 'content', 'type' => 'ckeditor'],
                 ['label' => 'Vị trí hiển thị', 'name' => 'location', 'type' => 'select', 'data-source' =>[
                     'brand' => 'brand',
                     'footer 1' => 'footer 1',
                     'footer 2' => 'footer 2',
                     'footer 3' => 'footer 3',
                 ]],
-                ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox'],
+                ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'checkbox'],
             ]
         ],
 

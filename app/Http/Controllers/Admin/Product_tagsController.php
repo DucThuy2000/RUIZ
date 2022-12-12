@@ -21,9 +21,9 @@ class Product_tagsController extends AdminController
         'general_tab' => [
             'tab_label' => 'General (VI)',
             'items' => [
-                ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-                ['label' => 'Description', 'name' => 'description', 'type' => 'text'],
-                ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox']
+                ['label' => 'Tên tag', 'name' => 'name', 'type' => 'text'],
+                ['label' => 'Mô tả', 'name' => 'description', 'type' => 'text'],
+                ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'checkbox']
             ]
         ],
 

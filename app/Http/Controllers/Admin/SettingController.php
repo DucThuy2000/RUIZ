@@ -15,10 +15,10 @@ class SettingController extends AdminController
         'general_tab' => [
             'tab_label' => 'General (VI)',
             'items' => [
-                ['label' => 'Name', 'name' => 'name', 'type' => 'text'],
-                ['label' => 'Link', 'name' => 'link', 'type' => 'text'],
-                ['label' => 'Icon', 'name' => 'icon', 'type' => 'text'],
-                ['label' => 'Status', 'name' => 'status', 'type' => 'checkbox']
+                ['label' => 'Tên', 'name' => 'name', 'type' => 'text'],
+                ['label' => 'Đường dẫn', 'name' => 'link', 'type' => 'text'],
+                ['label' => 'Biểu tượng', 'name' => 'icon', 'type' => 'text'],
+                ['label' => 'Trạng thái', 'name' => 'status', 'type' => 'checkbox']
             ]
         ],
     ];

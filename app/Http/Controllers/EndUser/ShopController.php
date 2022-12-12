@@ -81,7 +81,7 @@ class ShopController extends Controller
 
         if($category){
             $model = $category->products()->where("status","active");
-            $products = $category -> products() -> paginate(12);
+            $products = $category ->products()->where("status","active")->paginate(12);
         }
         else{
             $products = [];
@@ -90,7 +90,7 @@ class ShopController extends Controller
         if( !empty($request -> minPrice && $request -> maxPrice)){
             $minPrice = $request -> minPrice;
             $maxPrice = $request -> maxPrice;
-            $products = $category -> products() -> whereBetween('price_final', [$minPrice, $maxPrice]) -> paginate(12) -> appends(request() -> query());
+            $products = $category -> products()->where("status","active")->whereBetween('price_final', [$minPrice, $maxPrice]) -> paginate(12) -> appends(request() -> query());
         }
         else if(isset($_GET['loc'])){
             $products = $this -> sort($model);

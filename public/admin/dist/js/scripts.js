@@ -130,39 +130,56 @@
     $(document).on("click", ".add-new-pd-for-invoice", addNewProductForInvoice);
     function addNewProductForInvoice(event) {
         const _length = $(".invoice-group").length + 1;
-        const ele = '<div class="invoice-group my-4 d-flex flex-column">\n' +
-        '                        <div class="d-flex justify-content-between header-invoice">\n' +
-        '                            <h4 class="font-weight-bold mb-2 text-uppercase">Sản phẩm '+_length+'</h4>\n' +
-        '                        </div>\n' +
-        '                        <div class="card p-3">\n' +
-        '                            <div class="row">\n' +
-        '                                <div class="col-lg-3 mb-20">\n' +
-        '                                    <div class="form-group">\n' +
-        '                                        <label for="" class="mb-1 font-weight-bold">Nhà cung cấp</label>\n' +
-        '                                        <select class="form-control add-new-partner select-partner" name="partner_id[]"><option value=" ">Chọn Nhà Cung Cấp</option></select>\n' +
-        '                                    </div>\n' +
-        '                                </div>\n' +
-        '                                <div class="col-lg-3 mb-20">\n' +
-        '                                    <div class="form-group">\n' +
-        '                                        <label for="" class="mb-1 font-weight-bold">Sản phẩm</label>\n' +
-        '                                        <select class="form-control select-product" name="product_id[]"></select>\n' +
-        '                                    </div>\n' +
-        '                                </div>\n' +
-        '                                <div class="col-lg-3 mb-20">\n' +
-        '                                    <div class="form-group">\n' +
-        '                                        <label for="" class="mb-1 font-weight-bold">Số lượng</label>\n' +
-        '                                        <input type="number" name="amount[]" class="form-control">\n' +
-        '                                    </div>\n' +
-        '                                </div>\n' +
-        '                                <div class="col-lg-3 mb-20">\n' +
-        '                                    <div class="form-group">\n' +
-        '                                        <label for="" class="mb-1 font-weight-bold">Giá nhập</label>\n' +
-        '                                        <input type="text" name="price[]" class="form-control">\n' +
-        '                                    </div>\n' +
-        '                                </div>\n' +
-        '                            </div>\n' +
-        '                        </div>\n' +
-        '                    </div>';
+        const typeProductToAdd = $(this).data('type');
+        let productEle = '';
+
+        if ( typeProductToAdd === 'old' ) {
+            productEle = `<div class="col-lg-3 mb-20">\n` +
+                `           <div class="form-group">\n` +
+                `               <label for="" class="mb-1 font-weight-bold">Sản phẩm</label>\n` +
+                `               <select class="form-control select-product" name="product_id[]"></select>\n` +
+                `           </div>\n` +
+                `          </div>`;
+        } else {
+            productEle = `<div class="col-lg-3 mb-20">\n` +
+                `           <div class="form-group">\n` +
+                `               <label for="" class="mb-1 font-weight-bold">Tên sản phẩm</label>\n` +
+                `               <input type="text" class="form-control" name="name[]">\n` +
+                `           </div>\n` +
+                `          </div>`;
+        }
+
+        const ele = `<div class="invoice-group my-4 d-flex flex-column">\n` +
+        `                        <div class="d-flex justify-content-between header-invoice">\n` +
+        `                            <h4 class="font-weight-bold mb-2 text-uppercase">Sản phẩm `+_length+`</h4>\n` +
+        `                        </div>\n` +
+        `                        <div class="card p-3">\n` +
+        `                            <div class="row">\n` +
+        `                                <div class="col-lg-3 mb-20">\n` +
+        `                                    <div class="form-group">\n` +
+        `                                        <label for="" class="mb-1 font-weight-bold">Nhà cung cấp</label>\n` +
+        `                                        <select class="form-control add-new-partner select-partner" name="partner_id[]">` +
+        `                                           <option value=" ">Chọn Nhà Cung Cấp</option>` +
+        `                                        </select>\n` +
+        `                                    </div>\n` +
+        `                                </div>\n` +
+        `                                ${productEle}\n` +
+        `                                <div class="col-lg-3 mb-20">\n` +
+        `                                    <div class="form-group">\n` +
+        `                                        <label for="" class="mb-1 font-weight-bold">Số lượng</label>\n` +
+        `                                        <input type="number" name="amount[]" class="form-control">\n` +
+        `                                    </div>\n` +
+        `                                </div>\n` +
+        `                                <div class="col-lg-3 mb-20">\n` +
+        `                                    <div class="form-group">\n` +
+        `                                        <label for="" class="mb-1 font-weight-bold">Giá nhập</label>\n` +
+        `                                        <input type="text" name="price[]" class="form-control">\n` +
+        `                                    </div>\n` +
+        `                                </div>\n` +
+        `                            </div>\n` +
+        `                        </div>\n` +
+        `                    </div>`;
+
         const lastInvoiceGroupElement = $(".invoice-group").last();
         $(ele).insertAfter(lastInvoiceGroupElement);
         const _url = "http://localhost/admin/invoices/get-product-categories";
@@ -190,19 +207,21 @@
         const partnerID = $(this).val();
         const _url = `http://localhost/admin/invoices/get-product/${partnerID}`;
         const productSelect = $(this).parents('.card').find('select.select-product');
-        productSelect.html("");
-        $.ajax({
-            url: _url,
-            type: "GET",
-            success: (data) => {
-                data.products.forEach(function (item){
-                    $("<option />").val(item.id).text(item.name).appendTo(productSelect);
-                })
-            },
+        if ( productSelect.length > 0 ) {
+            productSelect.html("");
+            $.ajax({
+                url: _url,
+                type: "GET",
+                success: (data) => {
+                    data.products.forEach(function (item){
+                        $("<option />").val(item.id).text(item.name).appendTo(productSelect);
+                    })
+                },
 
-            error: (err) => {
-                productSelect.html("");
-            }
-        })
+                error: (err) => {
+                    productSelect.html("");
+                }
+            })
+        }
     }
 })(jQuery);

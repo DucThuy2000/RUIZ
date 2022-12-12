@@ -22,7 +22,10 @@ class CheckoutController extends Controller
         if( !Auth::check() ){
             return redirect() -> route("auth.login");
         }
-        else{
+        else if ( empty(session()->get("cart")) ) {
+            return redirect()->back();
+        }
+        else {
             $data["wishlist"] = session() -> get("wishList");
             $data["carts"] = session()->get("cart");
             $data["provinces"] = Province::orderBy("_name", "ASC")->get();
