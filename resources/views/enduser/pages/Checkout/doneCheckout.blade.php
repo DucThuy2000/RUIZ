@@ -13,7 +13,7 @@
     <!-- breadcrumb-area end -->
 
     <!-- main-content-wrap start -->
-    <div class="cart-layout checkout-layout">
+    <div class="checkout-layout" style="padding: 20px 0;">
         <div class="container">
             <div class="cart-layout-wrapper">
                 <h3>Đặt hàng thành công</h3>

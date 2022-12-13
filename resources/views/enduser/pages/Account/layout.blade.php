@@ -40,10 +40,6 @@
                                 <span>Thông tin</span>
                                 <i class="icon-info"></i>
                             </a>
-                            <a href="" class="list-item">
-                                <span>Địa chỉ</span>
-                                <i class="icon-direction"></i>
-                            </a>
                             <a href="{{ route("user_profile.myOrder") }}" class="list-item">
                                 <span>Đơn hàng của tôi</span>
                                 <i class="icon-basket-loaded"></i>
